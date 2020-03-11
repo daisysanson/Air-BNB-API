@@ -42,7 +42,9 @@ public class main {
     Names newEntry = new Names(4,"Santa", date, false); //will print todays date
     mapper.writeValue(new File("newEntry.json"), newEntry);
     String newCustomerString = mapper.writeValueAsString(newEntry);
-    System.out.print(newCustomerString); //using java class Names as a base to turn a new customer's infor into a jon
+    System.out.print(newCustomerString); //using java class Names as a base to turn a new customer's information
+
+        
 
 
 
