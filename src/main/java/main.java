@@ -10,49 +10,42 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static javafx.scene.input.KeyCode.Z;
 
 // 1587596400000
 
 public class main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
 
         ObjectMapper mapper = new ObjectMapper();
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String formatted = simpleDateFormat.format(new Date());
+        Date date = simpleDateFormat.parse(formatted); //had to call date in differnt varibale as wouldn't work directly in constructer
         mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-        Names[] name = mapper.readValue(new File("name.json"), Names[].class); ///this turning into string into an array //otherwise error trown expercting object
-        String customer = mapper.writeValueAsString(name);
+
+        //converts json array to Names object
+        Names[] name = mapper.readValue(new File("name.json"), Names[].class);
+        String customer = mapper.writeValueAsString(name);///this turns into string into an array //otherwise error appears expercting object
+        String customer2 = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(name); //makes it look nicer when printing
         System.out.println(customer);
+        System.out.println(customer2);
+
+
+    Names newEntry = new Names(4,"Santa", date, false); //will print todays date
+    mapper.writeValue(new File("newEntry.json"), newEntry);
+    String newCustomerString = mapper.writeValueAsString(newEntry);
+    System.out.print(newCustomerString); //using java class Names as a base to turn a new customer's infor into a jon
 
 
 
-
-
-
-
-
-
-
-//
-//        Car car = new Car("yellow", "renault", 4);  //creating a java ob to json string
-//        mapper.writeValue(new File("car.json"), car);
-//        String carAsString = mapper.writeValueAsString(car);
-//        System.out.println(carAsString);
-//
-//        // mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE); //converting *from* snake case
-//        String json = "{ \"colour\" : \"Black\", \"type\" : \"BMW\", \"no_of_wheels\" : 4} "; //converting json into java object converting field into json needs a field to recognise it
-//        // Deserialize the Json into a car object
-//        Car car1 = mapper.readValue(json, Car.class);
-//        carAsString = mapper.writeValueAsString(car1);
-//        System.out.println(carAsString);
-//        System.out.println(car1.getColour());
-//        System.out.println(car1.getDate()); //goes to getters to read
-//
 
 
 
