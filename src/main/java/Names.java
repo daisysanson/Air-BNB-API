@@ -4,12 +4,15 @@ import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONObject;
 
 import java.io.FileReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class Names {
     private int id;
     private String name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dateRegistered = new Date();
     private boolean booked;
 
@@ -25,6 +28,8 @@ public class Names {
         this.booked = booked;
 
     }
+
+
 
     public int getid() {
         return id;
@@ -42,7 +47,7 @@ public class Names {
         this.name = name;
     }
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     public Date getDateRegistered() {
         return dateRegistered;
     }
