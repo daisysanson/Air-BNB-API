@@ -1,11 +1,17 @@
-
+//Use a JSON array and have an 'id' on every object,
+// then change your code so that the user can key an id into the terminal and details of the relevant object will be printed back to the user?
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.sun.corba.se.impl.protocol.InfoOnlyServantCacheLocalCRDImpl;
 import jdk.nashorn.internal.parser.JSONParser;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import javax.naming.Name;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,8 +19,8 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 
 import static javafx.scene.input.KeyCode.Z;
 
@@ -24,34 +30,22 @@ public class main {
 
     public static void main(String[] args) throws IOException, ParseException {
 
-        ObjectMapper mapper = new ObjectMapper();
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        String formatted = simpleDateFormat.format(new Date());
-        Date date = simpleDateFormat.parse(formatted); //had to call date in differnt varibale as wouldn't work directly in constructer
-        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        Info info = new Info();
+        info.convertTomap();
+        info.promptUser("Entering id....");
 
-        //converts json array to Names object
-        Names[] name = mapper.readValue(new File("name.json"), Names[].class);
-        String customer = mapper.writeValueAsString(name);///this turns into string into an array //otherwise error appears expercting object
-        String customer2 = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(name); //makes it look nicer when printing
-        System.out.println(customer);
-        System.out.println(customer2);
-
-
-    Names newEntry = new Names(4,"Santa", date, false); //will print todays date
-    mapper.writeValue(new File("newEntry.json"), newEntry);
-    String newCustomerString = mapper.writeValueAsString(newEntry);
-    System.out.print(newCustomerString); //using java class Names as a base to turn a new customer's information
-
-        
-
-
-
-
-
-
-
+//        HashMap<Integer, Names> namesMap = new HashMap<Integer, Names>();
+//        Names[] obj = mapper.readValue(new File("name.json"), Names[].class);
+//        Names n = null;
+//        for (int i = 0; i<obj.length; i ++ ){ //loops through each array and sets each object to a key hash map
+//            n = obj[i];
+//            namesMap.put(obj[i].getid(), obj[i]); //put takes in key and value links togetehr
+//        }
+//        Names n1 = namesMap.get(2);
+//        System.out.println(n1.getName());
+//    }
+//
 
     }
 }
+

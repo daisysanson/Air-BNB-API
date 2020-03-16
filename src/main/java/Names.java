@@ -1,36 +1,37 @@
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.parser.JSONParser;
+import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
+import java.io.FileReader;
 import java.util.Date;
-import java.util.List;
-import java.text.SimpleDateFormat;
+
 
 public class Names {
-    private int identificationNumber;
+    private int id;
     private String name;
     private Date dateRegistered = new Date();
-    @JsonIgnore
-    private int noOfBookings;
     private boolean booked;
+
 
     public Names() {
 
     }
 
-    public Names(int identificationNumber, String name, Date dateRegistered, boolean booked) {
-        this.identificationNumber = identificationNumber;
+    public Names(int id, String name, Date dateRegistered, boolean booked) {
+        this.id = id;
         this.name = name;
         this.dateRegistered = dateRegistered;
         this.booked = booked;
+
     }
 
-    public int getidentificationNumber() {
-        return identificationNumber;
+    public int getid() {
+        return id;
     }
 
-    public void setidentificationNumber(int identificationNumber) {
-        this.identificationNumber = identificationNumber;
+    public void setid(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -50,7 +51,6 @@ public class Names {
         this.dateRegistered = dateRegistered;
     }
 
-
     public boolean getBooked() {
         return booked;
     }
@@ -59,12 +59,6 @@ public class Names {
         this.booked = booked;
     }
 
-    public int getNoOfBookings() {
-        return noOfBookings;
-    }
 
-    public void setNoOfBookings(int noOfBookings) {
-        this.noOfBookings = noOfBookings;
-    }
+
 }
-

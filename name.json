@@ -1,20 +1,20 @@
 [
-  {
-    "identification_number": "1",
-    "name": "daisy",
-    "date_registered" : "12-01-2020",
-    "booked" : 1
-  },
-  {
-    "identification_number": "2",
-    "name": "josh",
-    "date_registered" : "12-03-2020",
-    "booked" : 0
-  },
-  {
-    "identification_number": "3",
-    "name": "brad",
-    "date_registered" : "11-03-2020",
-    "booked" : 3
-  }
+    {
+      "id": "1",
+      "name": "daisy",
+      "date_registered": "12-01-2020",
+      "booked": 1
+    },
+    {
+      "id": "2",
+      "name": "josh",
+      "date_registered": "12-03-2020",
+      "booked": 0
+    },
+    {
+      "id": "3",
+      "name": "brad",
+      "date_registered": "11-03-2020",
+      "booked": 3
+    }
 ]
