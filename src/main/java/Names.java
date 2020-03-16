@@ -63,7 +63,4 @@ public class Names {
     public void setBooked(boolean booked) {
         this.booked = booked;
     }
-
-
-
 }
