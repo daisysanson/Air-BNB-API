@@ -1,30 +1,29 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Scanner;
 
 
 public class Info {
     private String namesJsonFilePath;
     private Scanner scanner = new Scanner(System.in);
     private ObjectMapper mapper = new ObjectMapper();
-    private HashMap<Integer, Names> namesMap = new HashMap<Integer, Names>(); //cr
+    private HashMap<Integer, Names> namesMap = new HashMap<Integer, Names>();
 
-    public Info(String namesJsonFilePath) {
+
+
+    public Info(String namesJsonFilePath) throws IOException {
         this.namesJsonFilePath = namesJsonFilePath;
-    }
 
-    public HashMap<Integer, Names> convertTomap() throws IOException, ParseException {
         mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         Names[] obj = mapper.readValue(new File(namesJsonFilePath), Names[].class); //create array into object
-        for (int i = 0; i < obj.length; i++) { //loops through each array and sets each object to a key hash map
-            namesMap.put(obj[i].getid(), obj[i]); //put takes in key and value links togetehr
+        for (int i = 0; i < obj.length; i++) { //loops through each array and sets each object to a hash map
+            namesMap.put(obj[i].getid(), obj[i]); //takes in key and a value, then links together
+            }
         }
-        return namesMap;
-    }
 
 
     public int promptUser(String prompt) throws ParseException {
