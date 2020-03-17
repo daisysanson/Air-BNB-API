@@ -1,0 +1,20 @@
+[
+    {
+      "id": "1",
+      "name": "daisy",
+      "date_registered": "2020-01-12",
+      "booked": 1
+    },
+    {
+      "id": "2",
+      "name": "josh",
+      "date_registered": "2020-03-01",
+      "booked": 0
+    },
+    {
+      "id": "3",
+      "name": "brad",
+      "date_registered": "2020-02-16",
+      "booked": 3
+    }
+]
