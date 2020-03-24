@@ -4,6 +4,7 @@ package hello.dao;
 import hello.model.Customer;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomerDao {
@@ -13,6 +14,12 @@ public interface CustomerDao {
     Customer insertCustomer(Customer customer);
 
     List<Customer> selectAllCustomers();
+
+    Optional<Customer> selectCustomerById(UUID id); //not sure whether value will be present s
+
+    int deleteCustomerById(UUID id);
+
+    int updateCustomerById(UUID id, Customer customer); //new customer
 
 
 

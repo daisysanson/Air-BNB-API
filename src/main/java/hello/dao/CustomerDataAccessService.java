@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository("hello/dao")
@@ -27,4 +28,21 @@ public class CustomerDataAccessService implements CustomerDao{
 public List<Customer> selectAllCustomers(){
         return db;
 }
+
+    @Override
+    public Optional<Customer> selectCustomerById(UUID id) { //search database for person with given id
+        return db.stream()
+                .filter(customer -> customer.getId().equals(id))
+                .findFirst();
+    }
+
+    @Override
+    public int deleteCustomerById(UUID id) {
+        return 0;
+    }
+
+    @Override
+    public int updateCustomerById(UUID id, Customer customer) {
+        return 0;
+    }
 }

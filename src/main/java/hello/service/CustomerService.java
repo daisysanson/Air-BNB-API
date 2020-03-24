@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service //can use 'componenet' but clearer to annotate what it is
 public class CustomerService {
@@ -19,11 +21,16 @@ public class CustomerService {
         this.customerDao = customerDao;
     }
 
-    public Customer insertCustomer(Customer customer){
+    public Customer insertCustomer(Customer customer) {
         return customerDao.insertCustomer(customer);
     }
 
-    public List<Customer> getAllCustomers(){
+    public List<Customer> getAllCustomers() {
         return customerDao.selectAllCustomers();
+    }
+
+
+    public Optional<Customer> getCustomerById(UUID id) {
+        return customerDao.selectCustomerById(id);
     }
 }

@@ -1,19 +1,22 @@
 package hello.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
     public class Customer {
         private UUID id;
-        //        @NotBlank //this has to be filled in as it will throw an error
+        @NotNull
         private String name;
         private Date dateRegistered = new Date();
-        private boolean bookingConfirmed;
+        @NotNull
+        private Boolean bookingConfirmed;
 
         public Customer(@JsonProperty("id") UUID id,
                         @JsonProperty("name") String name,
-                        @JsonProperty("booking_confirmed") boolean bookingConfirmed) {
+                        @JsonProperty("booking_confirmed") Boolean bookingConfirmed) {
 
             this.id = id;
             this.name = name;
@@ -33,7 +36,7 @@ import java.util.UUID;
             return dateRegistered;
         }
 
-        public boolean isBookingConfirmed() {
+        public Boolean isBookingConfirmed() {
             return bookingConfirmed;
         }
 
