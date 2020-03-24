@@ -2,13 +2,17 @@ package hello.controller;
 
 import hello.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import hello.service.CustomerService;
 
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.ok;
+
 //exposes some end points which clients use, i.e http methods
-@RequestMapping ("/api/v1/customer/")
+@RequestMapping ("/api/v1/customers")
 @RestController
 public class CustomerController {
     private final CustomerService customerService;
@@ -19,8 +23,12 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void addCustomer(@RequestBody Customer customer) { //to turn json object in java customer
-        customerService.insertCustomer(customer);
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity addCustomer(@RequestBody Customer customer) { //to turn json object in java customer
+        if (customer.getName().isEmpty()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("'Name' field is empty");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.insertCustomer(customer));
     }
 
     @GetMapping

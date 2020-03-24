@@ -19,7 +19,7 @@ public class CustomerService {
         this.customerDao = customerDao;
     }
 
-    public int insertCustomer(Customer customer){
+    public Customer insertCustomer(Customer customer){
         return customerDao.insertCustomer(customer);
     }
 

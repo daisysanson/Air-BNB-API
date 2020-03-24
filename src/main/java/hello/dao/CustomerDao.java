@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public interface CustomerDao {
 
-    int insertCustomer(UUID id, Customer customer);//insret a person, mocks database by using a list
+    Customer insertCustomer(UUID id, Customer customer);//insret a person, mocks database by using a list
 
-    int insertCustomer(Customer customer);
+    Customer insertCustomer(Customer customer);
 
     List<Customer> selectAllCustomers();
 

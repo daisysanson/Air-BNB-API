@@ -13,12 +13,13 @@ public class CustomerDataAccessService implements CustomerDao{
     private static List<Customer> db = new ArrayList<>();
 
 
-    public int insertCustomer(UUID id, Customer customer) {
-        db.add(new Customer(id,customer.getName(), customer.isBookingConfirmed()));
-        return 1; //return 1 so we know insertion always works
+    public Customer insertCustomer(UUID id, Customer customer) {
+        Customer updatedCustomer = new Customer(id,customer.getName(), customer.isBookingConfirmed());
+        db.add(updatedCustomer);
+        return updatedCustomer; //return back the data
     }
 
-    public int insertCustomer(Customer customer) {
+    public Customer insertCustomer(Customer customer) {
         UUID id = UUID.randomUUID();
         return insertCustomer(id,customer);
     }
