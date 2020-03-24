@@ -17,7 +17,7 @@ public interface CustomerDao {
 
     Optional<Customer> selectCustomerById(UUID id); //not sure whether value will be present s
 
-    int deleteCustomerById(UUID id);
+    String deleteCustomerById(UUID id);
 
     int updateCustomerById(UUID id, Customer customer); //new customer
 

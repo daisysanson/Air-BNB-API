@@ -33,4 +33,8 @@ public class CustomerService {
     public Optional<Customer> getCustomerById(UUID id) {
         return customerDao.selectCustomerById(id);
     }
+    public String deleteCustomer(UUID id){
+        return customerDao.deleteCustomerById(id);
+
+    }
 }

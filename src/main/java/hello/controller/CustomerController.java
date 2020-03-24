@@ -31,10 +31,10 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity addCustomer(@RequestBody Customer customer) { //to turn json object in java customer
         if (customer.getName().isEmpty()) {
-            return status(HttpStatus.BAD_REQUEST).body("'Name' field is empty");
+            return status(HttpStatus.BAD_REQUEST).body("'Name' field is invalid");
         }
         if (customer.isBookingConfirmed() == null) {
-            return status(HttpStatus.BAD_REQUEST).body("'Booking_confirmed' field is empty");
+            return status(HttpStatus.BAD_REQUEST).body("'Booking_confirmed' field is invalid");
 
 
         }
@@ -51,17 +51,18 @@ public class CustomerController {
     public ResponseEntity selectCustomerById(@PathVariable("id") UUID id) { //grab id and turn it into a UUID
         Optional<Customer> searchCustomer = customerService.getCustomerById(id);
         if (!searchCustomer.isPresent()) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND); //custom exception
+            return status(HttpStatus.NOT_FOUND).body("ID not found"); //custom exception
         } else {
             return status(HttpStatus.OK).body(searchCustomer.get());
         }
     }
+
+    @DeleteMapping(path = "{id}")
+    public String deleteCustomerById(@PathVariable("id") UUID id) {
+        return customerService.deleteCustomer(id);
+    }
 }
-//    @DeleteMapping(path = "{id}")
-//    public void deleteCustomerById(@PathVariable("id") UUID id){
-//        customerService.deleteCustomer(id);
-//    }
-//
+//t
 //    @PutMapping(path = "{id}")
 //    public void updateCustomer (@PathVariable("id") UUID id , @Valid @NotNull @RequestBody Customer customerToUpdate){
 //        customerService.updateCustomer(id, customerToUpdate);

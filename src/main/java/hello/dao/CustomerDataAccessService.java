@@ -37,10 +37,16 @@ public List<Customer> selectAllCustomers(){
     }
 
     @Override
-    public int deleteCustomerById(UUID id) {
-        return 0;
-    }
+    public String deleteCustomerById(UUID id) {
+        Optional<Customer> findCustomer = selectCustomerById(id);
+        if (!findCustomer.isPresent()){
+            return "Id not found";
+        } else {
+            db.remove(findCustomer.get());
+            return "Id successfully deleted" ;
 
+        }
+    }
     @Override
     public int updateCustomerById(UUID id, Customer customer) {
         return 0;
