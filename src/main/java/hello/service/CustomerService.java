@@ -1,18 +1,14 @@
 package hello.service;
-
-
 import hello.dao.CustomerDao;
 import hello.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service //can use 'componenet' but clearer to annotate what it is
+@Service
 public class CustomerService {
 
     private final CustomerDao customerDao;
@@ -37,8 +33,8 @@ public class CustomerService {
     public int deleteCustomer(UUID id){
         return customerDao.deleteCustomerById(id);}
 
-//        public int updateCustomerById(UUID id, Customer newCustomer){
-//        return customerDao.updateCustomerByiD(id, newCustomer);
-//        }
+        public int updateCustomerById(UUID id, Customer newCustomer){
+        return customerDao.updateCustomerByiD(id, newCustomer);
+        }
 
 }

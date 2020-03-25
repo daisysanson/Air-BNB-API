@@ -1,14 +1,13 @@
 package hello.model;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
     public class Customer {
         private UUID id;
-        @NotNull
+        @NotBlank
         private String name;
         private Date dateRegistered = new Date();
         @NotNull
