@@ -56,11 +56,18 @@ public class CustomerController {
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity deleteCustomerById(@PathVariable("id") UUID id) {
-        return customerService.deleteCustomer(id);
+       if (customerService.deleteCustomer(id) ==0){
+           return status(HttpStatus.OK).body(id + " has been deleted");
+       } else{
+           return status(HttpStatus.NOT_FOUND).body(id + "  not found");
+       }
+
+       }
     }
 
-    @PutMapping(path = "{id}")
-    public void updateCustomerById(@PathVariable("id") UUID id,  @RequestBody Customer customerToUpdate){
-        customerService.updateCustomerById(id, customerToUpdate);
-    }
-}
+
+//    @PutMapping(path = "{id}")
+//    public void updateCustomerById(@PathVariable("id") UUID id,  @RequestBody Customer customerToUpdate){
+//        customerService.updateCustomerById(id, customerToUpdate);
+//    }
+//}

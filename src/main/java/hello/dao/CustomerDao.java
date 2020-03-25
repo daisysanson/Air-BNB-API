@@ -18,9 +18,9 @@ public interface CustomerDao {
 
     Optional<Customer> selectCustomerById(UUID id); //not sure whether value will be present s
 
-    ResponseEntity deleteCustomerById(UUID id);
+    int deleteCustomerById(UUID id);
 
-    Customer updateCustomerByiD(UUID id, Customer customer);
+//    int updateCustomerByiD(UUID id, Customer customer);
 
 
 

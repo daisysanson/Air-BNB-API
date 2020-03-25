@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.status;
 
 @Repository("hello/dao")
@@ -41,28 +42,27 @@ public class CustomerDataAccessService implements CustomerDao {
     }
 
     @Override
-    public ResponseEntity deleteCustomerById(UUID id) {
+    public int deleteCustomerById(UUID id) {
         Optional<Customer> findCustomer = selectCustomerById(id);
         if (!findCustomer.isPresent()) {
-            return status(HttpStatus.NOT_FOUND).body("ID not found");
+            return 1;
         } else {
             db.remove(findCustomer.get()); ///FIX THIS.////
-            return status(HttpStatus.OK).body("Record successfully deleted");
+            return 0;
         }
-    }
-
-    @Override
-    public Customer updateCustomerByiD(UUID id, Customer update) { //get the customer update object from client
-        return (Customer) selectCustomerById(id) //select exisitng record in database
-                .map(customer1 -> { //maps the client request to th
-                    int indexOfCustomerToUpdate = db.indexOf(customer1); //index
-                    if (indexOfCustomerToUpdate >= 0) {// we know we;ve find the person
-                        db.set(indexOfCustomerToUpdate, new Customer(id, update.getName(), update.isBookingConfirmed())); //insert the customer that we;ve recieved from client to place where other cstomer was in database
-                        return update;
-                    }
-                    return id;
-
-                }).orElse(0);
     }
 }
 
+//    @Override
+//    public int updateCustomerByiD(UUID id, Customer update) { //get the customer update object from client
+//        return selectCustomerById(id) //select exisitng record in database
+//                .map(customer1 -> { //maps the client request to th
+//                    int indexOfCustomerToUpdate = db.indexOf(customer1); //index
+//                    if (indexOfCustomerToUpdate >= 0) {// we know we;ve find the person
+//                        db.set(indexOfCustomerToUpdate, new Customer(id, update.getName(), update.isBookingConfirmed())); //insert the customer that we;ve recieved from client to place where other cstomer was in database
+//                        return status(HttpStatus.OK).body("Customer information updated");
+//                    } return status(HttpStatus.BAD_REQUEST).body(("ID is invalid"));
+//
+//                }).orElse(new ResponseEntity(HttpStatus.NOT_FOUND));
+//}
+//}

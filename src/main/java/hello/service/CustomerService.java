@@ -34,11 +34,11 @@ public class CustomerService {
         return customerDao.selectCustomerById(id);
     }
 
-    public ResponseEntity deleteCustomer(UUID id){
+    public int deleteCustomer(UUID id){
         return customerDao.deleteCustomerById(id);}
 
-        public Customer updateCustomerById(UUID id, Customer newCustomer){
-        return customerDao.updateCustomerByiD(id, newCustomer);
-        }
+//        public int updateCustomerById(UUID id, Customer newCustomer){
+//        return customerDao.updateCustomerByiD(id, newCustomer);
+//        }
 
 }
