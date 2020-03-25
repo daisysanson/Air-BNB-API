@@ -30,12 +30,15 @@ public class CustomerService {
         return customerDao.selectAllCustomers();
     }
 
-
     public Optional<Customer> getCustomerById(UUID id) {
         return customerDao.selectCustomerById(id);
     }
-    public ResponseEntity deleteCustomer(UUID id){
-        return customerDao.deleteCustomerById(id);
 
-    }
+    public ResponseEntity deleteCustomer(UUID id){
+        return customerDao.deleteCustomerById(id);}
+
+        public Customer updateCustomerById(UUID id, Customer newCustomer){
+        return customerDao.updateCustomerByiD(id, newCustomer);
+        }
+
 }

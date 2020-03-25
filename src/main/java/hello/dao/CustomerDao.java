@@ -20,6 +20,7 @@ public interface CustomerDao {
 
     ResponseEntity deleteCustomerById(UUID id);
 
+    Customer updateCustomerByiD(UUID id, Customer customer);
 
 
 
