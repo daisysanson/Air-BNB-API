@@ -2,6 +2,7 @@ package hello.dao;
 
 
 import hello.model.Customer;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +18,8 @@ public interface CustomerDao {
 
     Optional<Customer> selectCustomerById(UUID id); //not sure whether value will be present s
 
-    String deleteCustomerById(UUID id);
+    ResponseEntity deleteCustomerById(UUID id);
 
-    int updateCustomerById(UUID id, Customer customer); //new customer
 
 
 

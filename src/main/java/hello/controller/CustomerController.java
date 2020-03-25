@@ -1,7 +1,5 @@
 package hello.controller;
 
-import hello.dao.CustomerDao;
-import hello.dao.CustomerDataAccessService;
 import hello.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import hello.service.CustomerService;
 
-import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -58,13 +55,7 @@ public class CustomerController {
     }
 
     @DeleteMapping(path = "{id}")
-    public String deleteCustomerById(@PathVariable("id") UUID id) {
+    public ResponseEntity deleteCustomerById(@PathVariable("id") UUID id) {
         return customerService.deleteCustomer(id);
     }
 }
-//t
-//    @PutMapping(path = "{id}")
-//    public void updateCustomer (@PathVariable("id") UUID id , @Valid @NotNull @RequestBody Customer customerToUpdate){
-//        customerService.updateCustomer(id, customerToUpdate);
-//    }
-//}

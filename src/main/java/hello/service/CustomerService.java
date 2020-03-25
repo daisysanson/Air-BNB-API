@@ -5,6 +5,7 @@ import hello.dao.CustomerDao;
 import hello.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class CustomerService {
     public Optional<Customer> getCustomerById(UUID id) {
         return customerDao.selectCustomerById(id);
     }
-    public String deleteCustomer(UUID id){
+    public ResponseEntity deleteCustomer(UUID id){
         return customerDao.deleteCustomerById(id);
 
     }

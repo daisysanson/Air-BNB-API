@@ -2,12 +2,16 @@ package hello.dao;
 
 
 import hello.model.Customer;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.springframework.http.ResponseEntity.status;
 
 @Repository("hello/dao")
 public class CustomerDataAccessService implements CustomerDao{
@@ -37,13 +41,13 @@ public List<Customer> selectAllCustomers(){
     }
 
     @Override
-    public String deleteCustomerById(UUID id) {
+    public ResponseEntity deleteCustomerById(UUID id) {
         Optional<Customer> findCustomer = selectCustomerById(id);
-        if (!findCustomer.isPresent()){
-            return "Id not found";
-        } else {
-            db.remove(findCustomer.get());
-            return "Id successfully deleted" ;
+            if (!findCustomer.isPresent()){
+                return status(HttpStatus.NOT_FOUND).body("ID not found");
+            } else {
+                db.remove(findCustomer.get()); ///FIX THIS.////
+                return status(HttpStatus.OK).body("Record successfully deleted") ;
 
         }
     }
