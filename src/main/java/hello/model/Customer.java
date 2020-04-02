@@ -20,8 +20,6 @@ import java.util.UUID;
 public class Customer {
 
     @Id
-    private ObjectId _id;
-    @Field(value="id")
     private String id;
     @Field(value="name")
     private String name;
