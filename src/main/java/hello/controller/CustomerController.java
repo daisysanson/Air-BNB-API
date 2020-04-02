@@ -46,19 +46,20 @@ public class CustomerController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity deleteCustomerById(@PathVariable("id") String id) {
         respository.deleteById(id);
+        if (respository.findById(id).isPresent()) {
             return status(HttpStatus.OK).body("id " + id + " has been deleted");
-//        } else{
-//            return status(HttpStatus.NOT_FOUND).body("id " + id + "  not found");
+        } else {
+            return status(HttpStatus.NOT_FOUND).body("id " + id + "  not found");
         }
-
     }
-
-//    @PutMapping(path = "/{id}")
-//    public ResponseEntity updateCustomerById(@PathVariable("id") String id, @Valid @NotNull @RequestBody Customer customerToUpdate){
-//        Optional<Customer> searchCustomer = customerService.getCustomerById(id);
-//        if (respository.updateCustomerById(id, customerToUpdate) == 1){
-//            return status(HttpStatus.OK).body( "'name' " + searchCustomer.get().getName() +
-//                    " at id " + id + " has been replaced by " + customerToUpdate.getName());
-//        } else {
-//            return status(HttpStatus.NOT_FOUND).body(id + " not found");
-//        }
+    @PutMapping(path = "/{id}")
+    public ResponseEntity updateCustomerById(@PathVariable("id") String id, @Valid @NotNull @RequestBody Customer customerToUpdate) {
+        Optional<Customer> searchCustomer = respository.findById(id);
+        if (respository.findById(id).isPresent()) {
+            return status(HttpStatus.OK).body("'name' " + searchCustomer.get().getName() +
+                    " at id " + id + " has been replaced by " + customerToUpdate.getName());
+        } else {
+            return status(HttpStatus.NOT_FOUND).body(id + " not found");
+        }
+    }
+}
