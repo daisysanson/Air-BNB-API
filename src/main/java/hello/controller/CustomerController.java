@@ -24,7 +24,7 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity addCustomer(@RequestBody Customer customer) { //to turn json object in java customer
 
-        return status(HttpStatus.OK).body(respository.save(customer));
+        return status(HttpStatus.OK).body(respository.insert(customer));
     }
 
     @GetMapping

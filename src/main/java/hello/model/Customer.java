@@ -1,30 +1,29 @@
 package hello.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.net.DatagramSocket;
 import java.util.Date;
-import java.util.UUID;
+
 
 @Document(collection = "customers")
 @RestController
 public class Customer {
 
-    @Id
+    @Id //this is the primary key field
     private String id;
+
     @Field(value="name")
     private String name;
+
+    @Field(value="durationOfStay")
+    private int durationOfStay;
+
     @Field(value="date")
     private Date date = new Date();
+
     @Field(value="bookingConfirmed")
     private boolean bookingConfirmed;
 
@@ -34,12 +33,19 @@ public class Customer {
 
     public Customer(@JsonProperty("id") String id,
                     @JsonProperty("name") String name,
-                    @JsonProperty("booking_confirmed") Boolean bookingConfirmed) {
+                    @JsonProperty("booking_confirmed") Boolean bookingConfirmed{
+
 
         this.id = id;
         this.name = name;
         this.bookingConfirmed = bookingConfirmed;
-    }
+
+
+
+}
+
+
+
     public String getId() {
         return id;
     }
