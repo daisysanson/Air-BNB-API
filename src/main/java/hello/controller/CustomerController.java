@@ -1,5 +1,6 @@
 package hello.controller;
 import com.sun.istack.internal.NotNull;
+import hello.exceptions.ApiRequestException;
 import hello.model.Customer;
 import hello.dao.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,8 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<List<Customer>> getAllCustomers() {
-        return status(HttpStatus.OK).body(respository.findAll());
+        throw new ApiRequestException("Cannot get all Customers");
+//        return status(HttpStatus.OK).body(respository.findAll());
     }
 
 
