@@ -33,7 +33,7 @@ public class Customer {
 
     public Customer(@JsonProperty("id") String id,
                     @JsonProperty("name") String name,
-                    @JsonProperty("booking_confirmed") Boolean bookingConfirmed{
+                    @JsonProperty("booking_confirmed") Boolean bookingConfirmed) {
 
 
         this.id = id;
