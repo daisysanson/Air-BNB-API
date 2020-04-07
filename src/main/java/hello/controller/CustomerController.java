@@ -1,8 +1,6 @@
 package hello.controller;
 import com.sun.istack.internal.NotNull;
-import hello.exceptions.ApiRequestException;
-import hello.exceptions.NotFound;
-import hello.exceptions.NotFoundException;
+import hello.exceptions.*;
 import hello.model.Customer;
 import hello.dao.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +25,16 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity addCustomer(@RequestBody @Valid Customer customer) { //to turn json object in java customer
         if ((customer.getName().isEmpty()) || (customer.getName() == null)) {
-            throw new ApiRequestException("Please enter a valid 'name'");
+            throw new BadRequestException("Please enter a valid 'name'");
 
         }
         if (customer.isBookingConfirmed() == null) {
-            throw new ApiRequestException("Please define the booking status as either 'true' or false'");
+            throw new BadRequestException("Please define the booking status as either 'true' or false'");
 
         }
        else if (customer.isBookingConfirmed() == null
                 && customer.getName() == null) {
-            throw new ApiRequestException("Please complete all the fields");
+            throw new BadRequestException("Please complete all the fields");
 
         } else {
             return status(HttpStatus.OK).body(respository.insert(customer));

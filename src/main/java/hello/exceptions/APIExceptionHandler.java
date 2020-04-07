@@ -6,18 +6,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-// @ControllerAdvice
+@ControllerAdvice
 public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = ApiRequestException.class)
-    //this exception will be fed into calss below //all exceptions of this type go to hear
-    public ResponseEntity<Object> handleBadRequest(ApiRequestException e) {
+
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<APIException> handleAllExceptions(Exception e) {
+        APIException errorDetails = new APIException(
+                e.getMessage(),
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                ZonedDateTime.now(ZoneId.of("Z")));
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+
+
+    }
+
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<APIException> handleBadRequest(BadRequestException e) {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
 
         APIException apiException = new APIException( //handles payload information
@@ -30,7 +43,7 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = NotFoundException.class) //this exception will be fed into calss below
-    public ResponseEntity<Object> handleNotFound(NotFoundException e) {
+    public ResponseEntity<APIException> handleNotFound(NotFoundException e) {
         HttpStatus notFound1 = HttpStatus.NOT_FOUND;
 
         NotFound notFound = new NotFound(
@@ -39,7 +52,7 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
                 ZonedDateTime.now(ZoneId.of("Z")
 
         ));
-        return new ResponseEntity<>(notFound, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(notFound, HttpStatus.NOT_FOUND);
 
 
     }
