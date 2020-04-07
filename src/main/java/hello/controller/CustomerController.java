@@ -1,6 +1,8 @@
 package hello.controller;
 import com.sun.istack.internal.NotNull;
 import hello.exceptions.ApiRequestException;
+import hello.exceptions.NotFound;
+import hello.exceptions.NotFoundException;
 import hello.model.Customer;
 import hello.dao.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +25,30 @@ public class CustomerController {
 
 
     @PostMapping
-    public ResponseEntity addCustomer(@RequestBody Customer customer) { //to turn json object in java customer
+    public ResponseEntity addCustomer(@RequestBody @Valid Customer customer) { //to turn json object in java customer
+        if ((customer.getName().isEmpty()) || (customer.getName() == null)) {
+            throw new ApiRequestException("Please enter a valid 'name'");
 
-        return status(HttpStatus.OK).body(respository.insert(customer));
+        }
+        if (customer.isBookingConfirmed() == null) {
+            throw new ApiRequestException("Please define the booking status as either 'true' or false'");
+
+        }
+       else if (customer.isBookingConfirmed() == null
+                && customer.getName() == null) {
+            throw new ApiRequestException("Please complete all the fields");
+
+        } else {
+            return status(HttpStatus.OK).body(respository.insert(customer));
+        }
     }
+
+
+
 
     @GetMapping
     public ResponseEntity<List<Customer>> getAllCustomers() {
-        throw new ApiRequestException("Cannot get all Customers");
-//        return status(HttpStatus.OK).body(respository.findAll());
+        return status(HttpStatus.OK).body(respository.findAll());
     }
 
 
@@ -39,29 +56,30 @@ public class CustomerController {
     public ResponseEntity selectCustomerById(@PathVariable("id") String id) { //grab id and turn it into a UUID
         Optional<Customer> searchCustomer = respository.findById(id);
         if (!searchCustomer.isPresent()) {
-            return status(HttpStatus.NOT_FOUND).body("ID not found");
-        } else {
-            return status(HttpStatus.OK).body(searchCustomer.get());
+            throw new NotFoundException("Cannot find this ID");
         }
+        return status(HttpStatus.OK).body(searchCustomer.get());
     }
+
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity deleteCustomerById(@PathVariable("id") String id) {
         respository.deleteById(id);
         if (respository.findById(id).isPresent()) {
-            return status(HttpStatus.OK).body("id " + id + " has been deleted");
+        return status(HttpStatus.OK).body("id " + id + " has been deleted");
         } else {
-            return status(HttpStatus.NOT_FOUND).body("id " + id + "  not found");
+         throw new NotFoundException("id " + id + "  not found");
         }
     }
-    @PutMapping(path = "/{id}")
-    public ResponseEntity updateCustomerById(@PathVariable("id") String id, @Valid @NotNull @RequestBody Customer customerToUpdate) {
-        Optional<Customer> searchCustomer = respository.findById(id);
-        if (respository.findById(id).isPresent()) {
-            return status(HttpStatus.OK).body("'name' " + searchCustomer.get().getName() +
-                    " at id " + id + " has been replaced by " + customerToUpdate.getName());
-        } else {
-            return status(HttpStatus.NOT_FOUND).body(id + " not found");
-        }
+
+   @PutMapping(path = "/{id}")
+  public ResponseEntity updateCustomerById(@PathVariable("id") String id, @Valid @NotNull @RequestBody Customer customerToUpdate) {
+      Optional<Customer> searchCustomer = respository.findById(id);
+       if (respository.findById(id).isPresent()) {
+           return status(HttpStatus.OK).body("'name' " + searchCustomer.get().getName() +
+                   " at id " + id + " has been replaced by " + customerToUpdate.getName());
+      } else {
+           throw new NotFoundException(id + " not found");
     }
+  }
 }

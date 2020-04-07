@@ -25,7 +25,7 @@ public class Customer {
     private Date date = new Date();
 
     @Field(value="bookingConfirmed")
-    private boolean bookingConfirmed;
+    private Boolean bookingConfirmed;
 
     public Customer() {
 
@@ -70,11 +70,11 @@ public class Customer {
         this.date = date;
     }
 
-    public boolean isBookingConfirmed() {
+    public Boolean isBookingConfirmed() {
         return bookingConfirmed;
     }
 
-    public void setBookingConfirmed(boolean bookingConfirmed) {
+    public void setBookingConfirmed(Boolean bookingConfirmed) {
         this.bookingConfirmed = bookingConfirmed;
     }
 }

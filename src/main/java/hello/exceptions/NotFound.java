@@ -4,14 +4,13 @@ import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 
-public class APIException {
+public class NotFound {
     private final String message;
     private final HttpStatus httpStatus;
     private ZonedDateTime timestamp;
 
 
-
-    public APIException(String message, HttpStatus httpStatus, ZonedDateTime timestamp) {
+    public NotFound(String message, HttpStatus httpStatus, ZonedDateTime timestamp) {
         this.message = message;
         this.httpStatus = httpStatus;
         this.timestamp = timestamp;
@@ -20,6 +19,7 @@ public class APIException {
     public String getMessage() {
         return message;
     }
+
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
