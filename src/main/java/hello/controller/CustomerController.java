@@ -31,8 +31,7 @@ public class CustomerController {
         if (customer.isBookingConfirmed() == null) {
             throw new BadRequestException("Please define the booking status as either 'true' or false'");
 
-        }
-       else if (customer.isBookingConfirmed() == null
+        } else if (customer.isBookingConfirmed() == null
                 && customer.getName() == null) {
             throw new BadRequestException("Please complete all the fields");
 
@@ -40,8 +39,6 @@ public class CustomerController {
             return status(HttpStatus.OK).body(respository.insert(customer));
         }
     }
-
-
 
 
     @GetMapping
@@ -60,15 +57,19 @@ public class CustomerController {
     }
 
 
+
     @DeleteMapping(path = "/{id}")
     public ResponseEntity deleteCustomerById(@PathVariable("id") String id) {
-        respository.deleteById(id);
-        if (respository.findById(id).isPresent()) {
-        return status(HttpStatus.OK).body("id " + id + " has been deleted");
-        } else {
-         throw new NotFoundException("id " + id + "  not found");
+        Optional<Customer> findCustomer = respository.findById(id);
+        if (!findCustomer.isPresent()) {
+            throw new NotFoundException("id " + id + "  not found");
         }
+
+        respository.deleteById(id);
+        return status(HttpStatus.OK).body("id " + id + " has been deleted");
     }
+
+
 
    @PutMapping(path = "/{id}")
   public ResponseEntity updateCustomerById(@PathVariable("id") String id, @Valid @NotNull @RequestBody Customer customerToUpdate) {

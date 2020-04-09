@@ -16,10 +16,11 @@ public class APIException {
         this.httpStatus = httpStatus;
         this.timestamp = timestamp;
     }
-
     public String getMessage() {
         return message;
     }
+
+
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }

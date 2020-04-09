@@ -1,14 +1,14 @@
 package hello.exceptions;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.mongodb.MongoException;
+import com.mongodb.MongoSocketOpenException;
+import com.mongodb.MongoSocketReadException;
+import com.mongodb.MongoTimeoutException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.servlet.handler.MappedInterceptor;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.ZoneId;
@@ -18,13 +18,15 @@ import java.time.ZonedDateTime;
 public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
 
-    @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<APIException> handleAllExceptions(Exception e) {
-        APIException errorDetails = new APIException(
-                e.getMessage(),
-                HttpStatus.INTERNAL_SERVER_ERROR,
+    @ExceptionHandler(value = ApiGlobal.class)
+    public ResponseEntity<ApiGlobalException> handleAllExceptions(ApiGlobal e) {
+        ApiGlobalException apiGlobalException = new ApiGlobalException(
+                "Something went wrong",
+                HttpStatus.I_AM_A_TEAPOT,
                 ZonedDateTime.now(ZoneId.of("Z")));
-        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+
+
+        return new ResponseEntity<>(apiGlobalException, HttpStatus.I_AM_A_TEAPOT);
 
 
     }
@@ -46,19 +48,70 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<APIException> handleNotFound(NotFoundException e) {
         HttpStatus notFound1 = HttpStatus.NOT_FOUND;
 
-        NotFound notFound = new NotFound(
+        APIException apiException = new APIException(
                 e.getMessage(),
                 notFound1,
                 ZonedDateTime.now(ZoneId.of("Z")
 
-        ));
-        return new ResponseEntity(notFound, HttpStatus.NOT_FOUND);
+                ));
+        return new ResponseEntity(apiException, HttpStatus.NOT_FOUND);
 
 
     }
 
 
+    @ExceptionHandler(value = MongoException.class)
+    public ResponseEntity<APIException> handleMongoException(MongoException e) {
+        HttpStatus nullPointer = HttpStatus.INTERNAL_SERVER_ERROR;
+        APIException apiException = new APIException(
+                e.getMessage(),
+                nullPointer,
+                ZonedDateTime.now(ZoneId.of("Z")));
+
+        return new ResponseEntity(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+    @ExceptionHandler(value = MongoSocketOpenException.class)
+    public ResponseEntity<APIException> handleNotFound(MongoSocketOpenException e) {
+        HttpStatus internalServerError = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        APIException apiException = new APIException(
+                e.getMessage(),
+                internalServerError,
+                ZonedDateTime.now(ZoneId.of("Z")
+
+                ));
+        return new ResponseEntity(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
+
+    @ExceptionHandler(value = MongoTimeoutException.class)
+    public ResponseEntity<APIException> handleNotFound(MongoTimeoutException e) {
+        HttpStatus internalServerError = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        APIException apiException = new APIException(
+                "Server timed out!",
+                internalServerError,
+                ZonedDateTime.now(ZoneId.of("Z")
+
+                ));
+        return new ResponseEntity(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
 }
 
 
+    @ExceptionHandler(value = MongoSocketReadException.class)
+    public ResponseEntity<APIException> handleNotFound(MongoSocketReadException e) {
+        HttpStatus internalServerError = HttpStatus.INTERNAL_SERVER_ERROR;
 
+        APIException apiException = new APIException(
+                e.getMessage(),
+                internalServerError,
+                ZonedDateTime.now(ZoneId.of("Z")
+
+                ));
+        return new ResponseEntity(apiException, HttpStatus.INTERNAL_SERVER_ERROR);
+
+
+    }
+}
