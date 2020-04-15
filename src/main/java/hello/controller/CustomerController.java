@@ -1,4 +1,5 @@
 package hello.controller;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.sun.istack.internal.NotNull;
 import hello.exceptions.*;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.BindException;
 import java.util.List;
 import java.util.Optional;
@@ -28,16 +30,15 @@ public class CustomerController {
 
 
     @PostMapping
-    public ResponseEntity addCustomer(@RequestBody Customer customer)  { //to turn json object in java customer
+    public ResponseEntity addCustomer(@RequestBody Customer customer){ //to turn json object in java customer
         System.out.println(customer);
         if ((customer.getName().isEmpty()) || (customer.getName() == null)) {
-
-            throw new InvalidFormatException();
             log.debug("Hello World");
 
-        }if (customer.isBookingConfirmed() == null) {
-//            throw new InvalidFormatException e;
+            throw new BadRequestException("Customer name needs to be entered");
 
+    }if (customer.isBookingConfirmed() == null) {
+            throw new BadRequestException("booking request cannot be empty");
         } else {
 
         }

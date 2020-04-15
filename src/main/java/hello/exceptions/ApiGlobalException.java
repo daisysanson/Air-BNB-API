@@ -8,12 +8,15 @@ public class ApiGlobalException {
     public String message;
     private final HttpStatus httpStatus;
     private ZonedDateTime timestamp;
+     private Throwable code;
 
 
     public ApiGlobalException(String message, HttpStatus httpStatus, ZonedDateTime timestamp) {
         this.message = message;
         this.httpStatus = httpStatus;
         this.timestamp = timestamp;
+
+
     }
 
 
@@ -21,10 +24,21 @@ public class ApiGlobalException {
         this.message = message;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return message;
     }
 
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
 
+    public ZonedDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(ZonedDateTime timestamp) {
+        this.timestamp = timestamp;
+
+    }
 
 }
