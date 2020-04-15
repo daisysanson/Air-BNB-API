@@ -10,7 +10,6 @@ public class APIException {
     private ZonedDateTime timestamp;
 
 
-
     public APIException(String message, HttpStatus httpStatus, ZonedDateTime timestamp) {
         this.message = message;
         this.httpStatus = httpStatus;
@@ -32,4 +31,6 @@ public class APIException {
     public void setTimestamp(ZonedDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+
 }

@@ -1,18 +1,21 @@
 package hello.controller;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.sun.istack.internal.NotNull;
 import hello.exceptions.*;
 import hello.model.Customer;
 import hello.dao.CustomerRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.validation.BindValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
+import java.net.BindException;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.ResponseEntity.status;
+import static org.springframework.http.ResponseEntity.*;
 
 @RequestMapping("/api/v1/customers")
 @RestController
@@ -21,24 +24,25 @@ public class CustomerController {
     @Autowired
     private CustomerRepository respository;
 
+    static Logger log = Logger.getLogger(CustomerController.class);
+
 
     @PostMapping
-    public ResponseEntity addCustomer(@RequestBody @Valid Customer customer) { //to turn json object in java customer
+    public ResponseEntity addCustomer(@RequestBody Customer customer)  { //to turn json object in java customer
+        System.out.println(customer);
         if ((customer.getName().isEmpty()) || (customer.getName() == null)) {
-            throw new BadRequestException("Please enter a valid 'name'");
 
-        }
-        if (customer.isBookingConfirmed() == null) {
-            throw new BadRequestException("Please define the booking status as either 'true' or false'");
+            throw new InvalidFormatException();
+            log.debug("Hello World");
 
-        } else if (customer.isBookingConfirmed() == null
-                && customer.getName() == null) {
-            throw new BadRequestException("Please complete all the fields");
+        }if (customer.isBookingConfirmed() == null) {
+//            throw new InvalidFormatException e;
 
         } else {
+
+        }
             return status(HttpStatus.OK).body(respository.insert(customer));
         }
-    }
 
 
     @GetMapping

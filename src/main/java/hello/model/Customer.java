@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -16,15 +18,14 @@ public class Customer {
     private String id;
 
     @Field(value="name")
+    @NotNull
     private String name;
-
-    @Field(value="durationOfStay")
-    private int durationOfStay;
 
     @Field(value="date")
     private Date date = new Date();
 
     @Field(value="bookingConfirmed")
+    @NotNull
     private Boolean bookingConfirmed;
 
     public Customer() {
