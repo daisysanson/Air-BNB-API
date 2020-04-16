@@ -1,19 +1,14 @@
 package hello.controller;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.sun.istack.internal.NotNull;
 import hello.exceptions.*;
 import hello.model.Customer;
 import hello.dao.CustomerRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.validation.BindValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.net.BindException;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +37,7 @@ public class CustomerController {
         } else {
 
         }
+        log.info("Customer " +  customer + "added");
             return status(HttpStatus.OK).body(respository.insert(customer));
         }
 
@@ -58,6 +54,7 @@ public class CustomerController {
         if (!searchCustomer.isPresent()) {
             throw new NotFoundException("Cannot find this ID");
         }
+        log.info("id " + id + "found");
         return status(HttpStatus.OK).body(searchCustomer.get());
     }
 
@@ -71,6 +68,7 @@ public class CustomerController {
         }
 
         respository.deleteById(id);
+        log.info("customer deleted" );
         return status(HttpStatus.OK).body("id " + id + " has been deleted");
     }
 
@@ -80,6 +78,7 @@ public class CustomerController {
   public ResponseEntity updateCustomerById(@PathVariable("id") String id, @Valid @NotNull @RequestBody Customer customerToUpdate) {
       Optional<Customer> searchCustomer = respository.findById(id);
        if (respository.findById(id).isPresent()) {
+           log.info("id updated");
            return status(HttpStatus.OK).body("'name' " + searchCustomer.get().getName() +
                    " at id " + id + " has been replaced by " + customerToUpdate.getName());
       } else {

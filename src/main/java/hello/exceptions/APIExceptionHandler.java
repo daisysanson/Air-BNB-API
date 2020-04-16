@@ -1,18 +1,19 @@
 package hello.exceptions;
+import com.mongodb.MongoException;
+import com.mongodb.MongoSocketOpenException;
+import com.mongodb.MongoSocketReadException;
+import com.mongodb.MongoTimeoutException;
+import hello.controller.CustomerController;
+import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
-        import com.mongodb.MongoException;
-        import com.mongodb.MongoSocketOpenException;
-        import com.mongodb.MongoSocketReadException;
-        import com.mongodb.MongoTimeoutException;
-        import hello.controller.CustomerController;
-        import org.apache.log4j.Logger;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.http.converter.HttpMessageNotReadableException;
-        import org.springframework.web.bind.annotation.ControllerAdvice;
-        import org.springframework.web.bind.annotation.ExceptionHandler;
-        import java.time.ZoneId;
-        import java.time.ZonedDateTime;
+
 
         @ControllerAdvice
         public class APIExceptionHandler {
@@ -23,7 +24,6 @@ package hello.exceptions;
             @ExceptionHandler(value = HttpMessageNotReadableException.class)
             public ResponseEntity<APIException> handleConverterErrors(HttpMessageNotReadableException e) {
                 HttpStatus badRequest = HttpStatus.NOT_ACCEPTABLE;
-                log.debug("Hello Wold");
                 log.error("exception caught: " + e);
 
                 APIException apiException = new APIException( //handles payload information
@@ -126,16 +126,16 @@ package hello.exceptions;
             }
 
             @ExceptionHandler(value = Exception.class)
-            public ResponseEntity<ApiGlobalException> handleAllExceptions(Exception e) {
+            public ResponseEntity<APIException> handleAllExceptions(Exception e) {
                 log.error("exception caught: " + e);
-                ApiGlobalException apiGlobalException = new ApiGlobalException(
-                        "Something went wrong",
+                APIException apiException = new APIException(
+                        "Something has gone wrong - please check your input",
                         HttpStatus.I_AM_A_TEAPOT,
                         ZonedDateTime.now(ZoneId.of("Z")));
 
 
 
-                return new ResponseEntity<>(apiGlobalException, HttpStatus.I_AM_A_TEAPOT);
+                return new ResponseEntity(apiException, HttpStatus.I_AM_A_TEAPOT);
 
 
             }
