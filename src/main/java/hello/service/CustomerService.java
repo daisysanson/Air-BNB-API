@@ -27,19 +27,16 @@ public class CustomerService {
 
 
     public Customer addCustomer(Customer customer) {
-        boolean isError = false;
         List<String> errors = new ArrayList<>(); //make new list which will contrain of errors
         if (StringUtils.isBlank(customer.getName())) {
-            isError = true;
             errors.add("Customer name needs to be entered");
         }
 
         if (customer.isBookingConfirmed() == null) {
-            isError = true;
             errors.add("Booking request cannot be empty");
         }
 
-        if (isError) {
+        if (!errors.isEmpty()) {
             throw new MultiErrorException("Your customer data is incorrect", errors);
         } else {
             repository.insert(customer);
@@ -54,7 +51,7 @@ public class CustomerService {
 
     public Customer selectCustomerById(String id) {
         Optional<Customer> searchCustomer = repository.findById(id);
-        if (!searchCustomer.isPresent()) {
+        if (!repository.existsById(id)) {
             throw new NotFoundException("Cannot find this ID");
         }
         status(HttpStatus.OK).body(searchCustomer.get());
@@ -63,8 +60,7 @@ public class CustomerService {
 
     public boolean deleteCustomerById(String id) {
         {
-            Optional<Customer> findCustomer = repository.findById(id);
-            if (!findCustomer.isPresent()) {
+            if (!repository.existsById(id)) {
                 throw new NotFoundException("id " + id + "  not found");
             }
             repository.deleteById(id);
@@ -74,8 +70,7 @@ public class CustomerService {
     }
 
     public Customer updateCustomerById(@PathVariable String id, Customer customerToUpdate) {
-        Optional<Customer> searchCustomer = repository.findById(id);
-        if (!searchCustomer.isPresent()) {
+        if (!repository.existsById(id)) {
             throw new NotFoundException("id " + id + " not found");
         }
         return repository.save(customerToUpdate);

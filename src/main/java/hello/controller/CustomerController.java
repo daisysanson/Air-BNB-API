@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/api/v1/customers")
 @RestController
 public class CustomerController {
-    private CustomerRepository respository;
     private CustomerService customerService;
     static Logger log = Logger.getLogger(CustomerController.class);
 
