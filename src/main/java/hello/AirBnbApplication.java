@@ -5,13 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-
 @SpringBootApplication
-    public class AirBnbApplication{
-
+public class AirBnbApplication {
 
     public static void main(String[] args) {
-            SpringApplication.run(AirBnbApplication.class, args);
-            BasicConfigurator.configure();
-        }
+        SpringApplication.run(AirBnbApplication.class, args);
+        BasicConfigurator.configure();
     }
+}

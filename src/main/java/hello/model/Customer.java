@@ -17,14 +17,14 @@ public class Customer {
     @Id //this is the primary key field
     private String id;
 
-    @Field(value="name")
+    @Field(value = "name")
     @NotNull
     private String name;
 
-    @Field(value="date")
+    @Field(value = "date")
     private Date date = new Date();
 
-    @Field(value="bookingConfirmed")
+    @Field(value = "bookingConfirmed")
     @NotNull
     private Boolean bookingConfirmed;
 
@@ -42,9 +42,7 @@ public class Customer {
         this.bookingConfirmed = bookingConfirmed;
 
 
-
-}
-
+    }
 
 
     public String getId() {
