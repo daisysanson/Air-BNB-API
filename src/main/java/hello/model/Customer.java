@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -15,17 +17,16 @@ public class Customer {
     @Id //this is the primary key field
     private String id;
 
-    @Field(value="name")
+    @Field(value = "name")
+    @NotNull
     private String name;
 
-    @Field(value="durationOfStay")
-    private int durationOfStay;
-
-    @Field(value="date")
+    @Field(value = "date")
     private Date date = new Date();
 
-    @Field(value="bookingConfirmed")
-    private boolean bookingConfirmed;
+    @Field(value = "bookingConfirmed")
+    @NotNull
+    private Boolean bookingConfirmed;
 
     public Customer() {
 
@@ -41,9 +42,7 @@ public class Customer {
         this.bookingConfirmed = bookingConfirmed;
 
 
-
-}
-
+    }
 
 
     public String getId() {
@@ -70,11 +69,11 @@ public class Customer {
         this.date = date;
     }
 
-    public boolean isBookingConfirmed() {
+    public Boolean isBookingConfirmed() {
         return bookingConfirmed;
     }
 
-    public void setBookingConfirmed(boolean bookingConfirmed) {
+    public void setBookingConfirmed(Boolean bookingConfirmed) {
         this.bookingConfirmed = bookingConfirmed;
     }
 }
