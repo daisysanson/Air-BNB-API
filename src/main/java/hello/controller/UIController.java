@@ -9,9 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import sun.net.httpserver.HttpServerImpl;
+
 
 import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/")
@@ -28,8 +26,9 @@ public class UIController {
         this.customerService = customerService;
     }
 
+
         @RequestMapping(value = "", method = RequestMethod.GET)
-        public String greeting(Model model) {
+        public String Customer(Model model) {
             model.addAttribute("customer", customerService.getAllCustomers());
             return "customer_information";
         }

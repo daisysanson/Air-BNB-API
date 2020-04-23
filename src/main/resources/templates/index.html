@@ -1,23 +1,25 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Customer</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Spring MVC Thymeleaf</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/mystyle.css" rel="stylesheet"/>
 </head>
+
 <body>
-<h1>Form</h1>
-<form action="#" th:action="addCustomer" th:object="${customerForm}" method="get">
-<table>
-    <tr>
-    <td>Name: <input type="text" th:field="*{name}" /></td>
-    </tr>
-    <tr>
-    <td>Booking Confirmation: <input type="text" th:field="*{isBookingConfirmed}" /></td>
-    </tr>
-    <tr>
-        <td><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></td>
-    </tr>
-</table>
-</form>
+
+<nav th:replace="fragments/nav :: nav"></nav>
+
+<p th:text="'Hello, ' + ${name} + '!'" />
+
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>

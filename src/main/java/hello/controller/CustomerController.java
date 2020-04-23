@@ -1,6 +1,5 @@
 package hello.controller;
 
-import com.sun.istack.internal.NotNull;
 import hello.model.Customer;
 import hello.dao.CustomerRepository;
 import hello.service.CustomerService;
@@ -59,7 +58,7 @@ public class CustomerController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity updateCustomerById(@PathVariable("id") String id, @Valid @NotNull @RequestBody Customer customerToUpdate) {
+    public ResponseEntity updateCustomerById(@PathVariable("id") String id, @Valid @RequestBody Customer customerToUpdate) {
         log.info("customer updated");
         Customer customer1 = customerService.updateCustomerById(id, customerToUpdate);
 
