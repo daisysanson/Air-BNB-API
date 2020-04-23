@@ -5,38 +5,32 @@ import hello.model.Customer;
 import hello.service.CustomerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import sun.net.httpserver.HttpServerImpl;
 
 import javax.servlet.http.HttpServletRequest;
-
+@RequestMapping("/")
 @Controller
 public class UIController {
   private Customer customer;
   private CustomerRepository repository;
+  private CustomerService customerService;
 
     @Autowired
-    public UIController(Customer customer, CustomerRepository repository) {
+    public UIController(Customer customer, CustomerRepository repository, CustomerService customerService) {
         this.customer = customer;
         this.repository = repository;
+        this.customerService = customerService;
     }
-   @GetMapping("/hello1")
-    public String getAllCustomers (HttpServletRequest request, Model model) {
-       model.addAttribute("customer", new Customer());
-       return "customer";
 
-   }
-      @PostMapping("/hello1")
-       public String addCustomer(@ModelAttribute Customer customer) {
-           return "customer";
-
- }
-
-
-
-
-
-
+        @RequestMapping(value = "", method = RequestMethod.GET)
+        public String greeting(Model model) {
+            model.addAttribute("customer", customerService.getAllCustomers());
+            return "customer_information";
+        }
 }
