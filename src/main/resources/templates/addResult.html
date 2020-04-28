@@ -7,16 +7,16 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Customer result</title>
+    <title>Customer added</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/mystyle.css" rel="stylesheet"/>
 </head>
-<h1>Customer</h1>
-<p th:text="'id: ' + ${customer.id}" />
-<p th:text="'name: ' + ${customer.name}" />
-<p th:text="'booking confirmation: ' + ${customer.bookingConfirmed}" />
+<th:block th:each="customer : ${customers}">
+    <td th:text="${customer.id}">customer ID</td>
+    <td th:text="${customer.isBookingConfirmed}">bookingConfirmed</td>
+</th:block>
 
-<a href="/greeting">Select another customer</a>
+<a href="/index">Select another customer</a>
 </body>
 </html>

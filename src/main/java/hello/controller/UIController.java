@@ -43,20 +43,39 @@ public class UIController {
 //    }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String showForm(Model model) {
+    public String showGetForm(Model model) {
         customer.getId();
 
         model.addAttribute("customer", customer);
         return "index";
     }
 
-    @RequestMapping(value = "/result", method = RequestMethod.POST)
+    @RequestMapping(value = "/displayCustomer", method = RequestMethod.POST)
     public String showPage(@ModelAttribute("customer") Customer customer,
                            @RequestParam("id") String id, Model model) {
         repository.findById(id);
         model.addAttribute("customer", customerService.selectCustomerById(id));
-        return "/result";
+        return "/displayCustomer";
 
     }
+
+    @RequestMapping(value = "/addCustomer", method = RequestMethod.GET)
+    public String showAddForm(Model model) {
+
+        model.addAttribute("customer", customer);
+        return "/addCustomer";
+    }
+
+
+
+    @RequestMapping(value= "/addResult", method = RequestMethod.POST)
+    public String addCustomer(@ModelAttribute("customer") Customer customer,
+                           @RequestParam("name") String name,
+                            @RequestParam("bookingConfirmed") Boolean bookingConfirmed, Model model) {
+        model.addAttribute("customer", customerService.addCustomer(customer));
+        return "/addResult";
+
+    }
+
 }
 

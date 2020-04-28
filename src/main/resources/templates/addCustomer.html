@@ -13,11 +13,12 @@
     <link href="css/mystyle.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>Select a customer</h1>
+<h1>Add a a customer</h1>
 
 
-<form action="#" th:action="@{/displayCustomer}" th:object="${customer}" method="post">
-    <p>id: <input type="text" th:field="*{id}" /></p>
+<form action="#" th:action="@{/addResult}" th:object="${customer}" method="POST">
+    <p>name: <input type="text" th:field="*{name}" /></p>
+    <label><input type="Boolean" name="bookingConfirmed" th:field="*{bookingConfirmed = false}"> Booking</label>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 
@@ -26,3 +27,6 @@
 </html>
 </body>
 </html>
+
+
+<!--h:unchecked="false"-->
