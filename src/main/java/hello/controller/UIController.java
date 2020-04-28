@@ -67,15 +67,43 @@ public class UIController {
     }
 
 
-
-    @RequestMapping(value= "/addResult", method = RequestMethod.POST)
+    @RequestMapping(value = "/addResult", method = RequestMethod.POST)
     public String addCustomer(@ModelAttribute("customer") Customer customer,
-                           @RequestParam("name") String name,
-                            @RequestParam("bookingConfirmed") Boolean bookingConfirmed, Model model) {
+                              @RequestParam("name") String name,
+                              @RequestParam("bookingConfirmed") Boolean bookingConfirmed, Model model) {
         model.addAttribute("customer", customerService.addCustomer(customer));
         return "/addResult";
 
     }
 
-}
+    @RequestMapping(value = "/deleteCustomerForm", method = RequestMethod.GET)
+    public String showDeleteForm(Model model) {
+        model.addAttribute("customer", customer);
+        return "/deleteCustomerForm";
+    }
 
+    @RequestMapping(value = "/customerDeleted", method = RequestMethod.GET)
+    public String deleteCustomer(@ModelAttribute("customer") Customer customer,
+                                 @RequestParam("id") String id, Model model) {
+        model.addAttribute("customer", customerService.deleteCustomerById(id));
+        return "/customerDeleted";
+
+    }
+
+
+    @RequestMapping(value = "/replaceCustomerForm", method = RequestMethod.GET)
+    public String showupdateForm(Model model) {
+        model.addAttribute("customer", customer);
+        return "/replaceCustomerForm";
+    }
+
+
+    @RequestMapping(value = "/replaceCustomer", method = RequestMethod.PUT)
+    public String updateCustomer(@ModelAttribute("customer") Customer customerToupdate,
+                                 @RequestParam("id") String id, Model model) {
+
+        model.addAttribute("customer", customerService.updateCustomerById(id, customerToupdate));
+        return "/replaceCustomer";
+
+    }
+}

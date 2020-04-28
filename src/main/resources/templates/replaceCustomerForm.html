@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Select a customer to replace</h1>
+
+
+<form action="#" th:action="@{/}" th:object="${customer}" method="put">
+    <p>id: <input type="text" th:field="*{id}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+</body>
+
+</body>
+</html>

@@ -48,6 +48,7 @@ public class APIExceptionHandler {
     }
 
 
+
     @ExceptionHandler(value = NotFoundException.class)
     public ResponseEntity<APIException> handleNotFound(NotFoundException e) {
         HttpStatus notFound1 = HttpStatus.NOT_FOUND;
