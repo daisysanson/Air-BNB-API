@@ -10,13 +10,26 @@
 </head>
 <body>
 <div class = "container">
-    <h2>Customer Deleted: </h2>
-    </tr>
-    <tr>
-    </tr>
+    <h2>Customer updated: </h2>
+    <table class ="table table-striped" >
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Booking</th>
+            <th>Date</th>
+        </tr>
+        <tr th:each ="customer :${customer}" >
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.bookingConfirmed}"></td>
+            <td th:text="${customer.date}"></td>
+        </tr>
+        <tr>
+        </tr>
     </table>
 </div>
-<a href="/addCustomer">Add another customer</a>
+<a href="/replaceCustomer">Replace another customer</a>
+<a href="/index">Main Page</a>
 </div>
 </body>
 </html>

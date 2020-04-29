@@ -29,18 +29,18 @@ public class UIController {
     }
 
 
-//    @RequestMapping(value = "", method = RequestMethod.GET)
-//    public String showAllCustomers(Model model) {
-//        model.addAttribute("customer", customerService.getAllCustomers());
-//        return "customer_information";
-//    }
+    @RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET)
+    public String showAllCustomers(Model model) {
+        model.addAttribute("customer", customerService.getAllCustomers());
+        return "/getAllCustomers";
+    }
 
 
-//    @RequestMapping(value = "/index", method = RequestMethod.GET)
-//    public String getCustomerId(@RequestParam(name = "id") String id, Model model) {
-//        model.addAttribute("id", id);
-//        return "index";
-//    }
+    @RequestMapping(value = "/index", method = RequestMethod.POST)
+    public String getCustomerId(@RequestParam(name = "id") String id, Model model) {
+        model.addAttribute("id", id);
+        return "index";
+    }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String showGetForm(Model model) {
@@ -50,12 +50,12 @@ public class UIController {
         return "index";
     }
 
-    @RequestMapping(value = "/displayCustomer", method = RequestMethod.POST)
+    @RequestMapping(value = "/customer_information", method = RequestMethod.POST)
     public String showPage(@ModelAttribute("customer") Customer customer,
                            @RequestParam("id") String id, Model model) {
         repository.findById(id);
         model.addAttribute("customer", customerService.selectCustomerById(id));
-        return "/displayCustomer";
+        return "/customer_information";
 
     }
 
@@ -98,7 +98,7 @@ public class UIController {
     }
 
 
-    @RequestMapping(value = "/replaceCustomer", method = RequestMethod.PUT)
+    @RequestMapping(value = "/replaceCustomer", method = RequestMethod.GET)
     public String updateCustomer(@ModelAttribute("customer") Customer customerToupdate,
                                  @RequestParam("id") String id, Model model) {
 

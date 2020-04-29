@@ -7,13 +7,15 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Spring MVC Thymeleaf</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/mystyle.css" rel="stylesheet"/>
+    <title>Main page</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link th:href="@{/index.css}" rel="stylesheet" />
 </head>
 <body>
-<h1>Select a customer</h1>
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+
+<h1 class = 'forms'>Find a customer</h1>
 
 
 <form action="#" th:action="@{/displayCustomer}" th:object="${customer}" method="post">
@@ -22,7 +24,16 @@
 </form>
 
 </form>
-</body>
-</html>
+
+<h2> Other Options: </h2>
+<ul>
+    <li><a href="/addCustomer">Add a customer</a></li>
+    <li><a href="/getAllCustomers">See all customers</a></li>
+    <li><a href="/deleteCustomerForm">Delete a customer</a></li>
+    <li><a href="/replaceCustomerForm">Update a customer</a></li>
+</ul>
+
+
+
 </body>
 </html>

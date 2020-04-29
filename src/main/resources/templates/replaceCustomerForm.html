@@ -5,15 +5,18 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Select a customer to replace</h1>
+
+<h1>Select a customer to replace: </h1>
 
 
-<form action="#" th:action="@{/}" th:object="${customer}" method="put">
-    <p>id: <input type="text" th:field="*{id}" /></p>
+<form action="#" th:action="@{/replaceCustomer}" th:object="${customer}" method="put">
+    <p>Id: <input type="text" th:field="*{id}" /></p>
+    <p>Customer Name: <input type="text" th:field="*{name}" /></p>
+    <label>Booking Confirmed: <input type="Boolean" name="bookingConfirmed" th:field="*{bookingConfirmed = false}">  <p> Please type either 'true' or false' </p></label>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+
 </form>
 
-</body>
-
+<a href="/index">Main Page</a>
 </body>
 </html>
