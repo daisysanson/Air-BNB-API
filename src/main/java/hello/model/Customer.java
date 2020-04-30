@@ -69,7 +69,7 @@ public class Customer {
         this.date = date;
     }
 
-    public Boolean isBookingConfirmed() {
+    public Boolean getBookingConfirmed() {
         return bookingConfirmed;
     }
 

@@ -6,28 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Customer Added Successfully</title>
+
+    <link th:href="@{/addResult.css}" rel="stylesheet" />
 </head>
 <body>
 <div class = "container">
-    <h2>Customer Added: </h2>
-    <table class ="table table-striped" >
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Booking</th>
-            <th>Date</th>
-        </tr>
-        <tr th:each ="customer :${customer}" >
-            <td th:text="${customer.id}"></td>
-            <td th:text="${customer.name}"></td>
-            <td th:text="${customer.bookingConfirmed}"></td>
-            <td th:text="${customer.date}"></td>
-        </tr>
-        <tr>
-        </tr>
-    </table>
+    <h2>Customer Added Successfully!</h2>
+    <span>ID:</span><span th:text="${customer.id}"></span><br/>
+    <span>Name:</span><span th:text="${customer.name}"></span><br/>
+    <span>Booking Confirmed:</span><span th:text="${customer.bookingConfirmed}"></span><br/>
+    <span>Date Added:</span><span th:text="${customer.date}"></span><br/>
+
 </div>
+
 <a href="/addCustomer">Add another customer</a>
 <a href="/index">Main Page</a>
 </div>
