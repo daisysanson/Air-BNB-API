@@ -1,26 +1,22 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" th:fragment="nav">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Home</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="/getAllCustomers">List of Customers</a>
-                </li>
-                <li>
-                    <a href="/addCustomer">Add a new customer</a>
-                </li>
-            </ul>
+<html xmlns:th="http://www.thymeleaf.org"><head>
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link th:href="@{/nav.css}" rel="stylesheet"/>
+    </head>
+<div th:fragment="header>">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/index">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/addCustomerForm">Add a Customer</a>
+            <a class="nav-item nav-link" href="/findACustomerForm">Find a Customer</a>
+            <a class="nav-item nav-link" href="/getAllCustomers">List of Customers</a>
+            <a class="nav-item nav-link" href="/deleteCustomerForm">Delete a Customer</a>
+            <a class="nav-item nav-link" href="/replaceCustomerForm">Update a Customer</a>
         </div>
     </div>
 </nav>
-</html>
+<html><

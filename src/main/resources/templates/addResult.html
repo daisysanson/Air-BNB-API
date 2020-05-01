@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
     <link th:href="@{/addResult.css}" rel="stylesheet" />
 </head>
 <body>
-<div class = "container">
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+
+<div>
     <h2>Customer Added Successfully!</h2>
     <span>ID:</span><span th:text="${customer.id}"></span><br/>
     <span>Name:</span><span th:text="${customer.name}"></span><br/>

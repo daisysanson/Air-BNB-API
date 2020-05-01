@@ -29,41 +29,41 @@ public class UIController {
     }
 
 
+
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String getCustomerId(Model model) {
+        return "/index";
+    }
+
+    @RequestMapping(value = "/findACustomerForm", method = RequestMethod.GET)
+    public String showGetCustomerForm(Model model) {
+        customer.getId();
+
+        model.addAttribute("customer", customer);
+        return "/findACustomerForm";
+    }
+
+    @RequestMapping(value = "/showCustomer", method = RequestMethod.POST)
+    public String showGetCustomerPage(@ModelAttribute("customer") Customer customer,
+                           @RequestParam("id") String id, Model model) {
+        model.addAttribute("customer", customerService.selectCustomerById(id));
+        return "/showCustomer";
+
+    }
+
+
     @RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET)
     public String showAllCustomers(Model model) {
         model.addAttribute("customer", customerService.getAllCustomers());
         return "/getAllCustomers";
     }
 
-
-    @RequestMapping(value = "/index", method = RequestMethod.POST)
-    public String getCustomerId(@RequestParam(name = "id") String id, Model model) {
-        model.addAttribute("id", id);
-        return "index";
-    }
-
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String showGetForm(Model model) {
-        customer.getId();
-
-        model.addAttribute("customer", customer);
-        return "index";
-    }
-
-    @RequestMapping(value = "/customer_information", method = RequestMethod.POST)
-    public String showPage(@ModelAttribute("customer") Customer customer,
-                           @RequestParam("id") String id, Model model) {
-        repository.findById(id);
-        model.addAttribute("customer", customerService.selectCustomerById(id));
-        return "/customer_information";
-
-    }
-
-    @RequestMapping(value = "/addCustomer", method = RequestMethod.GET)
+    @RequestMapping(value = "/addCustomerForm", method = RequestMethod.GET)
     public String showAddForm(Model model) {
 
         model.addAttribute("customer", customer);
-        return "/addCustomer";
+        return "/addCustomerForm";
     }
 
 

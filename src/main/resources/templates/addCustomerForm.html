@@ -9,27 +9,24 @@
 
     <title>Add a Customer</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link th:href="@{/addCustomer.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+    <link th:href="@{/addCustomer.css}" rel="stylesheet"/>
 </head>
 <body>
 <h1>Add a new Customer</h1>
+<nav th:replace="Fragments/nav :: nav"></nav>
 
-
+<div class = "input">
 <form action="#" th:action="@{/addResult}" th:object="${customer}" method="POST">
-    <p>Customer Name: <input type="text" th:field="*{name}" /></p>
-<!--    <label>Booking Confirmed: <input type="Boolean" name="bookingConfirmed" th:field="*{bookingConfirmed = false}">  <p> Please type either 'true' or false' </p></label>-->
-
+    <p>Customer Name: <input type="text" th:field="*{name}"/></p>
     <label>Booking:</label>
     <select th:field="*{bookingConfirmed}">
-        <option th:value= "false" th:text="False"></option>
-        <option th:value= "true" th:text="True"></option>
+        <option th:value="false" th:text="False"></option>
+        <option th:value="true" th:text="True"></option>
     </select>
-
-
-<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-
+    <p> <input class ="button" type="submit" value="Submit"/>    <input class ="button" type="reset" value="Reset"/></p>
 </form>
+</div>
 
 
 <a href="/index">Main Page</a>
