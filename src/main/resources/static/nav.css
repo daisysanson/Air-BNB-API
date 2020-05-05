@@ -1,4 +1,13 @@
 nav{
 font-family: 'Scope One', serif;
+margin-top: 0px;
+}
 
+.bg-light {
+background-color: white!important;
+
+}
+
+.navbar-brand, .navbar-light .navbar-brand{
+color:#ff0066;
 }

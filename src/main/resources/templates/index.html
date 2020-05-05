@@ -1,23 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+
 
     <title>Main page</title>
 
-    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/index.css">
-    <link rel="stylesheet" href="/nav.css">
 </head>
 <body>
 <nav th:replace="Fragments/nav :: nav"></nav>
 
-<h1>Hello, world</h1>
+<section id="header">
+    <div id="header-inner">
+        <h1>Hello, world</h1>
+        <h5>Edit Customer bookings</h5>
+    </div>
+</section>
+
 
 
 </form>
@@ -25,6 +28,6 @@
 
 
 
-
+<footer th:replace="Fragments/footer :: footer"></footer>
 </body>
 </html>

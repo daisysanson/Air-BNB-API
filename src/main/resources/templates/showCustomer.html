@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-    <title>Customer Selection</title>
     <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/index.css">
+
+    <title>Customer Selection</title>
 <body>
 <nav th:replace="Fragments/nav :: nav"></nav>
 <div class = "container">
-    <h2>Your selection: </h2>
+    <h2>Customer found: </h2>
     <table class ="table table-striped" >
         <tr>
             <th>ID</th>
@@ -20,17 +18,13 @@
             <th>Booking</th>
             <th>Date</th>
         </tr>
-        <tr th:each ="customer :${customer}" >
-            <td th:text="${customer.id}"></td>
-            <td th:text="${customer.name}"></td>
-            <td th:text="${customer.bookingConfirmed}"></td>
-            <td th:text="${customer.date}"></td>
-        </tr>
-        <tr>
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.bookingConfirmed}"></td>
+        <td th:text="${customer.date}"></td>
         </tr>
     </table>
-</div>
+
 </div>
 </body>
 </html>
-

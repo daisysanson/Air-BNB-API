@@ -34,7 +34,7 @@ public class CustomerService {
             errors.add("Customer name needs to be entered");
         }
 
-        if (customer.getBookingConfirmed() == null) {
+        if (customer.getBookingConfirmed()) {
                 errors.add("Booking request cannot be empty");
 
         }

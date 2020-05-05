@@ -2,18 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Delete a Customer</title>
     <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/index.css">
+    <title>Delete a Customer</title>
+
 </head>
 <body>
 <nav th:replace="Fragments/nav :: nav"></nav>
 
-<h1>Select a customer to delete</h1>
-
-
-<form action="#" th:action="@{/customerDeleted}" th:object="${customer}" method="delete">
-    <p>id: <input type="text" th:field="*{id}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Select a customer to delete</h1>
+                <form action="#" th:action="@{/customerDeleted}" th:object="${customer}" method="delete"
+                    <div class="form-group">
+                        <label> Customer ID  </label>
+                        <input type="text" class="form-control" th:field="*{id}"/>
+                        <small id="advice" class="form-text text-muted">Enter the customer's ID</small>
+                    </div>
+                    <p><input class="button" type="submit" value="Submit"/> <input class="button" type="reset" value="Reset"/>
+                </form>
+            </div>
+        </div>
+    </div>
 </form>
 
 </body>
