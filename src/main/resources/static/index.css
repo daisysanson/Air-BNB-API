@@ -1,8 +1,5 @@
 body {
-    padding-top: 40px;
-    padding-bottom: 40px;
     background-color: #fffdfa;
-    margin:20px
 }
 
 
@@ -68,17 +65,22 @@ background-color: #ff0066;
    }
 
 
-   .button{
+  .button{
    font-family: 'Scope One', serif;
    color:#ff0066;
    border: 2px transparent rgba(217, 83, 78, 0.75);
    border-radius: 80px;
    background: solid;
-   margin-top: 20px;
-    margin-bottom: 0;
-    margin-right: 0px;
-    margin-left: 0;
    }
 
-button:hover{
-color:red}
+
+
+
+   .button:hover{
+   font-family: 'Scope One', serif;
+   color:white;
+   border: 2px transparent rgba(217, 83, 78, 0.75);
+   border-radius: 80px;
+   background:#ff0066;;
+   }
+
