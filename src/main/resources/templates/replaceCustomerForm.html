@@ -12,20 +12,18 @@
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1>Update a customer's details</h1>
             <form action="#" th:action="@{/replaceCustomer}" th:object="${customer}" method="put">
                 <div class="form-group">
-                    <label> Customer Name  </label>
+                    <label> Customer Name </label>
                     <input type="text" class="form-control" th:field="*{name}"/>
                 </div>
                 <div class="form-group">
                     <label>ID:</label>
-                    <input  type="text" class="form-control" th:field="*{id}"/>
+                    <input type="text" class="form-control" th:field="*{id}"/>
                     <small id="advice" class="form-text text-muted">Enter customer's existing ID</small>
                 </div>
                 <div class="form-group">
@@ -35,9 +33,11 @@
                         <option th:value="true" th:text="True"></option>
                     </select>
                 </div>
-                <p><input class="button" type="submit" value="Submit"/> <input class="button" type="reset" value="Reset"/>
+                <p><input class="button" type="submit" value="Submit"/> <input class="button" type="reset"
+                                                                               value="Reset"/>
             </form>
         </div>
     </div>
-</div></body>
+</div>
+</body>
 </html>

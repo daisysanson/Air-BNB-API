@@ -20,19 +20,6 @@ public class APIExceptionHandler {
 
     static Logger log = Logger.getLogger(CustomerController.class);
 
-    @ExceptionHandler(value = HttpMessageNotReadableException.class)
-    public ResponseEntity<APIException> handleHttpNotReadableException(HttpMessageNotReadableException e) {
-        HttpStatus badRequest = HttpStatus.BAD_REQUEST;
-
-        APIException apiException = new APIException( //handles payload information
-                "Please enter data in correct format :",
-                badRequest,
-                ZonedDateTime.now(ZoneId.of("Z")));
-
-        return new ResponseEntity(apiException, HttpStatus.BAD_REQUEST);
-
-    }
-
     @ExceptionHandler(value = BadRequestException.class)
     public ResponseEntity<APIException> handleBadRequest(BadRequestException e) {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;

@@ -1,7 +1,6 @@
 package hello.controller;
 
 import hello.model.Customer;
-import hello.dao.CustomerRepository;
 import hello.service.CustomerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

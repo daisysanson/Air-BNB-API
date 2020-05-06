@@ -1,7 +1,6 @@
 package hello.service;
 
 import hello.dao.CustomerRepository;
-import hello.exceptions.BadRequestException;
 import hello.exceptions.MultiErrorException;
 import hello.exceptions.NotFoundException;
 import hello.model.Customer;
@@ -9,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ public class CustomerService {
         }
 
         if (customer.getBookingConfirmed()) {
-                errors.add("Booking request cannot be empty");
+            errors.add("Booking request cannot be empty");
 
         }
         if (!errors.isEmpty()) {

@@ -10,21 +10,21 @@
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 
-<div class = "container">
+<div class="container">
     <h2>Customer added successfully!: </h2>
-<table class ="table table-striped" >
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Booking</th>
-        <th>Date</th>
-    </tr>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Booking</th>
+            <th>Date</th>
+        </tr>
         <td th:text="${customer.id}"></td>
         <td th:text="${customer.name}"></td>
         <td th:text="${customer.bookingConfirmed}"></td>
         <td th:text="${customer.date}"></td>
-    </tr>
-</table>
+        </tr>
+    </table>
 
 </div>
 </body>

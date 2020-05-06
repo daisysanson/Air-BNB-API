@@ -3,32 +3,25 @@ package hello.controller;
 import hello.dao.CustomerRepository;
 import hello.model.Customer;
 import hello.service.CustomerService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping("/")
 @Controller
 public class UIController {
     private Customer customer;
-    private CustomerRepository repository;
     private CustomerService customerService;
 
     @Autowired
-    public UIController(Customer customer, CustomerRepository repository, CustomerService customerService) {
+    public UIController(Customer customer, CustomerService customerService) {
         this.customer = customer;
-        this.repository = repository;
         this.customerService = customerService;
     }
-
-
 
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -46,7 +39,7 @@ public class UIController {
 
     @RequestMapping(value = "/showCustomer", method = RequestMethod.POST)
     public String showGetCustomerPage(@ModelAttribute("customer") Customer customer,
-                           @RequestParam("id") String id, Model model) {
+                                      @RequestParam("id") String id, Model model) {
         model.addAttribute("customer", customerService.selectCustomerById(id));
         return "/showCustomer";
 

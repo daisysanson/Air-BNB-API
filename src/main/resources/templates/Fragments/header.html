@@ -1,37 +1,38 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="/index.js">
-<link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
-<link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/header.css">
 </head>
 <body>
 <div th:fragment="header">
 
-     <div class = "carousel" >
+    <div class="carousel">
 
-         <div class ="carousel_track-container">
-             <ul class ="carousel_track">
-                 <li class = "carousel_slide">
-                     <img class= "carousel_image" src="/img/newYork.jpg" alt = ""></li>
-                 <li class= "carousel_slide">
-                     <img class= "carousel_image"  src="/img/newYork.jpg" alt = ""><li>
-                 <li class = "carousel_slide">
-                 <img class= "carousel_image"  src="/img/newYork.jpg" alt = ""></li>
-             </ul>
+        <div class="carousel_track-container">
+            <ul class="carousel_track">
+                <li class="carousel_slide current-slide">
+                    <img class="carousel_image" src="/img/newYork.jpg" alt=""></li>
+                <li class="carousel_slide">
+                    <img class="carousel_image" src="/img/bedroom.jpg" alt="">
+                <li>
+                <li class="carousel_slide">
+                    <img class="carousel_image" src="/img/hotel.jpeg" alt=""></li>
+            </ul>
 
-         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-         <a class="next" onclick="plusSlides(1)">&#10095;</a>
-     </div>
+            <a class="prev is-hidden">&#10094;</a>
+            <a class="next">&#10095;</a>
+        </div>
 
-         <div class ="carousel_nav">
-             <button class = carousel_indicator></button>
-             <button class = carousel_indicator></button>
-             <button class = carousel_indicator></button>
-         </div>
-     </div>
-<br>
+        <div class="carousel_nav">
+            <button class="carousel_indicator current-slide"></button>
+            <button class="carousel_indicator"></button>
+            <button class="carousel_indicator"></button>
+        </div>
+    </div>
+    <br>
 </div>
+<script src="js/carousel.js"></script>
 </body>
 </html>
 
