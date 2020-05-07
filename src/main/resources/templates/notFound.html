@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/index.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Not Found</title>
+</head>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+<section id = "header">
+    <div id = "header-inner">
+    <h1>404 Not Found</h1>
+<h3>Sorry, couldn't find that id!</h3>
+    </div>
+</section>
+
+<button class = "button" onclick="goBack()">Go Back</button>
+<script src="js/error.js"></script>
+</body>
+</html>

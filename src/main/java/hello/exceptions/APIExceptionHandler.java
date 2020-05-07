@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-//@ControllerAdvice
+@ControllerAdvice
 public class APIExceptionHandler {
 
     static Logger log = Logger.getLogger(CustomerController.class);

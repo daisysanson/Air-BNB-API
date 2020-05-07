@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/index.css">
+<head>
+    <title>Bad Request</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+</head>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
+<section id = "header">
+    <div id = "header-inner">
+        <h1>400 Bad Request!</h1>
+        <h3>Please ensure that all fields have been completed</h3>
+    </div>
+</section>
+
+<button class = "button" onclick="goBack()">Go Back</button>
+    <script src="js/error.js"></script>
+
+</body>
+
+</html>
