@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@RequestMapping("/")
+
 @Controller
 public class UIController {
     private Customer customer;
@@ -26,7 +26,7 @@ public class UIController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String getCustomerId(Model model) {
-        return "/index";
+        return "index";
     }
 
     @RequestMapping(value = "/findACustomerForm", method = RequestMethod.GET)
@@ -34,14 +34,14 @@ public class UIController {
         customer.getId();
 
         model.addAttribute("customer", customer);
-        return "/findACustomerForm";
+        return "findACustomerForm";
     }
 
     @RequestMapping(value = "/showCustomer", method = RequestMethod.POST)
     public String showGetCustomerPage(@ModelAttribute("customer") Customer customer,
                                       @RequestParam("id") String id, Model model) {
         model.addAttribute("customer", customerService.selectCustomerById(id));
-        return "/showCustomer";
+        return "showCustomer";
 
     }
 
@@ -49,14 +49,14 @@ public class UIController {
     @RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET)
     public String showAllCustomers(Model model) {
         model.addAttribute("customer", customerService.getAllCustomers());
-        return "/getAllCustomers";
+        return "getAllCustomers";
     }
 
     @RequestMapping(value = "/addCustomerForm", method = RequestMethod.GET)
     public String showAddForm(Model model) {
 
         model.addAttribute("customer", customer);
-        return "/addCustomerForm";
+        return "addCustomerForm";
     }
 
 
@@ -65,21 +65,21 @@ public class UIController {
                               @RequestParam("name") String name,
                               @RequestParam("bookingConfirmed") Boolean bookingConfirmed, Model model) {
         model.addAttribute("customer", customerService.addCustomer(customer));
-        return "/addResult";
+        return "addResult";
 
     }
 
     @RequestMapping(value = "/deleteCustomerForm", method = RequestMethod.GET)
     public String showDeleteForm(Model model) {
         model.addAttribute("customer", customer);
-        return "/deleteCustomerForm";
+        return "deleteCustomerForm";
     }
 
     @RequestMapping(value = "/customerDeleted", method = RequestMethod.GET)
     public String deleteCustomer(@ModelAttribute("customer") Customer customer,
                                  @RequestParam("id") String id, Model model) {
         model.addAttribute("customer", customerService.deleteCustomerById(id));
-        return "/customerDeleted";
+        return "customerDeleted";
 
     }
 
@@ -87,7 +87,7 @@ public class UIController {
     @RequestMapping(value = "/replaceCustomerForm", method = RequestMethod.GET)
     public String showupdateForm(Model model) {
         model.addAttribute("customer", customer);
-        return "/replaceCustomerForm";
+        return "replaceCustomerForm";
     }
 
 
@@ -96,7 +96,7 @@ public class UIController {
                                  @RequestParam("id") String id, Model model) {
 
         model.addAttribute("customer", customerService.updateCustomerById(id, customerToupdate));
-        return "/replaceCustomer";
+        return "replaceCustomer";
 
     }
 }
