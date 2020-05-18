@@ -51,8 +51,7 @@ public class UIController {
             return "showCustomer";
         } catch (NotFoundException e) {
             log.info("customer with id" + id +  "not found");
-            // maybe log 'customer not found' with an 'id' at INFO level here for debugging purposes?
-            return "notFound"; // new html template specifically for data not being found
+            return "notFound";
         }
     }
 
