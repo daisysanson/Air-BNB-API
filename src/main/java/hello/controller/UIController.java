@@ -9,10 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -28,20 +25,18 @@ public class UIController {
 
     static Logger log = Logger.getLogger(CustomerController.class);
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @GetMapping("/index")
     public String getCustomerId(Model model) {
         return "index";
     }
 
-    @RequestMapping(value = "/findACustomerForm", method = RequestMethod.GET)
+    @GetMapping("/findACustomerForm")
     public String showGetCustomerForm(Model model) {
-        customer.getId();
-
-        model.addAttribute("customer", customer);
+        model.addAttribute("customer",customer);
         return "findACustomerForm";
     }
 
-    @RequestMapping(value = "/showCustomer", method = RequestMethod.POST)
+    @PostMapping("/showCustomer")
     public String showGetCustomerPage(@ModelAttribute("customer") Customer customer, @RequestParam("id") String id, Model model) {
         if (customer == null) {
             log.info("no customer input model");
@@ -60,13 +55,13 @@ public class UIController {
     }
 
 
-    @RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET)
+    @GetMapping("/getAllCustomers")
     public String showAllCustomers(Model model) {
         model.addAttribute("customer", customerService.getAllCustomers());
         return "getAllCustomers";
     }
 
-    @RequestMapping(value = "/addCustomerForm", method = RequestMethod.GET)
+    @GetMapping("/addCustomerForm")
     public String showAddForm(Model model) {
 
         model.addAttribute("customer", customer);
@@ -74,7 +69,7 @@ public class UIController {
     }
 
 
-    @RequestMapping(value = "/addResult", method = RequestMethod.POST)
+    @PostMapping("/addResult")
     public String addCustomer(@ModelAttribute("customer") Customer customer,
                               @RequestParam("name") String name,
                               @RequestParam("bookingConfirmed") Boolean bookingConfirmed, Model model) {
@@ -88,13 +83,13 @@ public class UIController {
     }
 
 
-    @RequestMapping(value = "/deleteCustomerForm", method = RequestMethod.GET)
+    @GetMapping("/deleteCustomerForm")
     public String showDeleteForm(Model model) {
         model.addAttribute("customer", customer);
         return "deleteCustomerForm";
     }
 
-    @RequestMapping(value = "/customerDeleted", method = RequestMethod.GET)
+    @GetMapping("/customerDeleted")
     public String deleteCustomer(@ModelAttribute("customer") Customer customer,
                                  @RequestParam("id") String id, Model model) {
         try {
@@ -107,13 +102,13 @@ public class UIController {
     }
 
 
-    @RequestMapping(value = "/replaceCustomerForm", method = RequestMethod.GET)
+    @GetMapping("/replaceCustomerForm")
     public String showUpdateForm(Model model) {
         model.addAttribute("customer", customer);
         return "replaceCustomerForm";
     }
 
-    @RequestMapping(value = "/replaceCustomer", method = RequestMethod.GET)
+    @GetMapping("/replaceCustomer")
     public String updateCustomer(@ModelAttribute("customer") Customer customerToupdate,
                                  @RequestParam("id") String id, Model model) {
 
