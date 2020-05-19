@@ -44,11 +44,12 @@ public class UIController {
     @RequestMapping(value = "/showCustomer", method = RequestMethod.POST)
     public String showGetCustomerPage(@ModelAttribute("customer") Customer customer, @RequestParam("id") String id, Model model) {
         if (customer == null) {
+            log.info("no customer input model");
             return "badRequest";
         }
         try {
             model.addAttribute("customer", customerService.selectCustomerById(id));
-        } catch (MultiErrorException e) {
+        } catch (BadRequestException e) {
             log.info("name field is empty");
             return "badRequest";
         } catch (NotFoundException e) {
@@ -120,7 +121,7 @@ public class UIController {
             model.addAttribute("customer", customerService.updateCustomerById(id, customerToupdate));
             return "replaceCustomer";
         } catch (BadRequestException e) {
-            log.info("customer with id" + id + "not found");
+            log.info("customer with id " + id + "not found");
             return "badRequest";
         } catch (NotFoundException e) {
             return "notFound";

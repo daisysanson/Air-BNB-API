@@ -28,6 +28,10 @@ public class CustomerService {
 
     public Customer selectCustomerById(String id) {
         Optional<Customer> searchCustomer = repository.findById(id);
+        if (StringUtils.isBlank(id)) {
+            throw new BadRequestException("Please enter an id");
+
+        }
         if (!repository.existsById(id)) {
             throw new NotFoundException("Cannot find this ID");
         }
