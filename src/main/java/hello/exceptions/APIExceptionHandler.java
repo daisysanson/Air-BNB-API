@@ -20,6 +20,7 @@ public class APIExceptionHandler {
 
     static Logger log = Logger.getLogger(CustomerController.class);
 
+
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResponseEntity<APIException> handleHttpNotReadableException(HttpMessageNotReadableException e) {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
@@ -32,6 +33,7 @@ public class APIExceptionHandler {
         return new ResponseEntity(apiException, HttpStatus.BAD_REQUEST);
 
     }
+
 
     @ExceptionHandler(value = BadRequestException.class)
     public ResponseEntity<APIException> handleBadRequest(BadRequestException e) {
@@ -46,6 +48,7 @@ public class APIExceptionHandler {
         );
         return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
     }
+
 
 
     @ExceptionHandler(value = NotFoundException.class)

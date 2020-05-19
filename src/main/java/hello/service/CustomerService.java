@@ -1,6 +1,7 @@
 package hello.service;
 
 import hello.dao.CustomerRepository;
+import hello.exceptions.BadRequestException;
 import hello.exceptions.MultiErrorException;
 import hello.exceptions.NotFoundException;
 import hello.model.Customer;
@@ -25,6 +26,25 @@ public class CustomerService {
         this.repository = repository;
     }
 
+    public Customer selectCustomerById(String id) {
+        Optional<Customer> searchCustomer = repository.findById(id);
+        if (StringUtils.isBlank(id)) {
+            throw new BadRequestException("Please enter an id");
+
+        }
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("Cannot find this ID");
+        }
+        status(HttpStatus.OK).body(searchCustomer.get());
+        return repository.findById(id).get();
+    }
+
+
+    public List<Customer> getAllCustomers() {
+
+        return repository.findAll();
+    }
+
 
     public Customer addCustomer(Customer customer) {
         List<String> errors = new ArrayList<>(); //make new list which will contrain of errors
@@ -32,10 +52,10 @@ public class CustomerService {
             errors.add("Customer name needs to be entered");
         }
 
-        if (customer.isBookingConfirmed() == null) {
+        if (customer.getBookingConfirmed() == null) {
             errors.add("Booking request cannot be empty");
-        }
 
+        }
         if (!errors.isEmpty()) {
             throw new MultiErrorException("Your customer data is incorrect", errors);
         } else {
@@ -44,19 +64,6 @@ public class CustomerService {
         }
     }
 
-    public List<Customer> getAllCustomers() {
-
-        return repository.findAll();
-    }
-
-    public Customer selectCustomerById(String id) {
-        Optional<Customer> searchCustomer = repository.findById(id);
-        if (!repository.existsById(id)) {
-            throw new NotFoundException("Cannot find this ID");
-        }
-        status(HttpStatus.OK).body(searchCustomer.get());
-        return repository.findById(id).get();
-    }
 
     public boolean deleteCustomerById(String id) {
         {
@@ -70,11 +77,21 @@ public class CustomerService {
     }
 
     public Customer updateCustomerById(@PathVariable String id, Customer customerToUpdate) {
+        List<String> errors = new ArrayList<>();
+        if (StringUtils.isBlank(customerToUpdate.getName())) {
+            throw new BadRequestException("Please enter a name");
+        }
+        if (StringUtils.isBlank(id)) {
+            throw new BadRequestException("Please enter an id");
+        }
         if (!repository.existsById(id)) {
             throw new NotFoundException("id " + id + " not found");
+
         }
-        return repository.save(customerToUpdate);
+        if (!errors.isEmpty()) {
+            throw new MultiErrorException("Your customer data is incorrect", errors);
+        } else
 
+            return repository.save(customerToUpdate);
     }
-
 }
