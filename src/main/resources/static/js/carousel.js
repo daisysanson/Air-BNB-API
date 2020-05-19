@@ -9,9 +9,10 @@ const slideWidth = slides[0].getBoundingClientRect().width;
 
 const setSlidePosition = (slide, index) =>{
 slide.style.left = slideWidth * index  + 'px';
-}
+};
 
 slides.forEach(setSlidePosition);
+
 
 const moveToSlide  = (track, currentSlide, targetSlide) => {
 track.style.transform = 'translateX(-' + targetSlide.style.left
@@ -53,7 +54,7 @@ moveToSlide(track, currentSlide, prevSlide);
 updateDots(currentDot,prevDot);
 hideShowArrows(slides, prev, next, prevIndex);
 
-})
+});
 
 next.addEventListener('click', e =>{
 const currentSlide = track.querySelector('.current-slide');
@@ -67,7 +68,7 @@ moveToSlide(track, currentSlide, nextSlide);
 updateDots(currentDot,nextDot);
 hideShowArrows(slides, prev, next, nextIndex);
 
-})
+});
 
 nav.addEventListener('click', e => {
 const targetDot = e.target.closest('button');

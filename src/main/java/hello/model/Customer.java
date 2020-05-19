@@ -14,7 +14,7 @@ import java.util.Date;
 @RestController
 public class Customer {
 
-    @Id //this is the primary key field
+    @Id
     private String id;
 
     @Field(value = "name")

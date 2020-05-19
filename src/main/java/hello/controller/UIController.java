@@ -1,12 +1,10 @@
 package hello.controller;
 
-import hello.dao.CustomerRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.MultiErrorException;
 import hello.exceptions.NotFoundException;
 import hello.model.Customer;
 import hello.service.CustomerService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,15 +42,20 @@ public class UIController {
     }
 
     @RequestMapping(value = "/showCustomer", method = RequestMethod.POST)
-    public String showGetCustomerPage(@ModelAttribute("customer") Customer customer,
-                                      @RequestParam("id") String id, Model model) {
+    public String showGetCustomerPage(@ModelAttribute("customer") Customer customer, @RequestParam("id") String id, Model model) {
+        if (customer == null) {
+            return "badRequest";
+        }
         try {
             model.addAttribute("customer", customerService.selectCustomerById(id));
-            return "showCustomer";
+        } catch (MultiErrorException e) {
+            log.info("name field is empty");
+            return "badRequest";
         } catch (NotFoundException e) {
-            log.info("customer with id" + id +  "not found");
+            log.info("customer with id" + id + " not found");
             return "notFound";
         }
+        return "showCustomer";
     }
 
 
@@ -97,19 +100,18 @@ public class UIController {
             model.addAttribute("customer", customerService.deleteCustomerById(id));
             return "customerDeleted";
         } catch (NotFoundException e) {
-            log.info("customer with id" + id +  "not found");
+            log.info("customer with id" + id + "not found");
             return "notFound";
         }
     }
 
 
     @RequestMapping(value = "/replaceCustomerForm", method = RequestMethod.GET)
-    public String showupdateForm(Model model) {
+    public String showUpdateForm(Model model) {
         model.addAttribute("customer", customer);
         return "replaceCustomerForm";
     }
 
-//no id - bad request, no name bad request
     @RequestMapping(value = "/replaceCustomer", method = RequestMethod.GET)
     public String updateCustomer(@ModelAttribute("customer") Customer customerToupdate,
                                  @RequestParam("id") String id, Model model) {
@@ -117,10 +119,10 @@ public class UIController {
         try {
             model.addAttribute("customer", customerService.updateCustomerById(id, customerToupdate));
             return "replaceCustomer";
-        } catch (BadRequestException e){
-            log.info("customer with id" + id +  "not found");
+        } catch (BadRequestException e) {
+            log.info("customer with id" + id + "not found");
             return "badRequest";
-        } catch (NotFoundException e ){
+        } catch (NotFoundException e) {
             return "notFound";
         }
     }
