@@ -1,19 +1,33 @@
 package hello.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
 @Document(collection = "apartments")
 @RestController
-public class Apartment {
 
-    @Id
+public class Apartment {
     private String id;
 
     @Field(value = "title")
@@ -21,29 +35,35 @@ public class Apartment {
     private String title;
 
     @Field(value = "location")
+    @NotNull
     private String location;
 
-    @Field(value = "checkInDate")
-    @NotNull
-    private Date checkInDate;
+    @JsonDeserialize(using = JsonDateDeserializer.class)
+    @Field(value = "occupiedDateStart")
+    private Date occupiedDateStart;
 
-    @Field(value = "checkOutDate")
-    @NotNull
-    private Date checkOutDate;
+    @JsonDeserialize(using = JsonDateDeserializer.class)
+    @Field(value = "occupiedDateEnd")
+    private Date occupiedDateEnd;
 
-    @Field(value = "guests")
-    private HashMap<Integer, String> guests = new HashMap<Integer, String>();
+    @Field(value = "guestCapacity")
+    private int guestCapacity;
 
+    public Apartment(){
 
-    public Apartment(String id,
-                     @NotNull String title,
-                     String location,
-                     HashMap<Integer, String> guests) {
+    }
 
+    public Apartment(String id, @JsonProperty("title")String title,
+                     @JsonProperty("location") String location,
+                     @JsonProperty("occupied_start_date") Date occupiedDateStart,
+                     @JsonProperty("occupied_end_date") Date occupiedDateEnd,
+                     @JsonProperty("guest_capacity") int guestCapacity) {
         this.id = id;
         this.title = title;
         this.location = location;
-        this.guests = guests;
+        this.occupiedDateStart = occupiedDateStart;
+        this.occupiedDateEnd = occupiedDateEnd;
+        this.guestCapacity = guestCapacity;
     }
 
     public String getId() {
@@ -70,27 +90,69 @@ public class Apartment {
         this.location = location;
     }
 
-    public Date getCheckInDate() {
-        return checkInDate;
+    @JsonDeserialize(using = JsonDateDeserializer.class)
+    public Date getOccupiedDateStart() {
+        return occupiedDateStart;
     }
 
-    public void setCheckInDate(Date checkInDate) {
-        this.checkInDate = checkInDate;
+    @JsonDeserialize(using = JsonDateDeserializer.class)
+    public void setOccupiedDateStart(Date occupiedDateStart) {
+        this.occupiedDateStart = occupiedDateStart;
     }
 
-    public Date getCheckOutDate() {
-        return checkOutDate;
+    @JsonDeserialize(using = JsonDateDeserializer.class)
+    public Date getOccupiedDateEnd() {
+        return occupiedDateEnd;
     }
 
-    public void setCheckOutDate(Date checkOutDate) {
-        this.checkOutDate = checkOutDate;
+    @JsonDeserialize(using = JsonDateDeserializer.class)
+    public void setOccupiedDateEnd(Date occupiedDateEnd) {
+        this.occupiedDateEnd = occupiedDateEnd;
     }
 
-    public HashMap<Integer, String> getGuests() {
-        return guests;
+    public int getGuestCapacity() {
+        return guestCapacity;
     }
 
-    public void setGuests(HashMap<Integer, String> guests) {
-        this.guests = guests;
+    public void setGuestCapacity(int guestCapacity) {
+        this.guestCapacity = guestCapacity;
+    }
+//
+//    public class JsonDateSerializer extends JsonSerializer<Date> {
+//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//
+//        @Override
+//        public void serialize(final Date date, final JsonGenerator gen, final SerializerProvider provider) throws IOException, JsonProcessingException {
+//
+//            String dateString = format.format(date);
+//            gen.writeString(dateString);
+//        }
+//
+//    }
+
+
+    public class JsonDateDeserializer extends JsonDeserializer<Date> {
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        @Override
+        public Date deserialize(final JsonParser jp, final DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            if (jp.getCurrentToken().equals(JsonToken.VALUE_STRING)) {
+                try {
+                    Date date = format.parse(jp.getText().toString());
+                    return date;
+                } catch (ParseException e) {
+                    //e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
     }
 }
+
+
+
+
+
+
