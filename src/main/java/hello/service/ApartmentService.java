@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.http.ResponseEntity.status;
-
 @Service
 public class ApartmentService {
 
@@ -52,7 +49,17 @@ public class ApartmentService {
 
     public Apartment addApartment(Apartment apartment) {
        // List<String> errors = new ArrayList<>(); //make new list which will contrain of errors
-            apartmentRepository.insert(apartment);
+        if ((StringUtils.isBlank(apartment.getTitle())) || ((StringUtils.isBlank(apartment.getLocation())))){
+            throw new BadRequestException("Please enter the apartment title");
+        }
+        if ((apartment.getOccupiedDateStart() == null) || (apartment.getOccupiedDateEnd() == null)) {
+            throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
+
+        }if ((apartment.getGuestCapacity() <= 0) || ((apartment.getGuestCapacity()  > 14))){
+            throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
+        } else
+
+        apartmentRepository.insert(apartment);
             return apartment;
         }
 
@@ -68,20 +75,22 @@ public class ApartmentService {
         }
     }
 
-    public Apartment updateApartmentById(@PathVariable String id, Apartment apartmentToUpdate) {
+    public Apartment updateApartmentById(@PathVariable String id, Apartment apartmentToUpdate)  {
         List<String> errors = new ArrayList<>();
-        if (StringUtils.isBlank(apartmentToUpdate.getTitle())) {
-            throw new BadRequestException("Please enter a name");
+
+        if ((StringUtils.isBlank(apartmentToUpdate.getTitle())) || ((StringUtils.isBlank(apartmentToUpdate.getLocation())))){
+            throw new BadRequestException("Please enter the apartment title");
         }
-        if (StringUtils.isBlank(id)) {
+        if ((apartmentToUpdate.getOccupiedDateStart() == null) || (apartmentToUpdate.getOccupiedDateEnd() == null)) {
+            throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
+        } if (StringUtils.isBlank(id)) {
             throw new BadRequestException("Please enter an id");
         }
         if (!apartmentRepository.existsById(id)) {
             throw new NotFoundException("id " + id + " not found");
 
-        }
-        if (!errors.isEmpty()) {
-            throw new MultiErrorException("The apartment data is incorrect", errors);
+        }if ((apartmentToUpdate.getGuestCapacity() <= 0) || ((apartmentToUpdate.getGuestCapacity()  > 14))){
+            throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
         } else
 
             return apartmentRepository.save(apartmentToUpdate);
