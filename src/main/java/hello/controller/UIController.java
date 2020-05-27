@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UIController {
-    private Customer customer;
     private CustomerService customerService;
 
     @Autowired
-    public UIController(Customer customer, CustomerService customerService) {
-        this.customer = customer;
+    public UIController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -32,6 +30,7 @@ public class UIController {
 
     @GetMapping("/findACustomerForm")
     public String showGetCustomerForm(Model model) {
+        Customer customer = new Customer();
         model.addAttribute("customer",customer);
         return "findACustomerForm";
     }
@@ -63,7 +62,7 @@ public class UIController {
 
     @GetMapping("/addCustomerForm")
     public String showAddForm(Model model) {
-
+        Customer customer = new Customer();
         model.addAttribute("customer", customer);
         return "addCustomerForm";
     }
@@ -85,6 +84,7 @@ public class UIController {
 
     @GetMapping("/deleteCustomerForm")
     public String showDeleteForm(Model model) {
+        Customer customer = new Customer();
         model.addAttribute("customer", customer);
         return "deleteCustomerForm";
     }
@@ -104,6 +104,7 @@ public class UIController {
 
     @GetMapping("/replaceCustomerForm")
     public String showUpdateForm(Model model) {
+        Customer customer = new Customer();
         model.addAttribute("customer", customer);
         return "replaceCustomerForm";
     }

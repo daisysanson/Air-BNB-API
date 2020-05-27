@@ -2,17 +2,21 @@ package hello.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "apartments")
-@RestController
+
 
 public class Apartment {
+    @Id
     private String id;
 
     @Field(value = "title")
@@ -33,6 +37,7 @@ public class Apartment {
 
     @Field(value = "guestCapacity")
     private int guestCapacity;
+
 
     public Apartment() {
 
@@ -102,7 +107,12 @@ public class Apartment {
     public void setGuestCapacity(int guestCapacity) {
         this.guestCapacity = guestCapacity;
     }
+
 }
+
+
+
+
 //
 //    public class JsonDateSerializer extends JsonSerializer<Date> {
 //        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
