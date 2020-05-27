@@ -26,6 +26,8 @@ public class CustomerService {
         this.repository = repository;
     }
 
+    public CustomerService(){}
+
     public Customer selectCustomerById(String id) {
         Optional<Customer> searchCustomer = repository.findById(id);
         if (StringUtils.isBlank(id)) {

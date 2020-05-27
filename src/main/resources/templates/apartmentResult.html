@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+
+<div class="container">
+    <h2>Apartment added successfully!: </h2>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Date Start</th>
+            <th>Date End</th>
+            <th>Guest Capacity</th>
+        </tr>
+        <td th:text="${apartment.id}"></td>
+        <td th:text="${apartment.title}"></td>
+        <td th:text="${apartment.location}"></td>
+        <td th:text="${apartment.occupiedStartDate}"></td>
+        <td th:text="${apartment.occupiedEndDate}"></td>
+        <td th:text="${apartment.guestCapacity}"></td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

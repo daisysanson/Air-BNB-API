@@ -17,6 +17,7 @@ import java.util.List;
 public class Customer {
 
     @Id
+    @NotNull
     private String id;
 
     @Field(value = "name")

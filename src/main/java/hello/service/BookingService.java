@@ -24,15 +24,7 @@ public class BookingService {
 
 
     public Booking selectBookingById(String id) {
-        Optional<Booking> searchBooking = repository.findById(id);
-        if (StringUtils.isBlank(id)) {
-            throw new BadRequestException("Please enter an id");
-
-        }
-        if (!repository.existsById(id)) {
-            throw new NotFoundException("Cannot find this ID");
-        }
-        status(HttpStatus.OK).body(searchBooking.get());
+        Optional<Booking> searchBooking = repository.findById(id);;
         return repository.findById(id).get();
     }
 
@@ -62,7 +54,7 @@ public class BookingService {
 
     public Booking updateBookingById(@PathVariable String id, Booking bookingUpdate) {
         if (StringUtils.isBlank(bookingUpdate.getId())) {
-            throw new BadRequestException("Please enter a name");
+            throw new BadRequestException("Please enter an id ");
         }
         if (StringUtils.isBlank(id)) {
             throw new BadRequestException("Please enter an id");

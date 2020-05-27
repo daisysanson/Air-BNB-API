@@ -49,7 +49,7 @@ public class BookingController {
     }
     @PutMapping(value = "/id")
         public ResponseEntity<Object> updateBooking (@RequestBody String id, Booking bookingUpdate){
-        BookingService bookingService = new BookingService(); 
+        BookingService bookingService = new BookingService();
         Booking booking = bookingService.updateBookingById(id, bookingUpdate);
 
         return ResponseEntity.status(HttpStatus.OK).body("booking id" + id + "has been updated");

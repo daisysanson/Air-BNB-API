@@ -4,12 +4,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "booking")
+import javax.validation.constraints.NotNull;
+
+@Document(collection = "bookings")
 public class Booking {
     @DBRef
     private Customer customer;
     @DBRef
     private Apartment apartment;
+    @NotNull
     @Id
     private String id;
 

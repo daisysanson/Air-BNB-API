@@ -3,20 +3,18 @@ package hello.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Document(collection = "apartments")
 
 
 public class Apartment {
     @Id
+    @NotNull
     private String id;
 
     @Field(value = "title")
@@ -28,14 +26,17 @@ public class Apartment {
     private String location;
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
+    @NotNull
     @Field(value = "occupiedDateStart")
-    private Date occupiedDateStart;
+    private Date occupiedStartDate;
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
+    @NotNull
     @Field(value = "occupiedDateEnd")
-    private Date occupiedDateEnd;
+    private Date occupiedEndDate;
 
     @Field(value = "guestCapacity")
+    @NotNull
     private int guestCapacity;
 
 
@@ -45,14 +46,14 @@ public class Apartment {
 
     public Apartment(String id, @JsonProperty("title") String title,
                      @JsonProperty("location") String location,
-                     @JsonProperty("occupied_start_date") Date occupiedDateStart,
-                     @JsonProperty("occupied_end_date") Date occupiedDateEnd,
+                     @JsonProperty("occupied_start_date") Date occupiedStartDate,
+                     @JsonProperty("occupied_end_date") Date occupiedEndDate,
                      @JsonProperty("guest_capacity") int guestCapacity) {
         this.id = id;
         this.title = title;
         this.location = location;
-        this.occupiedDateStart = occupiedDateStart;
-        this.occupiedDateEnd = occupiedDateEnd;
+        this.occupiedStartDate = occupiedStartDate;
+        this.occupiedEndDate = occupiedEndDate;
         this.guestCapacity = guestCapacity;
     }
 
@@ -81,23 +82,23 @@ public class Apartment {
     }
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
-    public Date getOccupiedDateStart() {
-        return occupiedDateStart;
+    public Date getOccupiedStartDate() {
+        return occupiedStartDate;
     }
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
-    public void setOccupiedDateStart(Date occupiedDateStart) {
-        this.occupiedDateStart = occupiedDateStart;
+    public void setOccupiedStartDate(Date occupiedStartDate) {
+        this.occupiedStartDate = occupiedStartDate;
     }
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
-    public Date getOccupiedDateEnd() {
-        return occupiedDateEnd;
+    public Date getOccupiedEndDate() {
+        return occupiedEndDate;
     }
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
-    public void setOccupiedDateEnd(Date occupiedDateEnd) {
-        this.occupiedDateEnd = occupiedDateEnd;
+    public void setOccupiedEndDate(Date occupiedEndDate) {
+        this.occupiedEndDate = occupiedEndDate;
     }
 
     public int getGuestCapacity() {
@@ -112,7 +113,7 @@ public class Apartment {
 
 
 
-
+//
 //
 //    public class JsonDateSerializer extends JsonSerializer<Date> {
 //        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");

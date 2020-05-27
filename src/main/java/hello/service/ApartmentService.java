@@ -1,15 +1,11 @@
 package hello.service;
 
 import hello.dao.ApartmentRepository;
-import hello.dao.CustomerRepository;
 import hello.exceptions.BadRequestException;
-import hello.exceptions.MultiErrorException;
 import hello.exceptions.NotFoundException;
 import hello.model.Apartment;
-import hello.model.Customer;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -52,7 +48,7 @@ public class ApartmentService {
         if ((StringUtils.isBlank(apartment.getTitle())) || ((StringUtils.isBlank(apartment.getLocation())))){
             throw new BadRequestException("Please enter the apartment title");
         }
-        if ((apartment.getOccupiedDateStart() == null) || (apartment.getOccupiedDateEnd() == null)) {
+        if ((apartment.getOccupiedStartDate() == null) || (apartment.getOccupiedEndDate() == null)) {
             throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
 
         }if ((apartment.getGuestCapacity() <= 0) || ((apartment.getGuestCapacity()  > 14))){
@@ -81,7 +77,7 @@ public class ApartmentService {
         if ((StringUtils.isBlank(apartmentToUpdate.getTitle())) || ((StringUtils.isBlank(apartmentToUpdate.getLocation())))){
             throw new BadRequestException("Please enter the apartment title");
         }
-        if ((apartmentToUpdate.getOccupiedDateStart() == null) || (apartmentToUpdate.getOccupiedDateEnd() == null)) {
+        if ((apartmentToUpdate.getOccupiedStartDate() == null) || (apartmentToUpdate.getOccupiedEndDate() == null)) {
             throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
         } if (StringUtils.isBlank(id)) {
             throw new BadRequestException("Please enter an id");
