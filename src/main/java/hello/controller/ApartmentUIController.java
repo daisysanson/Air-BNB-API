@@ -9,11 +9,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
+import java.beans.PropertyEditorSupport;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
@@ -41,14 +42,16 @@ public class ApartmentUIController {
     public String addCustomer(@ModelAttribute("apartment") Apartment apartment,
                               @RequestParam("title") String title,
                               @RequestParam("location") String location,
-                              @RequestParam("occupiedStartDate") Date occupiedStartDate,
-                              @RequestParam("occupiedEndDate") Date occupiedEndDate,
-                              @RequestParam("guest_capacity") int guestCapacity, Model model){
+//                              @RequestParam("occupiedStartDate") Date occupiedStartDate,
+//                              @RequestParam("occupiedEndDate") Date occupiedEndDate,
+                              @RequestParam("guestCapacity") int guestCapacity, Model model){
 
 
         model.addAttribute("apartment", apartmentService.addApartment(apartment));
         return "apartmentResult";
         }
+
+
 
     }
 

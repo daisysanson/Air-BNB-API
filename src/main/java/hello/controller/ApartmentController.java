@@ -57,12 +57,12 @@ public class ApartmentController {
 
     }
 
-    @PutMapping(path = "/{id}")
-    public ResponseEntity updateApartmentById(@PathVariable("id") String id, @Valid @RequestBody Apartment apartmentToUpdate) {
-        log.info("apartment updated");
-        Apartment apartment = apartmentService.updateApartmentById(id, apartmentToUpdate);
-
-        return ResponseEntity.status(HttpStatus.OK).body("apartment at id " + id + " has been replaced with " + apartmentToUpdate.getTitle());
+//    @PutMapping(path = "/{id}")
+//    public ResponseEntity updateApartmentById(@PathVariable("id") String id, @Valid @RequestBody Apartment apartmentToUpdate) {
+//        log.info("apartment updated");
+//        Apartment apartment = apartmentService.updateApartmentById(id, apartmentToUpdate);
+//
+//        return ResponseEntity.status(HttpStatus.OK).body("apartment at id " + id + " has been replaced with " + apartmentToUpdate.getTitle());
 
     }
-}
+

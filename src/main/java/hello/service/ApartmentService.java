@@ -44,20 +44,20 @@ public class ApartmentService {
 
 
     public Apartment addApartment(Apartment apartment) {
-       // List<String> errors = new ArrayList<>(); //make new list which will contrain of errors
-        if ((StringUtils.isBlank(apartment.getTitle())) || ((StringUtils.isBlank(apartment.getLocation())))){
-            throw new BadRequestException("Please enter the apartment title");
-        }
-        if ((apartment.getOccupiedStartDate() == null) || (apartment.getOccupiedEndDate() == null)) {
-            throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
-
-        }if ((apartment.getGuestCapacity() <= 0) || ((apartment.getGuestCapacity()  > 14))){
-            throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
-        } else
+        // List<String> errors = new ArrayList<>(); //make new list which will contrain of errors
+//        if ((StringUtils.isBlank(apartment.getTitle())) || ((StringUtils.isBlank(apartment.getLocation())))){
+//            throw new BadRequestException("Please enter the apartment title");
+//        }
+//        if ((apartment.getOccupiedStartDate() == null) || (apartment.getOccupiedEndDate() == null)) {
+//            throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
+//
+//        }if ((apartment.getGuestCapacity() <= 0) || ((apartment.getGuestCapacity()  > 14))){
+//            throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
+//        } else
 
         apartmentRepository.insert(apartment);
-            return apartment;
-        }
+        return apartment;
+    }
 
 
     public boolean deleteApartmentById(String id) {
@@ -70,27 +70,28 @@ public class ApartmentService {
 
         }
     }
-
-    public Apartment updateApartmentById(@PathVariable String id, Apartment apartmentToUpdate)  {
-        List<String> errors = new ArrayList<>();
-
-        if ((StringUtils.isBlank(apartmentToUpdate.getTitle())) || ((StringUtils.isBlank(apartmentToUpdate.getLocation())))){
-            throw new BadRequestException("Please enter the apartment title");
-        }
-        if ((apartmentToUpdate.getOccupiedStartDate() == null) || (apartmentToUpdate.getOccupiedEndDate() == null)) {
-            throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
-        } if (StringUtils.isBlank(id)) {
-            throw new BadRequestException("Please enter an id");
-        }
-        if (!apartmentRepository.existsById(id)) {
-            throw new NotFoundException("id " + id + " not found");
-
-        }if ((apartmentToUpdate.getGuestCapacity() <= 0) || ((apartmentToUpdate.getGuestCapacity()  > 14))){
-            throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
-        } else
-
-            return apartmentRepository.save(apartmentToUpdate);
-    }
 }
+//
+//    public Apartment updateApartmentById(@PathVariable String id, Apartment apartmentToUpdate)  {
+//        List<String> errors = new ArrayList<>();
+//
+//        if ((StringUtils.isBlank(apartmentToUpdate.getTitle())) || ((StringUtils.isBlank(apartmentToUpdate.getLocation())))){
+//            throw new BadRequestException("Please enter the apartment title");
+//        }
+//        if ((apartmentToUpdate.getOccupiedStartDate() == null) || (apartmentToUpdate.getOccupiedEndDate() == null)) {
+//            throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
+//        } if (StringUtils.isBlank(id)) {
+//            throw new BadRequestException("Please enter an id");
+//        }
+//        if (!apartmentRepository.existsById(id)) {
+//            throw new NotFoundException("id " + id + " not found");
+//
+//        }if ((apartmentToUpdate.getGuestCapacity() <= 0) || ((apartmentToUpdate.getGuestCapacity()  > 14))){
+//            throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
+//        } else
+//
+//            return apartmentRepository.save(apartmentToUpdate);
+//    }
+//}
 
 

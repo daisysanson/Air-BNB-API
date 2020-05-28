@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -24,16 +25,19 @@ public class Apartment {
     @Field(value = "location")
     @NotNull
     private String location;
-
-    @JsonDeserialize(using = JsonDateDeserializer.class)
-    @NotNull
-    @Field(value = "occupiedDateStart")
-    private Date occupiedStartDate;
-
-    @JsonDeserialize(using = JsonDateDeserializer.class)
-    @NotNull
-    @Field(value = "occupiedDateEnd")
-    private Date occupiedEndDate;
+//
+////    @JsonDeserialize(using = JsonDateDeserializer.class)
+//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+//    @NotNull
+//    @Field(value = "occupiedDateStart")
+//    private Date occupiedStartDate;
+//
+////    @JsonDeserialize(using = JsonDateDeserializer.class)
+//
+//    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+//    @NotNull
+//    @Field(value = "occupiedDateEnd")
+//    private Date occupiedEndDate;
 
     @Field(value = "guestCapacity")
     @NotNull
@@ -52,8 +56,8 @@ public class Apartment {
         this.id = id;
         this.title = title;
         this.location = location;
-        this.occupiedStartDate = occupiedStartDate;
-        this.occupiedEndDate = occupiedEndDate;
+//        this.occupiedStartDate = occupiedStartDate;
+//        this.occupiedEndDate = occupiedEndDate;
         this.guestCapacity = guestCapacity;
     }
 
@@ -81,25 +85,27 @@ public class Apartment {
         this.location = location;
     }
 
-    @JsonDeserialize(using = JsonDateDeserializer.class)
-    public Date getOccupiedStartDate() {
-        return occupiedStartDate;
-    }
-
-    @JsonDeserialize(using = JsonDateDeserializer.class)
-    public void setOccupiedStartDate(Date occupiedStartDate) {
-        this.occupiedStartDate = occupiedStartDate;
-    }
-
-    @JsonDeserialize(using = JsonDateDeserializer.class)
-    public Date getOccupiedEndDate() {
-        return occupiedEndDate;
-    }
-
-    @JsonDeserialize(using = JsonDateDeserializer.class)
-    public void setOccupiedEndDate(Date occupiedEndDate) {
-        this.occupiedEndDate = occupiedEndDate;
-    }
+//    @JsonDeserialize(using = JsonDateDeserializer.class)
+//  public Date getOccupiedStartDate() {
+//        return occupiedStartDate;
+//    }
+//
+//  @JsonDeserialize(using = JsonDateDeserializer.class)
+//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+//    public void setOccupiedStartDate(Date occupiedStartDate) {
+//        this.occupiedStartDate = occupiedStartDate;
+//    }
+//
+//   @JsonDeserialize(using = JsonDateDeserializer.class)
+//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+//    public Date getOccupiedEndDate() {
+//        return occupiedEndDate;
+//    }
+//
+//    @JsonDeserialize(using = JsonDateDeserializer.class)
+//    public void setOccupiedEndDate(Date occupiedEndDate) {
+//        this.occupiedEndDate = occupiedEndDate;
+//    }
 
     public int getGuestCapacity() {
         return guestCapacity;
