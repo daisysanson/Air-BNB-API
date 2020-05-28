@@ -6,6 +6,7 @@ import hello.exceptions.NotFoundException;
 import hello.model.Apartment;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -32,7 +33,7 @@ public class ApartmentService {
         if (!apartmentRepository.existsById(id)) {
             throw new NotFoundException("Cannot find this ID");
         }
-//        status(HttpStatus.OK).body(searchCustomer.get());
+//        status(HttpStatus.OK).body(searchApartment.get());
         return apartmentRepository.findById(id).get();
     }
 

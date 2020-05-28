@@ -25,19 +25,17 @@ public class Apartment {
     @Field(value = "location")
     @NotNull
     private String location;
-//
-////    @JsonDeserialize(using = JsonDateDeserializer.class)
-//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-//    @NotNull
-//    @Field(value = "occupiedDateStart")
-//    private Date occupiedStartDate;
-//
-////    @JsonDeserialize(using = JsonDateDeserializer.class)
-//
-//    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-//    @NotNull
-//    @Field(value = "occupiedDateEnd")
-//    private Date occupiedEndDate;
+
+@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @NotNull
+    @Field(value = "occupiedDateStart")
+    private Date occupiedStartDate;
+
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @NotNull
+    @Field(value = "occupiedDateEnd")
+    private Date occupiedEndDate;
 
     @Field(value = "guestCapacity")
     @NotNull
@@ -85,27 +83,27 @@ public class Apartment {
         this.location = location;
     }
 
-//    @JsonDeserialize(using = JsonDateDeserializer.class)
-//  public Date getOccupiedStartDate() {
-//        return occupiedStartDate;
-//    }
-//
-//  @JsonDeserialize(using = JsonDateDeserializer.class)
-//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-//    public void setOccupiedStartDate(Date occupiedStartDate) {
-//        this.occupiedStartDate = occupiedStartDate;
-//    }
-//
-//   @JsonDeserialize(using = JsonDateDeserializer.class)
-//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-//    public Date getOccupiedEndDate() {
-//        return occupiedEndDate;
-//    }
-//
-//    @JsonDeserialize(using = JsonDateDeserializer.class)
-//    public void setOccupiedEndDate(Date occupiedEndDate) {
-//        this.occupiedEndDate = occupiedEndDate;
-//    }
+@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+  public Date getOccupiedStartDate() {
+        return occupiedStartDate;
+    }
+
+
+@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    public void setOccupiedStartDate(Date occupiedStartDate) {
+        this.occupiedStartDate = occupiedStartDate;
+    }
+
+
+@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    public Date getOccupiedEndDate() {
+        return occupiedEndDate;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    public void setOccupiedEndDate(Date occupiedEndDate) {
+        this.occupiedEndDate = occupiedEndDate;
+    }
 
     public int getGuestCapacity() {
         return guestCapacity;

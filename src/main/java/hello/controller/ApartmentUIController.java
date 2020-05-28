@@ -42,8 +42,6 @@ public class ApartmentUIController {
     public String addCustomer(@ModelAttribute("apartment") Apartment apartment,
                               @RequestParam("title") String title,
                               @RequestParam("location") String location,
-//                              @RequestParam("occupiedStartDate") Date occupiedStartDate,
-//                              @RequestParam("occupiedEndDate") Date occupiedEndDate,
                               @RequestParam("guestCapacity") int guestCapacity, Model model){
 
 
