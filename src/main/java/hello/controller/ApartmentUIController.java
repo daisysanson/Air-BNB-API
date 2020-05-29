@@ -116,7 +116,7 @@ public class ApartmentUIController {
     }
 
     @GetMapping("/updateApartmentResult")
-    public String updateCustomer(@ModelAttribute("customer") Apartment apartmentToUpdate,
+    public String updateCustomer(@ModelAttribute("apartment") Apartment apartmentToUpdate,
                                  @RequestParam("id") String id, Model model) {
 
         try {

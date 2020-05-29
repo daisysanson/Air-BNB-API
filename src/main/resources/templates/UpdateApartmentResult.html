@@ -27,7 +27,7 @@
         <td th:text="${apartment.location}"></td>
         <td th:text="${#dates.format(apartment.occupiedStartDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
         <td th:text="${#dates.format(apartment.occupiedEndDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
-        <td th:number="${apartment?.guestCapacity?}"></td>
+        <td th:number="${apartment.guestCapacity}"></td>
         </tr>
     </table>
 

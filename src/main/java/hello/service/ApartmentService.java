@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,18 +49,15 @@ public class ApartmentService {
 
 
     public Apartment addApartment(Apartment apartment) {
-         List<String> errors = new ArrayList<>(); //make new list which will contrain of errors
-        if ((StringUtils.isBlank(apartment.getTitle())) || ((StringUtils.isBlank(apartment.getLocation())))){
+        List<String> errors = new ArrayList<>(); //make new list which will contrain of errors
+        if ((StringUtils.isBlank(apartment.getTitle())) || ((StringUtils.isBlank(apartment.getLocation())))) {
             throw new BadRequestException("Please enter the apartment title");
         }
-        if ((apartment.getOccupiedStartDate() == null) || (apartment.getOccupiedEndDate() == null)) {
-            throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
-
-        }if ((apartment.getGuestCapacity() <= 0) || ((apartment.getGuestCapacity()  > 14)) || ((apartment.getGuestCapacity() == null) )){
+        if ((apartment.getGuestCapacity() <= 0) || ((apartment.getGuestCapacity() > 14)) || ((apartment.getGuestCapacity() == null))) {
             throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
         } else
 
-        apartmentRepository.insert(apartment);
+            apartmentRepository.insert(apartment);
         return apartment;
     }
 
@@ -76,21 +74,25 @@ public class ApartmentService {
     }
 
 
-    public Apartment updateApartmentById(@PathVariable String id, Apartment apartmentToUpdate)  {
-        List<String> errors = new ArrayList<>();
+    public Apartment updateApartmentById(@PathVariable String id, Apartment apartmentToUpdate) {
 
-        if (StringUtils.isBlank(apartmentToUpdate.getTitle()) || ((StringUtils.isBlank(apartmentToUpdate.getLocation())))){
+        if (StringUtils.isBlank(apartmentToUpdate.getTitle()) || ((StringUtils.isBlank(apartmentToUpdate.getLocation())))) {
             throw new BadRequestException("Please ensure all fields are completed");
+
         }
-        if ((apartmentToUpdate.getOccupiedStartDate() == null) || (apartmentToUpdate.getOccupiedEndDate() == null)) {
-            throw new BadRequestException("Please enter the dates in dd-mm-yyyy");
-        } if (StringUtils.isBlank(id)) {
+        if (apartmentToUpdate.getOccupiedEndDate().before(apartmentToUpdate.getOccupiedStartDate())
+                || apartmentToUpdate.getOccupiedStartDate().after(apartmentToUpdate.getOccupiedEndDate())) {
+            throw new BadRequestException("Please ensure dates are chronological i.e start date is before end date");
+
+        }
+        if (StringUtils.isBlank(id)) {
             throw new BadRequestException("Please enter an id");
         }
         if (!apartmentRepository.existsById(id)) {
             throw new NotFoundException("id " + id + " not found");
 
-        }if ((apartmentToUpdate.getGuestCapacity() <= 0) || ((apartmentToUpdate.getGuestCapacity()  > 14)) || ((apartmentToUpdate.getGuestCapacity() == null) )){
+        }
+        if ((apartmentToUpdate.getGuestCapacity() <= 0) || ((apartmentToUpdate.getGuestCapacity() > 14)) || ((apartmentToUpdate.getGuestCapacity() == null))) {
             throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
         } else
 

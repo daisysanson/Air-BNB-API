@@ -22,29 +22,34 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Update an Apartment's details</h1>
-            <form action="#" th:action="@{/apartmentResult}" th:object="${apartment}" method="POST">
+            <form action="#" th:action="@{/updateApartmentResult}" th:object="${apartment}" method="put">
                 <div class="form-group">
-                    <label> Apartment title </label>
-                    <input type="text" class="form-control" th:field="*{title}"/>
-                    <small id="advice" class="form-text text-muted">Enter the new apartment's name</small>
+                    <label> Apartment ID </label>
+                    <input type="text" class="form-control" th:field="*{id}"/>
                 </div>
-                <div class="form-group">
-                    <label> Location: </label>
-                    <input type="text" class="form-control" th:field="*{location}"/>
-                </div>
-                <div class="form-group">
-                    <label> Occupied Start Date: </label>
-                    <input type="datetime-local" class="form-control" th:field="*{occupiedStartDate}"/>
-                </div>
-                <div class="form-group">
-                    <label> Occupied Start Date: </label>
-                    <input type="datetime-local" class="form-control" th:field="*{occupiedEndDate}"/>
-                </div>
-                <div class="form-group">
-                    <label> Guest Capacity: </label>
-                    <input type="number" class="form-control" th:field="*{guestCapacity}" required/>
-                </div>
-                <input class="button" type="submit" value="Submit"/> <input class="button" type="reset" value="Reset"/>
+                    <div class="form-group">
+                        <label> Apartment title </label>
+                        <input type="text" class="form-control" th:field="*{title}"/>
+                        <small id="advice" class="form-text text-muted">Enter the new apartment's name</small>
+                    </div>
+                    <div class="form-group">
+                        <label> Location: </label>
+                        <input type="text" class="form-control" th:field="*{location}"/>
+                    </div>
+                    <div class="form-group">
+                        <label> Occupied Start Date: </label>
+                        <input type="datetime-local" class="form-control" th:field="*{occupiedStartDate}"/>
+                    </div>
+                    <div class="form-group">
+                        <label> Occupied Start Date: </label>
+                        <input type="datetime-local" class="form-control" th:field="*{occupiedEndDate}"/>
+                    </div>
+                    <div class="form-group">
+                        <label> Guest Capacity: </label>
+                        <input type="number" class="form-control" th:field="*{guestCapacity}" required/>
+                    </div>
+                <input class="button" type="submit" value="Submit"/> <input class="button" type="reset"
+                                                                            value="Reset"/>
             </form>
         </div>
     </div>

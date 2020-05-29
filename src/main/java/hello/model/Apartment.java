@@ -112,4 +112,5 @@ public class Apartment {
         this.guestCapacity = guestCapacity;
     }
 
+
 }
