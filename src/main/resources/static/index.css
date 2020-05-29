@@ -82,6 +82,10 @@ background-color: #ff0066;
    color:white;
    border: 2px transparent rgba(217, 83, 78, 0.75);
    border-radius: 80px;
-   background:#ff0066;;
+   background:#ff0066;
    }
 
+.dropdown{
+font-family: 'Scope One', serif;
+background:#ff0066;
+}

@@ -5,13 +5,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/nav.css">
     <link rel="stylesheet" href="/index.css">
+    <title>Apartments</title>
 </head>
 <body>
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 
 <div class="container">
-    <h2>Apartment added successfully!: </h2>
+    <h2>List of all apartments: </h2>
     <table class="table table-striped">
         <tr>
             <th>ID</th>
@@ -21,12 +22,13 @@
             <th>Date End</th>
             <th>Guest Capacity</th>
         </tr>
+        <tr th:each="apartment :${apartment}">
         <td th:text="${apartment.id}"></td>
         <td th:text="${apartment.title}"></td>
         <td th:text="${apartment.location}"></td>
         <td th:text="${#dates.format(apartment.occupiedStartDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
         <td th:text="${#dates.format(apartment.occupiedEndDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
-        <td th:number="${apartment.guestCapacity}"></td>
+        <td th:text="${apartment.guestCapacity}"></td>
         </tr>
     </table>
 

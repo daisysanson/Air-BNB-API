@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/index.css">
+    <title>Delete an Apartment</title>
+
+</head>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Select an apartment to delete</h1>
+            <form action="#" th:action="@{/deleteApartmentResult}" th:object="${apartment}" method="delete"
+            <div class="form-group">
+                <label> Apartment ID </label>
+                <input type="text" class="form-control" th:field="*{id}"/>
+                <small id="advice" class="form-text text-muted">Enter the apartment's ID</small>
+            </div>
+            <p><input class="button" type="submit" value="Submit"/> <input class="button" type="reset" value="Reset"/>
+            </p>
+            </form>
+        </div>
+    </div>
+</div>
+</form>
+
+</body>
+
+</html>

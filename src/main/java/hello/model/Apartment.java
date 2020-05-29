@@ -38,7 +38,6 @@ public class Apartment {
     private Date occupiedEndDate;
 
     @Field(value = "guestCapacity")
-    @NotNull
     private int guestCapacity;
 
 
@@ -50,12 +49,12 @@ public class Apartment {
                      @JsonProperty("location") String location,
                      @JsonProperty("occupied_start_date") Date occupiedStartDate,
                      @JsonProperty("occupied_end_date") Date occupiedEndDate,
-                     @JsonProperty("guest_capacity") int guestCapacity) {
+                     @JsonProperty("guest_capacity") Integer guestCapacity) {
         this.id = id;
         this.title = title;
         this.location = location;
-//        this.occupiedStartDate = occupiedStartDate;
-//        this.occupiedEndDate = occupiedEndDate;
+        this.occupiedStartDate = occupiedStartDate;
+        this.occupiedEndDate = occupiedEndDate;
         this.guestCapacity = guestCapacity;
     }
 
@@ -105,32 +104,12 @@ public class Apartment {
         this.occupiedEndDate = occupiedEndDate;
     }
 
-    public int getGuestCapacity() {
+    public Integer getGuestCapacity() {
         return guestCapacity;
     }
 
-    public void setGuestCapacity(int guestCapacity) {
+    public void setGuestCapacity(Integer guestCapacity) {
         this.guestCapacity = guestCapacity;
     }
 
 }
-
-
-
-//
-//
-//    public class JsonDateSerializer extends JsonSerializer<Date> {
-//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-//
-//        @Override
-//        public void serialize(final Date date, final JsonGenerator gen, final SerializerProvider provider) throws IOException, JsonProcessingException {
-//
-//            String dateString = format.format(date);
-//            gen.writeString(dateString);
-//        }
-//
-//    }
-
-
-
-
