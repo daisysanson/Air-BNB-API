@@ -31,6 +31,12 @@ public class ApartmentUIController {
 
     static Logger log = Logger.getLogger(CustomerController.class);
 
+
+    @GetMapping("/apartment")
+    public String getCustomerId(Model model) {
+        return "apartment";
+    }
+
     @GetMapping("/findAnApartment")
     public String showFindApartmentForm(Model model) {
         Apartment apartment = new Apartment();

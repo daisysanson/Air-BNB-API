@@ -1,28 +1,58 @@
-<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/bootstrap/js/bootstrap-collapse.js"></script>
-    <script src="/bootstrap/js/bootstrap-transition.js"></script>
+
+    <link rel="stylesheet" href="bootstrap/js/js/bootstrap.bundle.min.js">
+
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/header.css">
+
+
     <link th:href="@{/nav.css}" rel="stylesheet"/>
 </head>
+<body>
 <div th:fragment="header>">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
         <a class="navbar-brand" href="/index">Home</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/addCustomerForm">Add a Customer</a>
-                <a class="nav-item nav-link" href="/findACustomerForm">Find a Customer</a>
-                <a class="nav-item nav-link" href="/getAllCustomers">List of Customers</a>
-                <a class="nav-item nav-link" href="/deleteCustomerForm">Delete a Customer</a>
-                <a class="nav-item nav-link" href="/replaceCustomerForm">Update a Customer</a>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="booking">Bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="apartment">Apartment</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="customer" id="navbarDropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Customer
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="addCustomerForm">Add a customer</a>
+                        <a class="dropdown-item" href="/findACustomerForm">Find a customer</a>
+                        <a class="dropdown-item" href="/getAllCustomers">See list of all customers</a>
+                        <a class="dropdown-item" href="/deleteCustomerForm">Delete a customer</a>
+                        <a class="dropdown-item" href="/replaceCustomerForm">Update a customer</a>
+
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
-    <html><
+</div>
+<script src="js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+</body>
+</html>

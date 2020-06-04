@@ -28,6 +28,11 @@ public class UIController {
         return "index";
     }
 
+    @GetMapping("/customer")
+    public String getCustomerPage(Model model) {
+        return "customer";
+    }
+
     @GetMapping("/findACustomerForm")
     public String showGetCustomerForm(Model model) {
         Customer customer = new Customer();

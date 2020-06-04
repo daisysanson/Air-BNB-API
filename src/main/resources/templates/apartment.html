@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/header.css">
+
+
+    <title>Apartment selection</title>
+
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
+<header th:replace="Fragments/header :: header"></header>
+
+
+<section id="header">
+    <div id="header-inner">
+        <h1>Apartment</h1>
+        <h5>Select an option: </h5>
+    </div>
+</section>
+<div class = "container"></div>
+<ul>
+    <li><a href="/addApartment">Add an apartment</a></li>
+    <li><a href="/findAnApartment">Find an apartment</a></li>
+    <li><a href="/showAllApartments">List of all apartments</a></li>
+    <li><a href="/deleteApartmentForm">Delete an apartment</a></li>
+    <li><a href="/UpdateApartmentForm">Update an apartment</a></li>
+</ul>
+<form>
+
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<script src="js/carousel.js"></script>
+</body>
+
+</html>

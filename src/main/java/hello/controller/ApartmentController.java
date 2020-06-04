@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ public class ApartmentController {
     public ApartmentController(ApartmentService apartmentService) {
         this.apartmentService = apartmentService;
     }
+
 
     @PostMapping
     public ResponseEntity<Apartment> addApartment(@RequestBody Apartment apartment) {
