@@ -22,6 +22,8 @@ public class Booking {
         this.id = id;
     }
 
+    public Booking(){}
+
     public Customer getCustomer() {
         return customer;
     }

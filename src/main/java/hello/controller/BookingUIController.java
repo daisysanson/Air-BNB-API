@@ -1,10 +1,17 @@
 package hello.controller;
 
+import hello.exceptions.BadRequestException;
+import hello.model.Apartment;
+import hello.model.Booking;
+import hello.model.Customer;
 import hello.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BookingUIController {
@@ -20,4 +27,29 @@ public class BookingUIController {
     public String getCustomerId(Model model) {
         return "booking";
     }
+
+
+
+    @GetMapping("/newBookingcreate")
+    public String showAddForm(Model model) {
+        Booking booking = new Booking();
+        model.addAttribute("booking", booking);
+        return "newBookingcreate";
+    }
+
+
+    @PostMapping("/newBooking")
+    public String addCustomer(@ModelAttribute("booking") Booking booking,
+                              Model model) {
+        try {
+            Booking b = bookingService.addBooking(booking);
+            model.addAttribute("booking", booking);
+
+            return "newBooking";
+        } catch (BadRequestException e) {
+            return "badRequest";
+        }
+    }
+
+
 }

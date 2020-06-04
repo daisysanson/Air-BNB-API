@@ -82,7 +82,9 @@ public class ApartmentUIController {
     public String addCustomer(@ModelAttribute("apartment") Apartment apartment,
                               @RequestParam("title") String title,
                               @RequestParam("location") String location,
-                              @RequestParam("guestCapacity") int guestCapacity, Model model) {
+                              @RequestParam("guestCapacity") int guestCapacity,
+                              @RequestParam("rating") int rating,
+                              @RequestParam("rooms") int rooms, Model model) {
         try {
             model.addAttribute("apartment", apartmentService.addApartment(apartment));
             return "apartmentResult";

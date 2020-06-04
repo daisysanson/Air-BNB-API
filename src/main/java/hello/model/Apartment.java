@@ -40,6 +40,13 @@ public class Apartment {
     @Field(value = "guestCapacity")
     private int guestCapacity;
 
+    @Field(value = "rating")
+    @NotNull
+    private int rating;
+
+    @Field(value = "rooms")
+    @NotNull
+    private int rooms;
 
     public Apartment() {
 
@@ -49,13 +56,17 @@ public class Apartment {
                      @JsonProperty("location") String location,
                      @JsonProperty("occupied_start_date") Date occupiedStartDate,
                      @JsonProperty("occupied_end_date") Date occupiedEndDate,
-                     @JsonProperty("guest_capacity") Integer guestCapacity) {
+                     @JsonProperty("guest_capacity") int guestCapacity,
+                     @JsonProperty("rating") int rating,
+                    @JsonProperty("rooms") int rooms){
         this.id = id;
         this.title = title;
         this.location = location;
         this.occupiedStartDate = occupiedStartDate;
         this.occupiedEndDate = occupiedEndDate;
         this.guestCapacity = guestCapacity;
+        this.rating = rating;
+        this.rooms = rooms;
     }
 
     public String getId() {
@@ -112,5 +123,23 @@ public class Apartment {
         this.guestCapacity = guestCapacity;
     }
 
+    public void setGuestCapacity(int guestCapacity) {
+        this.guestCapacity = guestCapacity;
+    }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public int getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(int rooms) {
+        this.rooms = rooms;
+    }
 }

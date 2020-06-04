@@ -42,8 +42,7 @@ public class BookingService {
 
 
     public Booking addBooking(Booking booking) {
-        repository.insert(booking);
-        return booking;
+        return repository.insert(booking);
     }
 
 
