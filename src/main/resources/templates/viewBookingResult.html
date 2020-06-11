@@ -1,38 +1,33 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/header.css">
-
-
-    <title>Apartment selection</title>
-
     <link rel="stylesheet" href="/index.css">
-</head>
+
+    <title>Customer Selection</title>
 <body>
 <nav th:replace="Fragments/nav :: nav"></nav>
-<header th:replace="Fragments/header :: header"></header>
+<div class="container">
+    <h2>Customer found: </h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Booking ID</th>
+            <th>Customer</th>
+        </tr>
+        <td th:text="${booking.id}"></td>
+
+        <td th:text="${customer.getId()}"></td>
+        <td th:text="${apartment.getId()}"></td>
 
 
-<section id="header">
-    <div id="header-inner">
-        <h1>Bookings</h1>
-        <h5>Book an apartment </h5>
-    </div>
-</section>
+    </table>
 
-
-<form>
-    <li><a href="/newBookingCreate">Make a new Booking</a></li>
-
-</form>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
-<script src="js/carousel.js"></script>
 </body>
 </html>

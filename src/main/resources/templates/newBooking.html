@@ -10,44 +10,42 @@
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 
-<div class="container">
+<tr class="container">
     <h2>Booking added successfully!: </h2>
 
 
+<tr class="table table-striped">
+    <h1>time</h1>
 
+<!--<tr>-->
+<!--    <th>ID</th>-->
+<!--    <th>Date Start</th>-->
+<!--    <th>Date End</th>-->
+<!--    <th>Guest Capacity</th>-->
+<!--</tr>-->
+<!--<td th:text="${apartment.id}"></td>-->
+<!--<td th:text="${#dates.format(apartment.occupiedStartDate, 'dd-MM-yyyy HH:mm:ss')}"></td>-->
+<!--<td th:text="${#dates.format(apartment.occupiedEndDate, 'dd-MM-yyyy HH:mm:ss')}"></td>-->
+<!--<td th:number="${apartment.guestCapacity}"></td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <th>ID</th>-->
+<!--    <th>Name</th>-->
+<!--    <th>Booking</th>-->
+<!--    <th>Date</th>-->
+<!--</tr>-->
+<!--<td th:text="${id}"></td>-->
+<!--<td th:text="${customer.name}"></td>-->
+<!--<td th:text="${customer.bookingConfirmed}"></td>-->
+<!--<td th:text="$customer.date}"></td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--</tr>-->
+<!--</tr>-->
+<td th:text="${booking.id}"></td>
+</tr>
+</table>
 
-    <table class="table table-striped">
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Location</th>
-            <th>Date Start</th>
-            <th>Date End</th>
-            <th>Guest Capacity</th>
-        </tr>
-
-
-        <td th:text="${booking.id}"></td>
-        <td th:text="${booking.title}"></td>
-        <td th:text="${booking.location}"></td>
-        <td th:text="${#dates.format(booking.occupiedStartDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
-        <td th:text="${#dates.format(booking.occupiedEndDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
-        <td th:number="${booking.guestCapacity}"></td>
-        <td th:number="${booking.rating}"></td>
-        <td th:number="${booking.rooms}"></td>
-        </tr>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Booking</th>
-            <th>Date</th>
-        </tr>
-        <td th:text="${booking.id}"></td>
-        <td th:text="${booking.name}"></td>
-        <td th:text="${booking.bookingConfirmed}"></td>
-        <td th:text="${booking.date}"></td>
-        </tr>
-    </table>
 
 </div>
 

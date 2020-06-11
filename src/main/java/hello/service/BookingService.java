@@ -6,7 +6,6 @@ import hello.dao.CustomerRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.MultiErrorException;
 import hello.exceptions.NotFoundException;
-import hello.model.Apartment;
 import hello.model.Booking;
 import hello.model.Customer;
 import org.apache.commons.lang3.StringUtils;
@@ -42,7 +41,9 @@ public class BookingService {
 
 
     public Booking addBooking(Booking booking) {
-        return repository.insert(booking);
+
+        Booking booking1 =  repository.insert(booking);
+        return repository.findById(booking1.getId()).orElse(null);
     }
 
 

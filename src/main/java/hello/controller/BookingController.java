@@ -1,6 +1,5 @@
 package hello.controller;
 import hello.dao.BookingRepository;
-import hello.model.Apartment;
 import hello.model.Booking;
 import hello.model.Customer;
 import hello.service.BookingService;

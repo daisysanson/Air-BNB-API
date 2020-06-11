@@ -3,7 +3,7 @@ package hello.controller;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.MultiErrorException;
 import hello.exceptions.NotFoundException;
-import hello.model.Apartment;
+import hello.model.Apartment2;
 import hello.model.Customer;
 import hello.service.ApartmentService;
 import hello.service.CustomerService;
@@ -39,13 +39,13 @@ public class ApartmentUIController {
 
     @GetMapping("/findAnApartment")
     public String showFindApartmentForm(Model model) {
-        Apartment apartment = new Apartment();
+        Apartment2 apartment = new Apartment2();
         model.addAttribute("apartment", apartment);
         return "findAnApartment";
     }
 
     @PostMapping("/findApartmentResult")
-    public String showFindApartmentResult(@ModelAttribute("apartment") Apartment apartment, @RequestParam("id") String id, Model model) {
+    public String showFindApartmentResult(@ModelAttribute("apartment") Apartment2 apartment, @RequestParam("id") String id, Model model) {
         if (apartmentService == null) {
             log.info("no apartment input model");
             return "badRequest";
@@ -72,14 +72,14 @@ public class ApartmentUIController {
 
     @GetMapping("/addApartment")
     public String showAddForm(Model model) {
-        Apartment apartment = new Apartment();
+        Apartment2 apartment = new Apartment2();
         model.addAttribute("apartment", apartment);
         return "addApartment";
     }
 
 
     @PostMapping("/apartmentResult")
-    public String addCustomer(@ModelAttribute("apartment") Apartment apartment,
+    public String addCustomer(@ModelAttribute("apartment") Apartment2 apartment,
                               @RequestParam("title") String title,
                               @RequestParam("location") String location,
                               @RequestParam("guestCapacity") int guestCapacity,
@@ -97,13 +97,13 @@ public class ApartmentUIController {
 
     @GetMapping("/deleteApartmentForm")
     public String showDeleteApartmentForm(Model model) {
-        Apartment apartment = new Apartment();
+        Apartment2 apartment = new Apartment2();
         model.addAttribute("apartment", apartment);
         return "deleteApartmentForm";
     }
 
     @GetMapping("/deleteApartmentResult")
-    public String deleteApartment(@ModelAttribute("apartment") Apartment apartment,
+    public String deleteApartment(@ModelAttribute("apartment") Apartment2 apartment,
                                   @RequestParam("id") String id, Model model) {
         try {
             model.addAttribute("customer", apartmentService.deleteApartmentById(id));
@@ -118,13 +118,13 @@ public class ApartmentUIController {
 
     @GetMapping("/updateApartmentForm")
     public String showUpdateForm(Model model) {
-        Apartment apartment = new Apartment();
+        Apartment2 apartment = new Apartment2();
         model.addAttribute("apartment", apartment);
         return "updateApartmentForm";
     }
 
     @GetMapping("/updateApartmentResult")
-    public String updateCustomer(@ModelAttribute("apartment") Apartment apartmentToUpdate,
+    public String updateCustomer(@ModelAttribute("apartment") Apartment2 apartmentToUpdate,
                                  @RequestParam("id") String id, Model model) {
 
         try {
