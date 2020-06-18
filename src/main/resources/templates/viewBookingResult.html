@@ -6,22 +6,45 @@
     <link rel="stylesheet" href="/nav.css">
     <link rel="stylesheet" href="/index.css">
 
-    <title>Customer Selection</title>
+    <title>Booking Successful</title>
 <body>
 <nav th:replace="Fragments/nav :: nav"></nav>
 <div class="container">
-    <h2>Customer found: </h2>
+    <h2>Booking Successfully Completed: </h2>
+
     <table class="table table-striped">
         <tr>
             <th>Booking ID</th>
-            <th>Customer</th>
         </tr>
-        <td th:text="${booking.id}"></td>
-
-        <td th:text="${customer.getId()}"></td>
-        <td th:text="${apartment.getId()}"></td>
-
-
+        <tr>
+            <td th:text="${booking.id}"></td>
+        </tr>
+        <tr>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Customer Booking Confirmation</th>
+        </tr>
+        <tr>
+            <td th:text="${booking.getCustomer().getId()}"></td>
+            <td th:text="${booking.getCustomer().getName()}"></td>
+            <td th:text="${booking.getCustomer().getBookingConfirmed()}"></td>
+        </tr>
+        <tr>
+            <th>Apartment ID</th>
+            <th>Apartment Title</th>
+            <th>Apartment Address</th>
+            <th>Apartment Guest Capacity</th>
+            <th>Apartment Rooms</th>
+            <th>Apartment Rating</th>
+        </tr>
+        <tr>
+            <td th:text="${booking.getApartment().getId()}"></td>
+            <td th:text="${booking.getApartment().getTitle()}"></td>
+            <td th:text="${booking.getApartment().getAddress()}"></td>
+            <td th:text="${booking.getApartment().getGuestCapacity()}"></td>
+            <td th:text="${booking.getApartment().getRooms()}"></td>
+            <td th:text="${booking.getApartment().getRating()}"></td>
+        </tr>
     </table>
 
 </div>

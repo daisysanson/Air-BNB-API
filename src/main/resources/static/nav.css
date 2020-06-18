@@ -5,6 +5,17 @@ font-family: 'Scope One', serif;
   width: 100%;
 }
 
+
+.nav-link active{
+padding-left: 0px;
+ color: white;
+
+}
+
+.navbar-dark .nav-item > .nav-link active  {
+    color:white;
+}
+
 .nav-link{
 font-size: 20px;
 padding: 10px;

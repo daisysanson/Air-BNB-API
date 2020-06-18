@@ -17,18 +17,16 @@
             <th>ID</th>
             <th>Title</th>
             <th>Location</th>
-            <th>Date Start</th>
-            <th>Date End</th>
             <th>Guest Capacity</th>
+            <th>Rating</th>
+            <th>Rooms</th>
         </tr>
         <td th:text="${apartment.id}"></td>
         <td th:text="${apartment.title}"></td>
-        <td th:text="${apartment.location}"></td>
-        <td th:text="${#dates.format(apartment.occupiedStartDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
-        <td th:text="${#dates.format(apartment.occupiedEndDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
-        <td th:number="${apartment.guestCapacity}"></td>
-        <td th:number="${apartment.rating}"></td>
-        <td th:number="${apartment.rooms}"></td>
+        <td th:text="${apartment.address}"></td>
+        <td th:text="${apartment.guestCapacity}"></td>
+        <td th:text="${apartment.rating}"></td>
+        <td th:text="${apartment.rooms}"></td>
         </tr>
     </table>
 

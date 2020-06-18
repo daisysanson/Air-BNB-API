@@ -10,48 +10,50 @@
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 
-<tr class="container">
+<div class="container">
     <h2>Booking added successfully!: </h2>
 
 
-<tr class="table table-striped">
-    <h1>time</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Booking ID</th>
+        </tr>
+        <tr>
+            <td th:text="${booking.id}"></td>
+        </tr>
+        <tr>
+            <th>Customer ID</th>
+            <th>Customer Name</th>
+            <th>Customer Booking Confirmation</th>
+        </tr>
+        <tr>
+            <td th:text="${booking.getCustomer().getId()}"></td>
+            <td th:text="${booking.getCustomer().getName()}"></td>
+            <td th:text="${booking.getCustomer().getBookingConfirmed()}"></td>
+        </tr>
+        <tr>
+            <th>Apartment ID</th>
+            <th>Apartment Title</th>
+            <th>Apartment Address</th>
+            <th>Apartment Guest Capacity</th>
+            <th>Apartment Rooms</th>
+            <th>Apartment Rating</th>
+        </tr>
+        <tr>
+            <td th:text="${booking.getApartment().getId()}"></td>
+            <td th:text="${booking.getApartment().getTitle()}"></td>
+            <td th:text="${booking.getApartment().getAddress()}"></td>
+            <td th:text="${booking.getApartment().getGuestCapacity()}"></td>
+            <td th:text="${booking.getApartment().getRooms()}"></td>
+            <td th:text="${booking.getApartment().getRating()}"></td>
+        </tr>
+    </table>
 
-<!--<tr>-->
-<!--    <th>ID</th>-->
-<!--    <th>Date Start</th>-->
-<!--    <th>Date End</th>-->
-<!--    <th>Guest Capacity</th>-->
-<!--</tr>-->
-<!--<td th:text="${apartment.id}"></td>-->
-<!--<td th:text="${#dates.format(apartment.occupiedStartDate, 'dd-MM-yyyy HH:mm:ss')}"></td>-->
-<!--<td th:text="${#dates.format(apartment.occupiedEndDate, 'dd-MM-yyyy HH:mm:ss')}"></td>-->
-<!--<td th:number="${apartment.guestCapacity}"></td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--    <th>ID</th>-->
-<!--    <th>Name</th>-->
-<!--    <th>Booking</th>-->
-<!--    <th>Date</th>-->
-<!--</tr>-->
-<!--<td th:text="${id}"></td>-->
-<!--<td th:text="${customer.name}"></td>-->
-<!--<td th:text="${customer.bookingConfirmed}"></td>-->
-<!--<td th:text="$customer.date}"></td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--</tr>-->
-<!--</tr>-->
-<td th:text="${booking.id}"></td>
-</tr>
-</table>
+    </div>
 
-
-</div>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

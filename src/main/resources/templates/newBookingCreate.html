@@ -15,10 +15,6 @@
     <link rel="stylesheet" href="/index.css">
 </head>
 
-<td th:text="${time}"></td>
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -40,25 +36,19 @@
                         <option th:value="true" th:text="True"></option>
                     </select>
                 </div>
-<!--                <select th:field="*{apartment}">-->
-<!--                    <option th:each="apartment: ${apartments}" th:text="${apartment.title}" th:value="${apartment}"></option>-->
-<!--                </select>-->
-                <select name="apartment.id" id="address.id" class="form-control">
-                    <option th:each="apartment : ${apartments}"
-                            th:value="${apartment.id}"
-                            th:text="${apartment.title}"
-                            th:selected="${apartment.id == apartment.title}">
-                    </option>
-                </select>
+                <div>
+                    <label class="dropdown"> Select the apartment: </label>
+                    <select name="apartment.id" id="address.id" class="form-control">
+                        <option th:each="apartment : ${apartments}"
+                                th:value="${apartment.id}"
+                                th:text="${apartment.title}"
+                                th:selected="${apartment.id == apartment.title}">
+                        </option>
+                    </select>
 
-
-
-
-
-                <input type="text" th:field="*{x}"  />
-
-                <input class="button" type="submit" value="Submit"/> <input class="button" type="reset"
-                                                                            value="Reset"/>
+                    <input class="button" type="submit" value="Submit"/> <input class="button" type="reset"
+                                                                                value="Reset"/>
+                </div>
             </form>
         </div>
     </div>

@@ -29,7 +29,8 @@ public class UIController {
     }
 
     @GetMapping("/customer")
-    public String getCustomerPage(Model model) {
+    public String getCustomerPage(Model model){
+    model.addAttribute("activeLink", "Customer");
         return "customer";
     }
 
@@ -111,6 +112,7 @@ public class UIController {
     public String showUpdateForm(Model model) {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
+        model.addAttribute("activeLink", "Customer");
         return "replaceCustomerForm";
     }
 

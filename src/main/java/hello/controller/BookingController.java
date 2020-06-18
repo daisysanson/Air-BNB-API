@@ -23,6 +23,8 @@ public class BookingController {
     }
 
 
+
+
     @GetMapping(value = "/")
     public ResponseEntity<Object> getAllBookings() {
         return ResponseEntity.ok(repository.findAll());

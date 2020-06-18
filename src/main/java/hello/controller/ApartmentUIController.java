@@ -33,7 +33,8 @@ public class ApartmentUIController {
 
 
     @GetMapping("/apartment")
-    public String getCustomerId(Model model) {
+    public String getApartmentId(Model model) {
+        model.addAttribute("activeLink", "Apartment");
         return "apartment";
     }
 
@@ -41,6 +42,7 @@ public class ApartmentUIController {
     public String showFindApartmentForm(Model model) {
         Apartment2 apartment = new Apartment2();
         model.addAttribute("apartment", apartment);
+        model.addAttribute("activeLink", "Apartment");
         return "findAnApartment";
     }
 
@@ -51,6 +53,7 @@ public class ApartmentUIController {
             return "badRequest";
         }
         try {
+            model.addAttribute("activeLink", "Apartment");
             model.addAttribute("apartment", apartmentService.selectApartmentById(id));
         } catch (BadRequestException e) {
             log.info("title field is empty");
@@ -66,9 +69,9 @@ public class ApartmentUIController {
     @GetMapping("/showAllApartments")
     public String showAllApartments(Model model) {
         model.addAttribute("apartment", apartmentService.getAllApartments());
+        model.addAttribute("activeLink", "Apartment");
         return "showAllApartments";
     }
-
 
     @GetMapping("/addApartment")
     public String showAddForm(Model model) {
@@ -81,7 +84,7 @@ public class ApartmentUIController {
     @PostMapping("/apartmentResult")
     public String addCustomer(@ModelAttribute("apartment") Apartment2 apartment,
                               @RequestParam("title") String title,
-                              @RequestParam("location") String location,
+                              @RequestParam("address") String address,
                               @RequestParam("guestCapacity") int guestCapacity,
                               @RequestParam("rating") int rating,
                               @RequestParam("rooms") int rooms, Model model) {
@@ -95,10 +98,12 @@ public class ApartmentUIController {
     }
 
 
+
     @GetMapping("/deleteApartmentForm")
     public String showDeleteApartmentForm(Model model) {
         Apartment2 apartment = new Apartment2();
         model.addAttribute("apartment", apartment);
+        model.addAttribute("activeLink", "Apartment");
         return "deleteApartmentForm";
     }
 
@@ -107,6 +112,7 @@ public class ApartmentUIController {
                                   @RequestParam("id") String id, Model model) {
         try {
             model.addAttribute("customer", apartmentService.deleteApartmentById(id));
+            model.addAttribute("activeLink", "Apartment");
             return "deleteApartmentResult";
         } catch (NotFoundException e) {
             log.info("apartment with id" + id + "not found");
@@ -114,12 +120,11 @@ public class ApartmentUIController {
         }
     }
 
-
-
     @GetMapping("/updateApartmentForm")
     public String showUpdateForm(Model model) {
         Apartment2 apartment = new Apartment2();
         model.addAttribute("apartment", apartment);
+        model.addAttribute("activeLink", "Apartment");
         return "updateApartmentForm";
     }
 
@@ -129,6 +134,7 @@ public class ApartmentUIController {
 
         try {
             model.addAttribute("apartment", apartmentService.updateApartmentById(id, apartmentToUpdate));
+            model.addAttribute("activeLink", "Apartment");
             return "updateApartmentResult";
         } catch (BadRequestException e) {
             log.info("apartment with id " + id + "not found");

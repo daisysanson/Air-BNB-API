@@ -29,7 +29,7 @@ body {
 }
 
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, a{
    font-family: 'Scope One', serif;
     margin-top: 20px;
     margin-bottom:20px
@@ -73,8 +73,6 @@ background-color: #ff0066;
    border-radius: 80px;
    background: solid;
    }
-
-
 
 
    .button:hover{

@@ -8,6 +8,7 @@ import hello.model.Booking;
 import hello.model.Customer;
 import hello.service.ApartmentService;
 import hello.service.BookingService;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,7 @@ public class BookingUIController {
 
     @GetMapping("/booking")
     public String getBookingPage(Model model) {
+        model.addAttribute("activeLink", "Booking");
         return "booking";
     }
 
@@ -43,20 +45,17 @@ public class BookingUIController {
     @GetMapping("/newBookingCreate")
     public String showAddForm(Model model) {
         Booking booking = new Booking();
-        List<Apartment2> apartments =  apartmentService.getAllApartments();
-        model.addAttribute("apartments", apartments);
+        model.addAttribute("apartments",  apartmentService.getAllApartments());
         model.addAttribute("booking", booking);
 
         return "newBookingCreate";
     }
 
-
     @PostMapping("/newBooking")
     public String addBooking(@ModelAttribute("booking") Booking booking, Model model) {
         try {
-            model.addAttribute("booking", booking);
-            bookingService.addBooking(booking);
-
+            Booking b = bookingService.addBooking(booking);
+            model.addAttribute("booking", b);
             return "newBooking";
         } catch (BadRequestException e) {
             return "badRequest";
@@ -72,7 +71,9 @@ public class BookingUIController {
     }
 
     @PostMapping("/viewBookingResult")
-    public String showFindApartmentResult(@ModelAttribute("booking") Booking booking, @RequestParam("id") String id, Model model) {
+    public String showFindApartmentResult(@ModelAttribute("booking") Booking booking,
+                                          @RequestParam("id") String id,
+                                          Model model) {
         if (bookingService == null) {
             return "badRequest";
         }
@@ -86,7 +87,6 @@ public class BookingUIController {
         return "viewBookingResult";
     }
 
-
-
+//    @GetMapping("viewBooking")\
 
 }
