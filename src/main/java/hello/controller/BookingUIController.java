@@ -8,6 +8,7 @@ import hello.model.Booking;
 import hello.model.Customer;
 import hello.service.ApartmentService;
 import hello.service.BookingService;
+import hello.service.CustomerService;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +53,7 @@ public class BookingUIController {
     }
 
     @PostMapping("/newBooking")
-    public String addBooking(@ModelAttribute("booking") Booking booking, Model model) {
+    public String addBooking(@ModelAttribute("booking") Booking booking,  Model model) {
         try {
             Booking b = bookingService.addBooking(booking);
             model.addAttribute("booking", b);
@@ -87,6 +88,6 @@ public class BookingUIController {
         return "viewBookingResult";
     }
 
-//    @GetMapping("viewBooking")\
+
 
 }

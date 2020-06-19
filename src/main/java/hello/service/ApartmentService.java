@@ -47,6 +47,7 @@ public class ApartmentService {
     }
 
 
+
     public Apartment2 addApartment(Apartment2 apartment) {
         if ((StringUtils.isBlank(apartment.getTitle())) || ((StringUtils.isBlank(apartment.getAddress())))) {
             throw new BadRequestException("Please enter the apartment title");

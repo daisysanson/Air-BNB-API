@@ -1,5 +1,6 @@
 package hello.controller;
 
+import hello.dao.CustomerRepository;
 import hello.model.Customer;
 import hello.service.CustomerService;
 import org.apache.log4j.Logger;
@@ -16,12 +17,14 @@ import java.util.List;
 @RestController
 public class CustomerController {
     private CustomerService customerService;
+    private CustomerRepository repository;
     static Logger log = Logger.getLogger(CustomerController.class);
 
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, CustomerRepository repository) {
         this.customerService = customerService;
+        this.repository = repository;
     }
 
 
@@ -33,6 +36,15 @@ public class CustomerController {
 
     }
 
+
+    @GetMapping(path = "/{name}")
+    public ResponseEntity<Object> findByName(@PathVariable("name") String name){
+        List<Customer> customerName =  repository.findByName(name);
+        return ResponseEntity.status(HttpStatus.OK).body(customerName);
+
+
+    }
+
     @GetMapping
     public ResponseEntity<List<Customer>> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomers();
@@ -40,7 +52,7 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(customers);
     }
 
-    @GetMapping(path = "/{id}") //id will appear in the path....i.e //someId
+    @GetMapping(path = "/{id}")
     public ResponseEntity<Customer> selectCustomerById(@PathVariable("id") String id) { //grab id and turn it into a UUID
         Customer customer = customerService.selectCustomerById(id);
         log.info("customer found");

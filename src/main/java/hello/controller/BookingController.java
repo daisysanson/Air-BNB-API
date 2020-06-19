@@ -35,6 +35,8 @@ public class BookingController {
         return ResponseEntity.ok(repository.findById(id));
     }
 
+
+
     @PostMapping(value = "/")
     public ResponseEntity<Object> addBooking(@RequestBody Booking booking) {
         Booking saveBooking = repository.save(booking);

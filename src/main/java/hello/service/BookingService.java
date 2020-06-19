@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.ResponseEntity.status;
 @Service
 public class BookingService {
     private BookingRepository repository;
@@ -38,6 +37,7 @@ public class BookingService {
 
         return repository.findAll();
     }
+
 
 
     public Booking addBooking(Booking booking) {
