@@ -14,24 +14,19 @@
     <link rel="stylesheet" href="/nav.css">
     <link rel="stylesheet" href="/index.css">
 </head>
+<nav th:replace="Fragments/nav :: nav"></nav>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h2>Customer details: </h2>
             <form action="#" th:action="@{/newBooking}" th:object="${booking}" method="POST">
-                <input th:find="customer : ${customers}"
-                        th:value="${customer.id}"
-                        th:text="${customer.name}"
-                        th:selected="${customer.id == customer.name}">
-                </select>
-
-
-
-
-                    <label class="dropdown"> Select the apartment: </label>
-
-                        <option th:each="apartment : ${apartments}"
+                <div class="form-group">
+                    <label> Customer Name </label>
+                    <input type="text" class="form-control" th:field="*{customer.name}"/>
+                </div>
+                <select class="dropdown" > <label> Select the apartment: </label>
+                    <option th:each="apartment : ${apartments}"
                                 th:value="${apartment.id}"
                                 th:text="${apartment.title}"
                                 th:selected="${apartment.id == apartment.title}">

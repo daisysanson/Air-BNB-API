@@ -26,7 +26,8 @@ public class CustomerService {
         this.repository = repository;
     }
 
-    public CustomerService(){}
+    public CustomerService() {
+    }
 
     public Customer selectCustomerById(String id) {
         Optional<Customer> searchCustomer = repository.findById(id);
@@ -41,6 +42,9 @@ public class CustomerService {
         return repository.findById(id).get();
     }
 
+    public List<Customer> findByName(String name){
+        return repository.findByName(name);
+    }
 
     public List<Customer> getAllCustomers() {
 

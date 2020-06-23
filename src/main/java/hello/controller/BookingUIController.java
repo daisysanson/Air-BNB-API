@@ -1,62 +1,63 @@
 package hello.controller;
 
-import hello.dao.BookingRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
-import hello.model.Apartment2;
 import hello.model.Booking;
 import hello.model.Customer;
 import hello.service.ApartmentService;
 import hello.service.BookingService;
 import hello.service.CustomerService;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class BookingUIController {
 
     private BookingService bookingService;
     private ApartmentService apartmentService;
-    private Apartment2 apartment2;
+    private CustomerService customerService;
 
 
     @Autowired
-    public BookingUIController(BookingService bookingService, ApartmentService apartmentService) {
+    public BookingUIController(BookingService bookingService, ApartmentService apartmentService, CustomerService customerService) {
         this.bookingService = bookingService;
         this.apartmentService=apartmentService;
+        this.customerService=customerService;
     }
 
 
     @GetMapping("/booking")
-    public String getBookingPage(Model model) {
+    public String showBookingLandingPage(Model model) {
         model.addAttribute("activeLink", "Booking");
         return "booking";
     }
 
 
     @GetMapping("/newBookingCreate")
-    public String showAddForm(Model model) {
+    public String showAddBookingForm( Model model) {
         Booking booking = new Booking();
         model.addAttribute("apartments",  apartmentService.getAllApartments());
+        model.addAttribute("customers", customerService.getAllCustomers());
+        model.addAttribute("activeLink", "Booking");
         model.addAttribute("booking", booking);
 
         return "newBookingCreate";
     }
 
     @PostMapping("/newBooking")
-    public String addBooking(@ModelAttribute("booking") Booking booking,  Model model) {
+    public String showBooking(@ModelAttribute("booking") Booking booking,
+                             @RequestParam("name") String name,
+                             Model model) {
         try {
+            List<Customer> c = customerService.findByName(name);
             Booking b = bookingService.addBooking(booking);
             model.addAttribute("booking", b);
+            model.addAttribute("name", c);
+            model.addAttribute("activeLink", "Booking");
+
             return "newBooking";
         } catch (BadRequestException e) {
             return "badRequest";
@@ -64,14 +65,15 @@ public class BookingUIController {
     }
 
 
-    @GetMapping("/viewBooking")
-    public String viewBookingById(Model model){
+    @GetMapping("/getBooking")
+    public String showBookingById(Model model){
         Booking booking = new Booking();
         model.addAttribute("booking", booking);
-        return "viewBooking";
+        model.addAttribute("activeLink", "Booking");
+        return "getBooking";
     }
 
-    @PostMapping("/viewBookingResult")
+    @PostMapping("/getBookingResult")
     public String showFindApartmentResult(@ModelAttribute("booking") Booking booking,
                                           @RequestParam("id") String id,
                                           Model model) {
@@ -80,12 +82,13 @@ public class BookingUIController {
         }
         try {
             model.addAttribute("booking", bookingService.selectBookingById(id));
+            model.addAttribute("activeLink", "Booking");
         } catch (BadRequestException e) {
             return "badRequest";
         } catch (NotFoundException e) {
             return "notFound";
         }
-        return "viewBookingResult";
+        return "getBookingResult";
     }
 
 

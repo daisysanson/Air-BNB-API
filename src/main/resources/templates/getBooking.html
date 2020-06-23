@@ -1,37 +1,26 @@
-<!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/nav.css">
     <link rel="stylesheet" href="/index.css">
-    <title>Update a Customer</title>
+
+    <title>Main page</title>
 
 </head>
 <body>
 <nav th:replace="Fragments/nav :: nav"></nav>
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Update a customer's details</h1>
-            <form action="#" th:action="@{/replaceCustomer}" th:object="${customer}" method="put">
+            <h1>Find your booking</h1>
+            <form action="#" th:action="@{/getBookingResult}" th:object="${booking}" method="post">
                 <div class="form-group">
-                    <label> Customer Name </label>
-                    <input type="text" class="form-control" th:field="*{name}"/>
-                </div>
-                <div class="form-group">
-                    <label>ID:</label>
+                    <label> Booking ID </label>
                     <input type="text" class="form-control" th:field="*{id}"/>
-                    <small id="advice" class="form-text text-muted">Enter customer's existing ID</small>
-                </div>
-                <div class="form-group">
-                    <label> Booking: </label>
-                    <select th:field="*{bookingConfirmed}">
-                        <option th:value="false" th:text="False"></option>
-                        <option th:value="true" th:text="True"></option>
-                    </select>
+                    <small id="advice" class="form-text text-muted">Enter your booking's ID</small>
                 </div>
                 <p><input class="button" type="submit" value="Submit"/> <input class="button" type="reset"
                                                                                value="Reset"/>
@@ -43,5 +32,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

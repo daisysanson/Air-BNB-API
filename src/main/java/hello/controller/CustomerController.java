@@ -39,8 +39,9 @@ public class CustomerController {
 
     @GetMapping(path = "/{name}")
     public ResponseEntity<Object> findByName(@PathVariable("name") String name){
-        List<Customer> customerName =  repository.findByName(name);
-        return ResponseEntity.status(HttpStatus.OK).body(customerName);
+        List<Customer> customers = customerService.findByName(name);
+        log.info("customers found");
+        return ResponseEntity.status(HttpStatus.OK).body(customers);
 
 
     }

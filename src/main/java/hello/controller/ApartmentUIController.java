@@ -33,7 +33,7 @@ public class ApartmentUIController {
 
 
     @GetMapping("/apartment")
-    public String getApartmentId(Model model) {
+    public String getApartmentLandingPage(Model model) {
         model.addAttribute("activeLink", "Apartment");
         return "apartment";
     }
@@ -82,7 +82,7 @@ public class ApartmentUIController {
 
 
     @PostMapping("/apartmentResult")
-    public String addCustomer(@ModelAttribute("apartment") Apartment2 apartment,
+    public String showAddCustomerForm(@ModelAttribute("apartment") Apartment2 apartment,
                               @RequestParam("title") String title,
                               @RequestParam("address") String address,
                               @RequestParam("guestCapacity") int guestCapacity,
@@ -108,7 +108,7 @@ public class ApartmentUIController {
     }
 
     @GetMapping("/deleteApartmentResult")
-    public String deleteApartment(@ModelAttribute("apartment") Apartment2 apartment,
+    public String showDeleteApartmentForm(@ModelAttribute("apartment") Apartment2 apartment,
                                   @RequestParam("id") String id, Model model) {
         try {
             model.addAttribute("customer", apartmentService.deleteApartmentById(id));
@@ -129,7 +129,7 @@ public class ApartmentUIController {
     }
 
     @GetMapping("/updateApartmentResult")
-    public String updateCustomer(@ModelAttribute("apartment") Apartment2 apartmentToUpdate,
+    public String showUpdateCustomerForm(@ModelAttribute("apartment") Apartment2 apartmentToUpdate,
                                  @RequestParam("id") String id, Model model) {
 
         try {

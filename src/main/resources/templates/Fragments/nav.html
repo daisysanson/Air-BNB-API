@@ -22,25 +22,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul id="myDIV" class="navbar-nav">
-<!--                <li th:class="${#strings.equals(activeLink, 'Customer')} ? 'nav-item active' : 'nav-item'">-->
-<!--                    <a class="nav-link" href="customer">Customer</a>-->
-<!--                </li>-->
                 <li th:class="${#strings.equals(activeLink, 'Booking')} ? 'nav-item active' : 'nav-item'">
                     <a class="nav-link" href="booking">Bookings</a>
                 </li>
                 <li th:class="${#strings.equals(activeLink, 'Apartment')} ? 'nav-item active' : 'nav-item'">
                     <a class="nav-link" href="apartment">Apartment</a>
                 </li>
-                <li class="nav-item dropdown" >
+                <li th:class="${#strings.equals(activeLink, 'Customer')} ? 'nav-item dropdown active' : 'nav-item'">
                     <a class="nav-link dropdown-toggle" href="customer" id="navbarDropdownMenuLink"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer
-                    </a>
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="addCustomerForm">Add a customer</a>
                         <a class="dropdown-item" href="/findACustomerForm">Find a customer</a>
                         <a class="dropdown-item" href="/getAllCustomers">See list of all customers</a>
                         <a class="dropdown-item" href="/deleteCustomerForm">Delete a customer</a>
-                        <a class="dropdown-item" href="/replaceCustomerForm">Update a customer</a>
+                        <a class="dropdown-item" href="/updateCustomerForm">Update a customer</a>
 
                     </div>
                 </li>
