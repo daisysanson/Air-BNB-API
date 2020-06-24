@@ -39,7 +39,7 @@ public class BookingController {
 
     @PostMapping(value = "/")
     public ResponseEntity<Object> addBooking(@RequestBody Booking booking) {
-        Booking saveBooking = repository.save(booking);
+        Booking saveBooking = bookingService.addBooking(booking); 
         return ResponseEntity.status(HttpStatus.CREATED).body(saveBooking);
     }
 

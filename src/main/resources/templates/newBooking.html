@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <td th:text="${booking.getCustomer().getId()}"></td>
-            <td th:text="${booking.Customer('name')}" />
+            <td th:text="${booking.getCustomer().getName()}"></td>
             <td th:text="${booking.getCustomer().getBookingConfirmed()}"></td>
         </tr>
         <tr>

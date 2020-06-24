@@ -3,6 +3,7 @@ package hello.controller;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
 import hello.model.Booking;
+import hello.model.BookingRequest;
 import hello.model.Customer;
 import hello.service.ApartmentService;
 import hello.service.BookingService;
@@ -37,8 +38,8 @@ public class BookingUIController {
 
 
     @GetMapping("/newBookingCreate")
-    public String showAddBookingForm( Model model) {
-        Booking booking = new Booking();
+    public String showAddBookingForm(Model model) {
+        BookingRequest booking = new BookingRequest();
         model.addAttribute("apartments",  apartmentService.getAllApartments());
         model.addAttribute("customers", customerService.getAllCustomers());
         model.addAttribute("activeLink", "Booking");
@@ -47,13 +48,17 @@ public class BookingUIController {
         return "newBookingCreate";
     }
 
-    @PostMapping("/newBooking")
-    public String showBooking(@ModelAttribute("booking") Booking booking,
-                             @RequestParam("name") String name,
-                             Model model) {
+    @PostMapping(value = "/newBooking")
+    public String showBooking(@ModelAttribute("booking") BookingRequest booking, Model model) {
         try {
-            List<Customer> c = customerService.findByName(name);
-            Booking b = bookingService.addBooking(booking);
+            List<Customer> c = customerService.findByName(booking.name);
+            if (c.isEmpty()) {
+                return "badRequest";
+            }
+
+            Booking newBooking = new Booking(c.get(0), booking.apartment);
+
+            Booking b = bookingService.addBooking(newBooking);
             model.addAttribute("booking", b);
             model.addAttribute("name", c);
             model.addAttribute("activeLink", "Booking");

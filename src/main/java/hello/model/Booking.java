@@ -19,10 +19,9 @@ public class Booking {
 
     public int x;
 
-    public Booking(Customer customer, Apartment2 apartment, String id) {
+    public Booking(Customer customer, Apartment2 apartment) {
         this.customer = customer;
         this.apartment = apartment;
-        this.id = id;
     }
 
 
