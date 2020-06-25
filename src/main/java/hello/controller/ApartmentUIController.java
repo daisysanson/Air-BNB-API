@@ -1,23 +1,20 @@
 package hello.controller;
 
 import hello.exceptions.BadRequestException;
-import hello.exceptions.MultiErrorException;
 import hello.exceptions.NotFoundException;
 import hello.model.Apartment2;
-import hello.model.Customer;
 import hello.service.ApartmentService;
-import hello.service.CustomerService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.beans.PropertyEditorSupport;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+
+
 
 @Controller
 public class ApartmentUIController {
@@ -28,8 +25,6 @@ public class ApartmentUIController {
     public ApartmentUIController(ApartmentService apartmentService) {
         this.apartmentService = apartmentService;
     }
-
-    static Logger log = Logger.getLogger(CustomerController.class);
 
 
     @GetMapping("/apartment")
@@ -49,17 +44,14 @@ public class ApartmentUIController {
     @PostMapping("/findApartmentResult")
     public String showFindApartmentResult(@ModelAttribute("apartment") Apartment2 apartment, @RequestParam("id") String id, Model model) {
         if (apartmentService == null) {
-            log.info("no apartment input model");
             return "badRequest";
         }
         try {
             model.addAttribute("activeLink", "Apartment");
             model.addAttribute("apartment", apartmentService.selectApartmentById(id));
         } catch (BadRequestException e) {
-            log.info("title field is empty");
             return "badRequest";
         } catch (NotFoundException e) {
-            log.info("apartment with id" + id + " not found");
             return "notFound";
         }
         return "findApartmentResult";
@@ -83,20 +75,18 @@ public class ApartmentUIController {
 
     @PostMapping("/apartmentResult")
     public String showAddCustomerForm(@ModelAttribute("apartment") Apartment2 apartment,
-                              @RequestParam("title") String title,
-                              @RequestParam("address") String address,
-                              @RequestParam("guestCapacity") int guestCapacity,
-                              @RequestParam("rating") int rating,
-                              @RequestParam("rooms") int rooms, Model model) {
+                                      @RequestParam("title") String title,
+                                      @RequestParam("address") String address,
+                                      @RequestParam("guestCapacity") int guestCapacity,
+                                      @RequestParam("rating") int rating,
+                                      @RequestParam("rooms") int rooms, Model model) {
         try {
             model.addAttribute("apartment", apartmentService.addApartment(apartment));
             return "apartmentResult";
         } catch (BadRequestException e) {
-            log.info("title field is empty");
             return "badRequest";
         }
     }
-
 
 
     @GetMapping("/deleteApartmentForm")
@@ -109,13 +99,12 @@ public class ApartmentUIController {
 
     @GetMapping("/deleteApartmentResult")
     public String showDeleteApartmentForm(@ModelAttribute("apartment") Apartment2 apartment,
-                                  @RequestParam("id") String id, Model model) {
+                                          @RequestParam("id") String id, Model model) {
         try {
             model.addAttribute("customer", apartmentService.deleteApartmentById(id));
             model.addAttribute("activeLink", "Apartment");
             return "deleteApartmentResult";
         } catch (NotFoundException e) {
-            log.info("apartment with id" + id + "not found");
             return "notFound";
         }
     }
@@ -130,14 +119,13 @@ public class ApartmentUIController {
 
     @GetMapping("/updateApartmentResult")
     public String showUpdateCustomerForm(@ModelAttribute("apartment") Apartment2 apartmentToUpdate,
-                                 @RequestParam("id") String id, Model model) {
+                                         @RequestParam("id") String id, Model model) {
 
         try {
             model.addAttribute("apartment", apartmentService.updateApartmentById(id, apartmentToUpdate));
             model.addAttribute("activeLink", "Apartment");
             return "updateApartmentResult";
         } catch (BadRequestException e) {
-            log.info("apartment with id " + id + "not found");
             return "badRequest";
         } catch (NotFoundException e) {
             return "notFound";

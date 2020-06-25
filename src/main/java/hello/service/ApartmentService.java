@@ -1,16 +1,17 @@
 package hello.service;
 
+import hello.controller.CustomerController;
 import hello.dao.ApartmentRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
 import hello.model.Apartment2;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,13 +28,17 @@ public class ApartmentService {
         this.apartmentRepository = apartmentRepository;
     }
 
+    static Logger log = Logger.getLogger(CustomerController.class);
+
     public Apartment2 selectApartmentById(String id) {
         Optional<Apartment2> searchApartments = apartmentRepository.findById(id);
         if (StringUtils.isBlank(id)) {
+            log.info("No id entered");
             throw new BadRequestException("Please enter an id");
 
         }
         if (!apartmentRepository.existsById(id)) {
+            log.info("id not found");
             throw new NotFoundException("Cannot find this ID");
         }
         status(HttpStatus.OK).body(searchApartments.get());
@@ -47,15 +52,26 @@ public class ApartmentService {
     }
 
 
-
     public Apartment2 addApartment(Apartment2 apartment) {
         if ((StringUtils.isBlank(apartment.getTitle())) || ((StringUtils.isBlank(apartment.getAddress())))) {
+            log.info("apartment id not entered");
             throw new BadRequestException("Please enter the apartment title");
+
         }
         if ((apartment.getGuestCapacity() <= 0) || ((apartment.getGuestCapacity() > 14))) {
+            log.info("Guest Capacity is less than 0 or more than 14");
             throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
-        } else
 
+        }
+        if ((apartment.getRating() < 0 || (apartment.getRating() >= 6))) {
+            log.info("Rating is less than 0 or is/more than 6");
+            throw new BadRequestException("Rating is out of range 0 -5");
+        }
+        if ((apartment.getRooms() <= 0 || (apartment.getRooms() >= 20))) {
+            log.info("Room is less than 0 or is/more than 20");
+            throw new BadRequestException("Room number is out of range 0 -5");
+
+        } else
             apartmentRepository.insert(apartment);
         return apartment;
     }
@@ -64,6 +80,7 @@ public class ApartmentService {
     public boolean deleteApartmentById(String id) {
         {
             if (!apartmentRepository.existsById(id)) {
+                log.info("id not found");
                 throw new NotFoundException("id " + id + "  not found");
             }
             apartmentRepository.deleteById(id);
@@ -76,23 +93,31 @@ public class ApartmentService {
     public Apartment2 updateApartmentById(@PathVariable String id, Apartment2 apartmentToUpdate) {
 
         if (StringUtils.isBlank(apartmentToUpdate.getTitle()) || ((StringUtils.isBlank(apartmentToUpdate.getAddress())))) {
+            log.info("title or address not entered");
             throw new BadRequestException("Please ensure all fields are completed");
 
         }
-//        if (apartmentToUpdate.getOccupiedEndDate().before(apartmentToUpdate.getOccupiedStartDate())
-//                || apartmentToUpdate.getOccupiedStartDate().after(apartmentToUpdate.getOccupiedEndDate())) {
-//            throw new BadRequestException("Please ensure dates are chronological i.e start date is before end date");
-
-//        }
         if (StringUtils.isBlank(id)) {
+            log.info("id not found");
             throw new BadRequestException("Please enter an id");
         }
         if (!apartmentRepository.existsById(id)) {
+            log.info("id not found");
             throw new NotFoundException("id " + id + " not found");
 
         }
-        if ((apartmentToUpdate.getGuestCapacity() <= 0) || ((apartmentToUpdate.getGuestCapacity() > 14)) ) {
+        if ((apartmentToUpdate.getGuestCapacity() <= 0) || ((apartmentToUpdate.getGuestCapacity() > 14))) {
+            log.info("Guest Capacity is less than 0 or more than 14");
             throw new BadRequestException("Guest Capacity can not be less than 0 or more than 14");
+
+        }
+        if ((apartmentToUpdate.getRating() < 0 || (apartmentToUpdate.getRating() >= 6))) {
+            log.info("Rating is less than 0 or is/more than 6");
+            throw new BadRequestException("Rating is out of range 0 -5");
+        }
+        if ((apartmentToUpdate.getRooms() <= 0 || (apartmentToUpdate.getRooms() >= 20))) {
+            log.info("Room is less than 0 or is/more than 20");
+            throw new BadRequestException("Room number is out of range 0 -5");
         } else
 
             return apartmentRepository.save(apartmentToUpdate);

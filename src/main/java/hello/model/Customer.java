@@ -2,16 +2,13 @@ package hello.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.querydsl.core.annotations.QueryEntity;
-import hello.dao.ApartmentRepository;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
+
 
 @QueryEntity
 @Document(collection = "customers")
@@ -33,7 +30,6 @@ public class Customer {
     private Boolean bookingConfirmed;
 
 
-
     public Customer() {
 
     }
@@ -44,7 +40,6 @@ public class Customer {
         this.id = id;
         this.name = name;
         this.bookingConfirmed = bookingConfirmed;
-
 
 
     }

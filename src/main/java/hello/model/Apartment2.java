@@ -28,13 +28,13 @@ public class Apartment2 {
                       @JsonProperty("address") String address,
                       @JsonProperty("guest_capacity") int guestCapacity,
                       @JsonProperty("rooms") int rooms,
-                      @JsonProperty("rating") int rating){
-        this.id=id;
+                      @JsonProperty("rating") int rating) {
+        this.id = id;
         this.title = title;
-        this.address=address;
-        this.guestCapacity= guestCapacity;
-        this.rooms=rooms;
-        this.rating=rating;
+        this.address = address;
+        this.guestCapacity = guestCapacity;
+        this.rooms = rooms;
+        this.rating = rating;
     }
 
     public String getId() {

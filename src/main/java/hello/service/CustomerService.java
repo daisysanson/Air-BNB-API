@@ -42,7 +42,7 @@ public class CustomerService {
         return repository.findById(id).get();
     }
 
-    public List<Customer> findByName(String name){
+    public List<Customer> findByName(String name) {
         return repository.findByName(name);
     }
 
@@ -53,7 +53,7 @@ public class CustomerService {
 
 
     public Customer addCustomer(Customer customer) {
-        List<String> errors = new ArrayList<>(); //make new list which will contrain of errors
+        List<String> errors = new ArrayList<>();
         if (StringUtils.isBlank(customer.getName())) {
             errors.add("Customer name needs to be entered");
         }
