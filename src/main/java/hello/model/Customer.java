@@ -1,20 +1,21 @@
 package hello.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.querydsl.core.annotations.QueryEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
+@QueryEntity
 @Document(collection = "customers")
-@RestController
 public class Customer {
 
     @Id
+    @NotNull
     private String id;
 
     @Field(value = "name")
@@ -28,20 +29,16 @@ public class Customer {
     @NotNull
     private Boolean bookingConfirmed;
 
-    public Customer() {
 
+    public Customer() {
     }
 
     public Customer(@JsonProperty("id") String id,
                     @JsonProperty("name") String name,
                     @JsonProperty("booking_confirmed") Boolean bookingConfirmed) {
-
-
         this.id = id;
         this.name = name;
         this.bookingConfirmed = bookingConfirmed;
-
-
     }
 
 
@@ -76,5 +73,5 @@ public class Customer {
     public void setBookingConfirmed(Boolean bookingConfirmed) {
         this.bookingConfirmed = bookingConfirmed;
     }
-}
 
+}

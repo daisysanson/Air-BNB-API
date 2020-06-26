@@ -7,6 +7,7 @@ import hello.exceptions.NotFoundException;
 import hello.model.Customer;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,9 @@ public class CustomerService {
         this.repository = repository;
     }
 
+    public CustomerService() {
+    }
+
     public Customer selectCustomerById(String id) {
         Optional<Customer> searchCustomer = repository.findById(id);
         if (StringUtils.isBlank(id)) {
@@ -39,6 +43,10 @@ public class CustomerService {
         return repository.findById(id).get();
     }
 
+    public List<Customer> findByName(String name) {
+        return repository.findByName(name);
+    }
+
 
     public List<Customer> getAllCustomers() {
 
@@ -47,7 +55,7 @@ public class CustomerService {
 
 
     public Customer addCustomer(Customer customer) {
-        List<String> errors = new ArrayList<>(); //make new list which will contrain of errors
+        List<String> errors = new ArrayList<>();
         if (StringUtils.isBlank(customer.getName())) {
             errors.add("Customer name needs to be entered");
         }

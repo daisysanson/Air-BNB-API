@@ -11,19 +11,22 @@
 
 
 <div class="container">
-    <h2>Customer added successfully!: </h2>
+    <h2>Apartment added successfully!: </h2>
     <table class="table table-striped">
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Booking</th>
-            <th>Date</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Guest Capacity</th>
+            <th>Rating</th>
+            <th>Rooms</th>
         </tr>
-        <tr>
-            <td th:text="${customer.id}"></td>
-            <td th:text="${customer.name}"></td>
-            <td th:text="${customer.bookingConfirmed}"></td>
-            <td th:text="${customer.date}"></td>
+        <td th:text="${apartment.id}"></td>
+        <td th:text="${apartment.title}"></td>
+        <td th:text="${apartment.address}"></td>
+        <td th:text="${apartment.guestCapacity}"></td>
+        <td th:text="${apartment.rating}"></td>
+        <td th:text="${apartment.rooms}"></td>
         </tr>
     </table>
 
@@ -33,4 +36,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

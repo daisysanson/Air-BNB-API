@@ -9,17 +9,18 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
 public class UIController {
-    private Customer customer;
     private CustomerService customerService;
 
     @Autowired
-    public UIController(Customer customer, CustomerService customerService) {
-        this.customer = customer;
+    public UIController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -30,9 +31,17 @@ public class UIController {
         return "index";
     }
 
+    @GetMapping("/customer")
+    public String showCustomerLandingPage(Model model){
+    model.addAttribute("activeLink", "Customer");
+        return "customer";
+    }
+
     @GetMapping("/findACustomerForm")
     public String showGetCustomerForm(Model model) {
+        Customer customer = new Customer();
         model.addAttribute("customer",customer);
+        model.addAttribute("activeLink", "Customer");
         return "findACustomerForm";
     }
 
@@ -44,6 +53,7 @@ public class UIController {
         }
         try {
             model.addAttribute("customer", customerService.selectCustomerById(id));
+            model.addAttribute("activeLink", "Customer");
         } catch (BadRequestException e) {
             log.info("name field is empty");
             return "badRequest";
@@ -58,23 +68,26 @@ public class UIController {
     @GetMapping("/getAllCustomers")
     public String showAllCustomers(Model model) {
         model.addAttribute("customer", customerService.getAllCustomers());
+        model.addAttribute("activeLink", "Customer");
         return "getAllCustomers";
     }
 
     @GetMapping("/addCustomerForm")
     public String showAddForm(Model model) {
-
+        Customer customer = new Customer();
         model.addAttribute("customer", customer);
+        model.addAttribute("activeLink", "Customer");
         return "addCustomerForm";
     }
 
 
     @PostMapping("/addResult")
-    public String addCustomer(@ModelAttribute("customer") Customer customer,
+    public String showAddCustomer(@ModelAttribute("customer") Customer customer,
                               @RequestParam("name") String name,
                               @RequestParam("bookingConfirmed") Boolean bookingConfirmed, Model model) {
         try {
             model.addAttribute("customer", customerService.addCustomer(customer));
+            model.addAttribute("activeLink", "Customer");
             return "addResult";
         } catch (MultiErrorException e) {
             log.info("name field is empty");
@@ -85,15 +98,18 @@ public class UIController {
 
     @GetMapping("/deleteCustomerForm")
     public String showDeleteForm(Model model) {
+        Customer customer = new Customer();
         model.addAttribute("customer", customer);
+        model.addAttribute("activeLink", "Customer");
         return "deleteCustomerForm";
     }
 
     @GetMapping("/customerDeleted")
-    public String deleteCustomer(@ModelAttribute("customer") Customer customer,
+    public String showDeleteCustomer(@ModelAttribute("customer") Customer customer,
                                  @RequestParam("id") String id, Model model) {
         try {
             model.addAttribute("customer", customerService.deleteCustomerById(id));
+            model.addAttribute("activeLink", "Customer");
             return "customerDeleted";
         } catch (NotFoundException e) {
             log.info("customer with id" + id + "not found");
@@ -102,19 +118,22 @@ public class UIController {
     }
 
 
-    @GetMapping("/replaceCustomerForm")
+    @GetMapping("/updateCustomerForm")
     public String showUpdateForm(Model model) {
+        Customer customer = new Customer();
         model.addAttribute("customer", customer);
-        return "replaceCustomerForm";
+        model.addAttribute("activeLink", "Customer");
+        return "updateCustomerForm";
     }
 
-    @GetMapping("/replaceCustomer")
-    public String updateCustomer(@ModelAttribute("customer") Customer customerToupdate,
+    @GetMapping("/updateCustomer")
+    public String showUpdateCustomer(@ModelAttribute("customer") Customer customerToupdate,
                                  @RequestParam("id") String id, Model model) {
 
         try {
             model.addAttribute("customer", customerService.updateCustomerById(id, customerToupdate));
-            return "replaceCustomer";
+            model.addAttribute("activeLink", "Customer");
+            return "updateCustomer";
         } catch (BadRequestException e) {
             log.info("customer with id " + id + "not found");
             return "badRequest";

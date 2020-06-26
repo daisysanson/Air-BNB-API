@@ -1,8 +1,25 @@
 nav{
 font-family: 'Scope One', serif;
- position: fixed;
+ position: absolute;
   top: 0;
   width: 100%;
+}
+
+
+.nav-link active{
+padding-left: 0px;
+ color: white;
+
+}
+
+.navbar-dark .nav-item > .nav-link active  {
+    color:white;
+}
+
+.nav-link{
+font-size: 20px;
+padding: 10px;
+right: 20px;
 }
 
 .bg-light {
@@ -11,7 +28,11 @@ background-color: #F7F7F7!important;
 }
 
 .navbar-brand, .navbar-light .navbar-brand{
+font-size: 30px;
 color:#ff0066;
 background-color: #F7F7F7!important;
 }
 
+.dropdown-menu{
+left:auto;
+}

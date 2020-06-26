@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/nav.css">
     <link rel="stylesheet" href="/index.css">
-    <title>Delete a Customer</title>
+
+    <title>Main page</title>
 
 </head>
 <body>
@@ -15,23 +15,23 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Select a customer to delete</h1>
-            <form action="#" th:action="@{/customerDeleted}" th:object="${customer}" method="delete"
-            <div class="form-group">
-                <label> Customer ID </label>
-                <input type="text" class="form-control" th:field="*{id}"/>
-                <small id="advice" class="form-text text-muted">Enter the customer's ID</small>
-            </div>
-            <p><input class="button" type="submit" value="Submit"/> <input class="button" type="reset" value="Reset"/>
-                </form>
+            <h1>Find an apartment</h1>
+            <form action="#" th:action="@{/findApartmentResult}" th:object="${apartment}" method="post">
+                <div class="form-group">
+                    <label> Apartment ID </label>
+                    <input type="text" class="form-control" th:field="*{id}"/>
+                    <small id="advice" class="form-text text-muted">Enter the apartment's ID</small>
+                </div>
+                <p><input class="button" type="submit" value="Submit"/> <input class="button" type="reset"
+                                                                               value="Reset"/>
+            </form>
         </div>
     </div>
 </div>
-</form>
-
-</body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+</body>
 </html>

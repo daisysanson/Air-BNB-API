@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/nav.css">
     <link rel="stylesheet" href="/index.css">
-    <title>Delete a Customer</title>
+    <title>Delete an Apartment</title>
 
 </head>
 <body>
@@ -15,15 +15,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Select a customer to delete</h1>
-            <form action="#" th:action="@{/customerDeleted}" th:object="${customer}" method="delete"
+            <h1>Select an apartment to delete</h1>
+            <form action="#" th:action="@{/deleteApartmentResult}" th:object="${apartment}" method="delete"
             <div class="form-group">
-                <label> Customer ID </label>
+                <label> Apartment ID </label>
                 <input type="text" class="form-control" th:field="*{id}"/>
-                <small id="advice" class="form-text text-muted">Enter the customer's ID</small>
+                <small id="advice" class="form-text text-muted">Enter the apartment's ID</small>
             </div>
             <p><input class="button" type="submit" value="Submit"/> <input class="button" type="reset" value="Reset"/>
-                </form>
+            </p>
+            </form>
         </div>
     </div>
 </div>
@@ -34,4 +35,5 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
 </html>

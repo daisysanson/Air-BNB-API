@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/header.css">
+
+
+    <title>Apartment selection</title>
+
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
+<header th:replace="Fragments/header :: header"></header>
+
+
+<section id="header">
+    <div id="header-inner">
+        <h1>Apartments</h1>
+    </div>
+</section>
+
+<div class="container">
+    <h3>Make a selection:</h3>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><a href="/addApartment">Add an apartment</a></li>
+        <li class="list-group-item"><a href="/findAnApartment">Find an apartment</a></li>
+        <li class="list-group-item"><a href="/showAllApartments">List of all apartments</a></li>
+        <li class="list-group-item"><a href="/deleteApartmentForm">Delete an apartment</a></li>
+        <li class="list-group-item"><a href="/updateApartmentForm">Update an apartment</a></li>
+    </ul>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<script src="js/carousel.js"></script>
+<script src="js/nav.js"></script>
+</body>
+
+</html>

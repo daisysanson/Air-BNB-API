@@ -7,41 +7,40 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Add a Customer</title>
+    <title>Make a booking</title>
 
     <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/nav.css">
     <link rel="stylesheet" href="/index.css">
 </head>
-
-<body>
-
 <nav th:replace="Fragments/nav :: nav"></nav>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Add a new Customer</h1>
-            <form action="#" th:action="@{/addResult}" th:object="${customer}" method="POST">
+            <h2>Customer details: </h2>
+            <form action="#" th:action="@{/newBooking}" th:object="${booking}" method="POST">
                 <div class="form-group">
                     <label> Customer Name </label>
                     <input type="text" class="form-control" th:field="*{name}"/>
-                    <small id="advice" class="form-text text-muted">Enter the new customer's name</small>
+                    <input type="text" class="form-control" th:field="*{customer.id}"/>
                 </div>
                 <div class="form-group">
-                    <label class="dropdown"> Booking: </label>
-                    <select th:field="*{bookingConfirmed}">
-                        <option th:value="false" th:text="False"></option>
-                        <option th:value="true" th:text="True"></option>
+                    <select th:field="*{apartment.id}">
+                        <option th:each="apartment : ${apartments}"
+                                th:value="${apartment.id}"
+                                th:text="${apartment.title}">
                     </select>
                 </div>
-                <input class="button" type="submit" value="Submit"/> <input class="button" type="reset" value="Reset"/>
+
+                <input class="button" type="submit" value="Submit"/> <input class="button" type="reset"
+                                                                            value="Reset"/>
             </form>
         </div>
     </div>
 </div>
 
-<script src="js/carousel.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
@@ -49,4 +48,3 @@
 </body>
 
 </html>
-

@@ -138,6 +138,8 @@ public class APIExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiException);
     }
 
+
+
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<APIException> handleAllExceptions(Exception e) {
         log.error("exception caught: " + e);
@@ -149,6 +151,20 @@ public class APIExceptionHandler {
 
         return new ResponseEntity(apiException, HttpStatus.I_AM_A_TEAPOT);
     }
+
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public ResponseEntity<APIException> handleIllegalArgumentException(IllegalArgumentException e) {
+        log.error("exception caught: " + e);
+        APIException apiException = new APIException(
+                "Please ensure all fields are correct and completed",
+                HttpStatus.BAD_REQUEST,
+                ZonedDateTime.now(ZoneId.of("Z")));
+
+
+        return new ResponseEntity(apiException, HttpStatus.BAD_REQUEST);
+    }
+
+
 
 
 }
