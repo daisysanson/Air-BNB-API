@@ -42,7 +42,6 @@ public class CustomerController {
 
     }
 
-
     @GetMapping(path = "/{name}")
     public ResponseEntity<Object> findByName(@PathVariable("name") String name) {
         List<Customer> customers = customerService.findByName(name);
@@ -51,6 +50,7 @@ public class CustomerController {
 
 
     }
+
 
     @GetMapping
     public ResponseEntity<List<Customer>> getAllCustomers() {

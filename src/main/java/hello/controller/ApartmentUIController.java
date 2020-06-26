@@ -2,7 +2,7 @@ package hello.controller;
 
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
-import hello.model.Apartment2;
+import hello.model.Apartment;
 import hello.service.ApartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
-
 
 
 @Controller
@@ -35,17 +32,14 @@ public class ApartmentUIController {
 
     @GetMapping("/findAnApartment")
     public String showFindApartmentForm(Model model) {
-        Apartment2 apartment = new Apartment2();
+        Apartment apartment = new Apartment();
         model.addAttribute("apartment", apartment);
         model.addAttribute("activeLink", "Apartment");
         return "findAnApartment";
     }
 
     @PostMapping("/findApartmentResult")
-    public String showFindApartmentResult(@ModelAttribute("apartment") Apartment2 apartment, @RequestParam("id") String id, Model model) {
-        if (apartmentService == null) {
-            return "badRequest";
-        }
+    public String showFindApartmentResult(@ModelAttribute("apartment") Apartment apartment, @RequestParam("id") String id, Model model) {
         try {
             model.addAttribute("activeLink", "Apartment");
             model.addAttribute("apartment", apartmentService.selectApartmentById(id));
@@ -67,14 +61,14 @@ public class ApartmentUIController {
 
     @GetMapping("/addApartment")
     public String showAddForm(Model model) {
-        Apartment2 apartment = new Apartment2();
+        Apartment apartment = new Apartment();
         model.addAttribute("apartment", apartment);
         return "addApartment";
     }
 
 
     @PostMapping("/apartmentResult")
-    public String showAddCustomerForm(@ModelAttribute("apartment") Apartment2 apartment,
+    public String showAddCustomerForm(@ModelAttribute("apartment") Apartment apartment,
                                       @RequestParam("title") String title,
                                       @RequestParam("address") String address,
                                       @RequestParam("guestCapacity") int guestCapacity,
@@ -91,17 +85,17 @@ public class ApartmentUIController {
 
     @GetMapping("/deleteApartmentForm")
     public String showDeleteApartmentForm(Model model) {
-        Apartment2 apartment = new Apartment2();
+        Apartment apartment = new Apartment();
         model.addAttribute("apartment", apartment);
         model.addAttribute("activeLink", "Apartment");
         return "deleteApartmentForm";
     }
 
     @GetMapping("/deleteApartmentResult")
-    public String showDeleteApartmentForm(@ModelAttribute("apartment") Apartment2 apartment,
+    public String showDeleteApartmentForm(@ModelAttribute("apartment") Apartment apartment,
                                           @RequestParam("id") String id, Model model) {
         try {
-            model.addAttribute("customer", apartmentService.deleteApartmentById(id));
+            apartmentService.deleteApartmentById(id);
             model.addAttribute("activeLink", "Apartment");
             return "deleteApartmentResult";
         } catch (NotFoundException e) {
@@ -111,14 +105,14 @@ public class ApartmentUIController {
 
     @GetMapping("/updateApartmentForm")
     public String showUpdateForm(Model model) {
-        Apartment2 apartment = new Apartment2();
+        Apartment apartment = new Apartment();
         model.addAttribute("apartment", apartment);
         model.addAttribute("activeLink", "Apartment");
         return "updateApartmentForm";
     }
 
     @GetMapping("/updateApartmentResult")
-    public String showUpdateCustomerForm(@ModelAttribute("apartment") Apartment2 apartmentToUpdate,
+    public String showUpdateCustomerForm(@ModelAttribute("apartment") Apartment apartmentToUpdate,
                                          @RequestParam("id") String id, Model model) {
 
         try {

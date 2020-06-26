@@ -31,7 +31,6 @@ public class Customer {
 
 
     public Customer() {
-
     }
 
     public Customer(@JsonProperty("id") String id,
@@ -40,8 +39,6 @@ public class Customer {
         this.id = id;
         this.name = name;
         this.bookingConfirmed = bookingConfirmed;
-
-
     }
 
 

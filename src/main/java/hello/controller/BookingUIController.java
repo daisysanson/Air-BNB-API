@@ -2,7 +2,6 @@ package hello.controller;
 
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
-import hello.model.Apartment2;
 import hello.model.Booking;
 import hello.model.BookingRequest;
 import hello.model.Customer;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import java.awt.print.Book;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -61,6 +59,7 @@ public class BookingUIController {
         return "newBookingCreate";
     }
 
+
     @PostMapping(value = "/newBooking")
     public String showBooking(@ModelAttribute("booking") BookingRequest booking, Model model) {
         try {
@@ -97,9 +96,6 @@ public class BookingUIController {
     public String showFindApartmentResult(@ModelAttribute("booking") Booking booking,
                                           @RequestParam("id") String id,
                                           Model model) {
-        if (bookingService == null) {
-            return "badRequest";
-        }
         try {
             model.addAttribute("booking", bookingService.selectBookingById(id));
             model.addAttribute("activeLink", "Booking");
@@ -125,7 +121,7 @@ public class BookingUIController {
 
     @GetMapping("/deleteBookingResult")
     public String showDeleteBookingForm(@ModelAttribute("booking") Booking booking,
-                                          @RequestParam("id") String id, Model model) {
+                                        @RequestParam("id") String id, Model model) {
         try {
             model.addAttribute("booking", bookingService.deleteBookingById(id));
             model.addAttribute("activeLink", "Booking");
@@ -134,8 +130,6 @@ public class BookingUIController {
             return "notFound";
         }
     }
-
-
 
 
 }

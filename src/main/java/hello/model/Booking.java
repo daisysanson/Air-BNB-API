@@ -8,22 +8,19 @@ import javax.validation.constraints.NotNull;
 
 @Document(collection = "bookings")
 public class Booking {
-    @DBRef
-    private Customer customer;
-    @DBRef
-    private Apartment2 apartment;
-
-    @NotNull
     @Id
     private String id;
 
-    public int x;
+    @DBRef
+    private Customer customer;
 
-    public Booking(Customer customer, Apartment2 apartment) {
+    @DBRef
+    private Apartment apartment;
+
+    public Booking(Customer customer, Apartment apartment) {
         this.customer = customer;
         this.apartment = apartment;
     }
-
 
     public Booking() {
     }
@@ -32,18 +29,17 @@ public class Booking {
         return customer;
     }
 
-    public Apartment2 getApartment() {
+    public Apartment getApartment() {
         return apartment;
     }
 
-    public void setApartment(Apartment2 apartment) {
+    public void setApartment(Apartment apartment) {
         this.apartment = apartment;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
 
     public String getId() {
         return id;

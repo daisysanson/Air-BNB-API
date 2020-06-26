@@ -2,7 +2,7 @@ package hello.model;
 
 public class BookingRequest {
     public String name;
-    public Apartment2 apartment;
+    public Apartment apartment;
 
     public String getName() {
         return name;
@@ -12,11 +12,11 @@ public class BookingRequest {
         this.name = name;
     }
 
-    public Apartment2 getApartment() {
+    public Apartment getApartment() {
         return apartment;
     }
 
-    public void setApartment(Apartment2 apartment) {
+    public void setApartment(Apartment apartment) {
         this.apartment = apartment;
     }
 }

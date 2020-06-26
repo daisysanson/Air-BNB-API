@@ -4,7 +4,7 @@ import hello.controller.CustomerController;
 import hello.dao.ApartmentRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
-import hello.model.Apartment2;
+import hello.model.Apartment;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,29 +30,29 @@ public class ApartmentService {
 
     static Logger log = Logger.getLogger(CustomerController.class);
 
-    public Apartment2 selectApartmentById(String id) {
-        Optional<Apartment2> searchApartments = apartmentRepository.findById(id);
+    public Apartment selectApartmentById(String id) {
         if (StringUtils.isBlank(id)) {
             log.info("No id entered");
             throw new BadRequestException("Please enter an id");
-
         }
         if (!apartmentRepository.existsById(id)) {
             log.info("id not found");
             throw new NotFoundException("Cannot find this ID");
+        } else {
+            Optional<Apartment> searchApartments = apartmentRepository.findById(id);
+            status(HttpStatus.OK).body(searchApartments.get());
+
+            return apartmentRepository.findById(id).get();
         }
-        status(HttpStatus.OK).body(searchApartments.get());
-        return apartmentRepository.findById(id).get();
     }
 
-
-    public List<Apartment2> getAllApartments() {
+    public List<Apartment> getAllApartments() {
 
         return apartmentRepository.findAll();
     }
 
 
-    public Apartment2 addApartment(Apartment2 apartment) {
+    public Apartment addApartment(Apartment apartment) {
         if ((StringUtils.isBlank(apartment.getTitle())) || ((StringUtils.isBlank(apartment.getAddress())))) {
             log.info("apartment id not entered");
             throw new BadRequestException("Please enter the apartment title");
@@ -71,26 +71,23 @@ public class ApartmentService {
             log.info("Room is less than 0 or is/more than 20");
             throw new BadRequestException("Room number is out of range 0 -5");
 
-        } else
-            apartmentRepository.insert(apartment);
-        return apartment;
+        }
+        return apartmentRepository.insert(apartment);
     }
 
 
-    public boolean deleteApartmentById(String id) {
+    public void deleteApartmentById(String id) {
         {
             if (!apartmentRepository.existsById(id)) {
                 log.info("id not found");
                 throw new NotFoundException("id " + id + "  not found");
             }
             apartmentRepository.deleteById(id);
-            return true;
-
         }
     }
 
 
-    public Apartment2 updateApartmentById(@PathVariable String id, Apartment2 apartmentToUpdate) {
+    public Apartment updateApartmentById(@PathVariable String id, Apartment apartmentToUpdate) {
 
         if (StringUtils.isBlank(apartmentToUpdate.getTitle()) || ((StringUtils.isBlank(apartmentToUpdate.getAddress())))) {
             log.info("title or address not entered");

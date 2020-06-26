@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "apartments2")
-public class Apartment2 {
+public class Apartment {
     @Id
     private String id;
     @Field(value = "title")
@@ -20,15 +20,15 @@ public class Apartment2 {
     @Field(value = "rating")
     private int rating;
 
-    public Apartment2() {
+    public Apartment() {
     }
 
-    public Apartment2(@JsonProperty("id") String id,
-                      @JsonProperty("title") String title,
-                      @JsonProperty("address") String address,
-                      @JsonProperty("guest_capacity") int guestCapacity,
-                      @JsonProperty("rooms") int rooms,
-                      @JsonProperty("rating") int rating) {
+    public Apartment(@JsonProperty("id") String id,
+                     @JsonProperty("title") String title,
+                     @JsonProperty("address") String address,
+                     @JsonProperty("guest_capacity") int guestCapacity,
+                     @JsonProperty("rooms") int rooms,
+                     @JsonProperty("rating") int rating) {
         this.id = id;
         this.title = title;
         this.address = address;

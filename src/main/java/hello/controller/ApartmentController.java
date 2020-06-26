@@ -1,7 +1,7 @@
 package hello.controller;
 
 
-import hello.model.Apartment2;
+import hello.model.Apartment;
 import hello.service.ApartmentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +23,9 @@ import java.util.List;
 @RequestMapping("/api/v1/apartments")
 @RestController
 public class ApartmentController {
-    private ApartmentService apartmentService;
-    static Logger log = Logger.getLogger(hello.controller.ApartmentController.class);
+    private static Logger log = Logger.getLogger(hello.controller.ApartmentController.class);
 
+    private ApartmentService apartmentService;
 
     @Autowired
     public ApartmentController(ApartmentService apartmentService) {
@@ -34,23 +34,23 @@ public class ApartmentController {
 
 
     @PostMapping
-    public ResponseEntity<Apartment2> addApartment(@RequestBody Apartment2 apartment) {
-        Apartment2 apartment1 = apartmentService.addApartment(apartment);
+    public ResponseEntity<Apartment> addApartment(@RequestBody Apartment apartment) {
+        Apartment apartment1 = apartmentService.addApartment(apartment);
         log.info("apartment added");
         return ResponseEntity.status(HttpStatus.OK).body(apartment);
 
     }
 
     @GetMapping
-    public ResponseEntity<List<Apartment2>> getAllApartments() {
-        List<Apartment2> apartments = apartmentService.getAllApartments();
+    public ResponseEntity<List<Apartment>> getAllApartments() {
+        List<Apartment> apartments = apartmentService.getAllApartments();
         log.info("apartments found");
         return ResponseEntity.status(HttpStatus.OK).body(apartments);
     }
 
     @GetMapping(path = "/{id}") //id will appear in the path....i.e //someId
-    public ResponseEntity<Apartment2> selectApartmentById(@PathVariable("id") String id) {
-        Apartment2 apartment = apartmentService.selectApartmentById(id);
+    public ResponseEntity<Apartment> selectApartmentById(@PathVariable("id") String id) {
+        Apartment apartment = apartmentService.selectApartmentById(id);
         log.info("apartment found");
         return ResponseEntity.status(HttpStatus.OK).body(apartment);
     }
@@ -65,9 +65,9 @@ public class ApartmentController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity updateApartmentById(@PathVariable("id") String id, @Valid @RequestBody Apartment2 apartmentToUpdate) {
+    public ResponseEntity updateApartmentById(@PathVariable("id") String id, @Valid @RequestBody Apartment apartmentToUpdate) {
         log.info("apartment updated");
-        Apartment2 apartment1 = apartmentService.updateApartmentById(id, apartmentToUpdate);
+        Apartment apartment1 = apartmentService.updateApartmentById(id, apartmentToUpdate);
 
         return ResponseEntity.status(HttpStatus.OK).body("apartment at id " + id + " has been replaced with " + apartmentToUpdate.getTitle());
 
