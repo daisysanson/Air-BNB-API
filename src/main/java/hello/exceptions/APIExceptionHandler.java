@@ -9,8 +9,10 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -137,6 +139,18 @@ public class APIExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiException);
     }
+
+//
+//    @ExceptionHandler(Throwable.class)
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public String exception(final Throwable throwable, final Model model) {
+//        log.error("Exception during execution of SpringSecurity application", throwable);
+//        String errorMessage = (throwable != null ? throwable.getMessage() : "Unknown error");
+//        model.addAttribute("errorMessage", errorMessage);
+//        return "error";
+//    }
+
+
 
 
 

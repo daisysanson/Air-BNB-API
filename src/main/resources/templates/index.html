@@ -20,6 +20,11 @@
 <nav th:replace="Fragments/nav :: nav"></nav>
 <header th:replace="Fragments/header :: header"></header>
 
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
 
 <section id="header">
     <div id="header-inner">
@@ -36,7 +41,6 @@
             </div>
         </div>
         <div class="row">
-            <!-- bootstrap box has to add up to 12 -->
             <div class="col-md-4">
                 <div class="event-box">
                     <a href="customer" target="_blank">

@@ -9,10 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -25,6 +22,20 @@ public class UIController {
     }
 
     static Logger log = Logger.getLogger(CustomerController.class);
+
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    // Login form with error
+    @RequestMapping("/loginError")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "loginError";
+    }
+
 
     @GetMapping("/index")
     public String getCustomerId(Model model) {
