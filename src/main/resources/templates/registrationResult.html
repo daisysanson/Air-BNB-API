@@ -1,8 +1,16 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/index.css">
+
+    <title>Main page</title>
 
 </head>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
 <body>
 <div class="container">
     <h2>User added successfully!: </h2>
@@ -12,8 +20,8 @@
             <th>pass</th>
         </tr>
         <tr>
-            <td th:text="${email}"></td>
-            <td th:text="${password}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.password}"></td>
         </tr>
     </table>
 </div>

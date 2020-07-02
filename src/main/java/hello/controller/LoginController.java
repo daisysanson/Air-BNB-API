@@ -27,13 +27,26 @@ public class LoginController {
     }
 
 
-    // Login form with error
-    @RequestMapping("/loginError")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "loginError";
+    @RequestMapping(value = "/registrationForm", method = RequestMethod.GET)
+    public String registration(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "registrationForm";
+
     }
 
+
+
+    @RequestMapping(value = "/registrationResult", method = RequestMethod.GET)
+    public String createNewUser(@Valid User user, Model model) {
+        User userExists = userService.findUserByEmail(user.getEmail());
+
+            userService.saveNewUser(user);
+            model.addAttribute("successMessage", "User has been registered successfully");
+            model.addAttribute("user", new User());
+
+        return "registrationResult";
+    }
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String dashboard(Model model) {
@@ -47,6 +60,10 @@ public class LoginController {
     }
 
 
-
-
+    // Login form with error
+    @RequestMapping("/loginError")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "loginError";
+    }
 }

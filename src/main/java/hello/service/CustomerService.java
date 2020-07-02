@@ -33,7 +33,7 @@ public class CustomerService {
     public CustomerService() {
     }
 
-    static Logger log = Logger.getLogger(CustomerController.class);
+    static Logger log = Logger.getLogger(CustomerService.class);
 
 
 

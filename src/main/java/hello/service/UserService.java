@@ -6,10 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import hello.controller.CustomerController;
 import hello.dao.RoleRepository;
 import hello.dao.UserRepository;
+import hello.exceptions.BadRequestException;
 import hello.model.Role;
 import hello.model.User;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,6 +32,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    static Logger log = Logger.getLogger(UserService.class);
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -38,6 +42,11 @@ public class UserService implements UserDetailsService {
     public void saveNewUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
+        if (user.getEmail() != null){
+            log.info("Username already exists");
+            throw new BadRequestException("There's already a user with this name");
+
+        }
         Role userRole = roleRepository.findByRole("USER"); //new user's role is set as admin
         user.setRoles(new HashSet(Arrays.asList(userRole)));
         userRepository.save(user);

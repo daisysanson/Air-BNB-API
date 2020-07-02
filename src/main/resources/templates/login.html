@@ -1,29 +1,58 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default}">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap/js/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/index.css">
+
     <title>Login</title>
-</head>
-<body class="text-center">
-<div layout:fragment="content">
-    <form class="form-signin" th:action="@{/login}" method="post">
-        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <div th:if="${param.error}">
-            Invalid email and password.
+    <head>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+<!--<div layout:fragment="content">-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-signin" th:action="@{/login}" method="post">
+                <h1>Please sign in</h1>
+                <div th:if="${param.error}">
+                    Invalid email and password.
+                </div>
+                <div th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required=""/>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="inputPassword" name="password" id="inputPassword" class="form-control"  placeholder="Password" required=""/>
+                <button class="button" type="submit">Sign in</button>
+            </form>
         </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form>
-    <form class="form-signin" th:action="@{/registrationForm}" method="get">
-        <button class="btn btn-md btn-success btn-block" type="Submit">Signup Here</button>
-    </form>
+    </div>
 </div>
+</form>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form class="form-signin" th:action="@{/registrationForm}" method="get">
+                <button id="signup" class="button" type="Submit">Signup Here</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 </body>
+
+</html>
 </html>

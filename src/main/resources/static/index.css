@@ -72,7 +72,14 @@ background-color: #ff0066;
    border: 2px transparent rgba(217, 83, 78, 0.75);
    border-radius: 80px;
    background: solid;
+   display: inline-block;
+   vertical-align: top;
    }
+
+.button #signup{
+position:relative;
+left: 10;
+}
 
 
    .button:hover{

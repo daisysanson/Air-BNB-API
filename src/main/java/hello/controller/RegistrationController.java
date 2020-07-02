@@ -1,6 +1,7 @@
 package hello.controller;
 
 
+import hello.exceptions.BadRequestException;
 import hello.model.User;
 import hello.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class RegistrationController {
     private UserService userService;
 
 
-    @GetMapping("/registrationForm")
+    @RequestMapping("/registrationForm")
     public String registration(Model model) {
         User user = new User();
         model.addAttribute("user", user);
@@ -32,13 +33,18 @@ public class RegistrationController {
 
 
 
-    @PostMapping("/registrationResult")
+    @RequestMapping("/registrationResult")
     public String createNewUser(@Valid User user, Model model) {
-        User userExists = userService.findUserByEmail(user.getEmail());
+        try {
 
-        userService.saveNewUser(user);
-        model.addAttribute("successMessage", "User has been registered successfully");
-        model.addAttribute("user", new User());
+            User userExists = userService.findUserByEmail(user.getEmail());
+
+            userService.saveNewUser(user);
+            model.addAttribute("successMessage", "User has been registered successfully");
+            model.addAttribute("user", new User());
+        } catch (BadRequestException e){
+            return "badRequest";
+        }
 
         return "registrationResult";
     }
