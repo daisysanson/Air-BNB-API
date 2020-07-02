@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
 
 
@@ -20,7 +20,7 @@
 <nav th:replace="Fragments/nav :: nav"></nav>
 <header th:replace="Fragments/header :: header"></header>
 
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
@@ -70,6 +70,7 @@
                         </div>
                     </a>
                 </div>
+            </div>
             </div>
             <div class="col-md-4">
                 <div class="event-box">

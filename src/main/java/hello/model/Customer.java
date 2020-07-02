@@ -22,6 +22,10 @@ public class Customer {
     @NotNull
     private String name;
 
+    @Field(value = "userName")
+    @NotNull
+    private String userName;
+
     @Field(value = "date")
     private Date date = new Date();
 
@@ -35,9 +39,11 @@ public class Customer {
 
     public Customer(@JsonProperty("id") String id,
                     @JsonProperty("name") String name,
+                    @JsonProperty("user_name") String userName,
                     @JsonProperty("booking_confirmed") Boolean bookingConfirmed) {
         this.id = id;
         this.name = name;
+        this.userName = userName;
         this.bookingConfirmed = bookingConfirmed;
     }
 
@@ -48,6 +54,14 @@ public class Customer {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getName() {

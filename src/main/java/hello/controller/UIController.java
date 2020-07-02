@@ -24,34 +24,21 @@ public class UIController {
     static Logger log = Logger.getLogger(CustomerController.class);
 
 
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    // Login form with error
-    @RequestMapping("/loginError")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "loginError";
-    }
-
-
     @GetMapping("/index")
     public String getCustomerId(Model model) {
         return "index";
     }
 
     @GetMapping("/customer")
-    public String showCustomerLandingPage(Model model){
-    model.addAttribute("activeLink", "Customer");
+    public String showCustomerLandingPage(Model model) {
+        model.addAttribute("activeLink", "Customer");
         return "customer";
     }
 
     @GetMapping("/findACustomerForm")
     public String showGetCustomerForm(Model model) {
         Customer customer = new Customer();
-        model.addAttribute("customer",customer);
+        model.addAttribute("customer", customer);
         model.addAttribute("activeLink", "Customer");
         return "findACustomerForm";
     }
@@ -94,14 +81,15 @@ public class UIController {
 
     @PostMapping("/addResult")
     public String showAddCustomer(@ModelAttribute("customer") Customer customer,
-                              @RequestParam("name") String name,
-                              @RequestParam("bookingConfirmed") Boolean bookingConfirmed, Model model) {
+                                  @RequestParam("name") String name,
+                                  @RequestParam("userName") String userName,
+                                  @RequestParam("bookingConfirmed") Boolean bookingConfirmed, Model model) {
         try {
             model.addAttribute("customer", customerService.addCustomer(customer));
             model.addAttribute("activeLink", "Customer");
             return "addResult";
         } catch (MultiErrorException e) {
-            log.info("name field is empty");
+            log.info("name/username field is empty");
             return "badRequest";
         }
     }
@@ -117,7 +105,7 @@ public class UIController {
 
     @GetMapping("/customerDeleted")
     public String showDeleteCustomer(@ModelAttribute("customer") Customer customer,
-                                 @RequestParam("id") String id, Model model) {
+                                     @RequestParam("id") String id, Model model) {
         try {
             model.addAttribute("customer", customerService.deleteCustomerById(id));
             model.addAttribute("activeLink", "Customer");
@@ -139,7 +127,7 @@ public class UIController {
 
     @GetMapping("/updateCustomer")
     public String showUpdateCustomer(@ModelAttribute("customer") Customer customerToupdate,
-                                 @RequestParam("id") String id, Model model) {
+                                     @RequestParam("id") String id, Model model) {
 
         try {
             model.addAttribute("customer", customerService.updateCustomerById(id, customerToupdate));

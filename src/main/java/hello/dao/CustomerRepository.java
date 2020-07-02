@@ -14,4 +14,9 @@ public interface CustomerRepository extends MongoRepository<Customer, String> {
 
     @Query("{ 'name' : ?0 }")
     List<Customer> findByName(String name);
+
+    @Query("{ 'userName' : ?0 }")
+    List<Customer> findByUserName(String userName);
+
+
 }

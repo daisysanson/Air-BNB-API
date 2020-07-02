@@ -29,6 +29,10 @@
                     <small id="advice" class="form-text text-muted">Enter the new customer's name</small>
                 </div>
                 <div class="form-group">
+                    <label> User Name </label>
+                    <input type="text" class="form-control" th:field="*{userName}"/>
+                </div>
+                <div class="form-group">
                     <label class="dropdown"> Booking: </label>
                     <select th:field="*{bookingConfirmed}">
                         <option th:value="false" th:text="False"></option>

@@ -1,11 +1,13 @@
 package hello.service;
 
+import hello.controller.CustomerController;
 import hello.dao.CustomerRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.MultiErrorException;
 import hello.exceptions.NotFoundException;
 import hello.model.Customer;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.ResponseEntity.status;
 
@@ -29,6 +32,11 @@ public class CustomerService {
 
     public CustomerService() {
     }
+
+    static Logger log = Logger.getLogger(CustomerController.class);
+
+
+
 
     public Customer selectCustomerById(String id) {
         Optional<Customer> searchCustomer = repository.findById(id);
@@ -48,6 +56,10 @@ public class CustomerService {
     }
 
 
+    public List<Customer> findByUserName(String userName) {
+        return repository.findByName(userName);
+    }
+
     public List<Customer> getAllCustomers() {
 
         return repository.findAll();
@@ -59,8 +71,16 @@ public class CustomerService {
         if (StringUtils.isBlank(customer.getName())) {
             errors.add("Customer name needs to be entered");
         }
+        if (StringUtils.isBlank(customer.getUserName())) {
+            throw new BadRequestException("Please enter an id");
 
-        if (customer.getBookingConfirmed() == null) {
+        }
+        List<Customer> c = repository.findByName(customer.getUserName());
+        if (c.size()> 1) {
+            log.info("Username already exists!");
+            throw new BadRequestException("userName");
+
+        } if (customer.getBookingConfirmed() == null) {
             errors.add("Booking request cannot be empty");
 
         }
@@ -89,6 +109,16 @@ public class CustomerService {
         if (StringUtils.isBlank(customerToUpdate.getName())) {
             throw new BadRequestException("Please enter a name");
         }
+        if (StringUtils.isBlank(customerToUpdate.getUserName())) {
+            throw new BadRequestException("Please enter a name");
+
+        }
+        List<Customer> c = repository.findByName(customerToUpdate.getUserName());
+        if (c.size()> 1) {
+            log.info("Username already exists!");
+            throw new BadRequestException("userName");
+        }
+
         if (StringUtils.isBlank(id)) {
             throw new BadRequestException("Please enter an id");
         }
