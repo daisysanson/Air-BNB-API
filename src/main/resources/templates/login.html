@@ -17,42 +17,64 @@
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 <!--<div layout:fragment="content">-->
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-signin" th:action="@{/login}" method="post">
-                <h1>Please sign in</h1>
-                <div th:if="${param.error}">
-                    Invalid email and password.
-                </div>
-                <div th:if="${param.logout}">
-                    You have been logged out.
-                </div>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required=""/>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="inputPassword" name="password" id="inputPassword" class="form-control"  placeholder="Password" required=""/>
-                <button class="button" type="submit">Sign in</button>
-            </form>
-        </div>
-    </div>
-</div>
-</form>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <form class="form-signin" th:action="@{/registrationForm}" method="get">
-                <button id="signup" class="button" type="Submit">Signup Here</button>
-            </form>
-        </div>
-    </div>
-</div>
-</div>
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <div class="col">-->
 
+<section id="cover">
+    <div id="cover-caption">
+        <div id="container" class="container">
+            <div class="row">
+                <div class="col-sm-10 offset-sm-1 text-center">
+                    <h1 class="display-3">Sign in</h1>
+                    <div class="info-form">
+                        <form class="form-inline justify-content-center" th:action="@{/login}" method="post">
+                            <div class="col-md-6 text-center">
+                                <div class="form-group">
+                                    <label for="inputEmail" class="sr-only">Email address</label>
+                                    <input type="email" name="email" id="inputEmail" class="form-control"
+                                           placeholder="Email"
+                                           required=""/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword" class="sr-only">Password</label>
+                                    <input type="inputPassword" name="password" id="inputPassword"
+                                           class="form-control"
+                                           placeholder="Password" required=""/>
+                                </div>
+                                <button class="btn btn-lg btn-block display-3" type="submit">Sign in</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <form class="form-inline justify-content-center">
+                    <div class="col-md-6 text-center">
+                        <p id="link">Forgot your password? <a href="#">Click Here</a></p>
+                        <p> New Customer? <a href="registrationForm">Create New Account</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:if="${param.error}">
+    Invalid email and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 </body>
 
-</html>
 </html>
