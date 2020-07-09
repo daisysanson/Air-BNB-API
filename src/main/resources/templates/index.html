@@ -20,11 +20,6 @@
 <nav th:replace="Fragments/nav :: nav"></nav>
 <header th:replace="Fragments/header :: header"></header>
 
-<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
-
 
 <section id="header">
     <div id="header-inner">
@@ -36,9 +31,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 id="content-header" class="text-center">Home Page!</h1>
-                <hr>
-            </div>
+                <div sec:authorize="isAuthenticated()">
+                    <h1  id="content-header"  class="text-center" th:inline="text">Welcome, [[${#httpServletRequest.remoteUser}]]!</h1>
+                </div>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -71,23 +66,23 @@
                     </a>
                 </div>
             </div>
-            </div>
-            <div class="col-md-4">
-                <div class="event-box">
-                    <a href="apartment" target="_blank">
-                        <div class="event-inner" id="apartments">
-                            <div class="event-info">
-                                <hr>
-                                <h1>
-                                    <strong>Apartments</strong>
-                                </h1>
-                                <hr>
-                            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="event-box">
+                <a href="apartment" target="_blank">
+                    <div class="event-inner" id="apartments">
+                        <div class="event-info">
+                            <hr>
+                            <h1>
+                                <strong>Apartments</strong>
+                            </h1>
+                            <hr>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             </div>
         </div>
+    </div>
     </div>
 </section>
 

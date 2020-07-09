@@ -64,6 +64,12 @@ color:red;
 weight:bold;
 font-size: 20px; }
 
+.greeting{
+color: #ff0066;;
+weight:bold;
+font-size: 20px;
+position:relative;
+}
 
    .form-group,{
    font-family: 'Scope One', serif;
