@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/index.css">
+<link rel="stylesheet" href="/nav.css">
+<head>
+    <title>Error</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+</head>
+
+<nav th:replace="Fragments/nav :: nav"></nav>
+<h1 th:text="${status}|"></h1>
+<h2 th:text="${message}"></h2>
+
+
+<button class="button" onclick="goBack()">Go Back</button>
+
+<script src="js/error.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+</body>
+
+<a href="/" th:href="@{/}">Back to Home Page</a>
+</html>

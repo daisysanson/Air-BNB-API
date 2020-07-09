@@ -50,12 +50,20 @@ font-weight: bold;
 
 }
 
+
+
 td, th{
 font-family: 'Scope One', serif;
 }
 th{
 background-color: #ff0066;
 }
+
+.invalid{
+color:red;
+weight:bold;
+font-size: 20px; }
+
 
    .form-group,{
    font-family: 'Scope One', serif;
@@ -70,6 +78,10 @@ input {
     margin-top: 10px;
     width: 100%;
 }
+
+
+
+
 .form-inline .form-control{
 width:100%; }
 

@@ -67,9 +67,8 @@ public class CustomerService {
 
 
     public Customer addCustomer(Customer customer) {
-        List<String> errors = new ArrayList<>();
         if (StringUtils.isBlank(customer.getName())) {
-            errors.add("Customer name needs to be entered");
+            throw new BadRequestException("Please enter an id");
         }
         if (StringUtils.isBlank(customer.getUserName())) {
             throw new BadRequestException("Please enter an id");
@@ -79,13 +78,6 @@ public class CustomerService {
         if (c.size()> 1) {
             log.info("Username already exists!");
             throw new BadRequestException("userName");
-
-        } if (customer.getBookingConfirmed() == null) {
-            errors.add("Booking request cannot be empty");
-
-        }
-        if (!errors.isEmpty()) {
-            throw new MultiErrorException("Your customer data is incorrect", errors);
         } else {
             repository.insert(customer);
             return customer;

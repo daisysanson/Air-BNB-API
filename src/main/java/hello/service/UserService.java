@@ -10,9 +10,12 @@ import hello.controller.CustomerController;
 import hello.dao.RoleRepository;
 import hello.dao.UserRepository;
 import hello.exceptions.BadRequestException;
+import hello.exceptions.NotFoundException;
+import hello.model.Customer;
 import hello.model.Role;
 import hello.model.User;
 import org.apache.log4j.Logger;
+import org.apache.tomcat.jni.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,20 +42,24 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public void saveNewUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setEnabled(true);
-        if (user.getEmail() != null){
+    public User saveNewUser(User user) {
+
+        List<User> users = userRepository.findByEmailList(user.getEmail());
+        if (users.size() >= 1) {
             log.info("Username already exists");
-            throw new BadRequestException("There's already a user with this name");
+            throw new BadRequestException("username already exists");
 
+        } else {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setEnabled(true);
+            Role userRole = roleRepository.findByRole("USER"); //new user's role is set as admin
+            user.setRoles(new HashSet(Arrays.asList(userRole)));
+            userRepository.save(user);
+
+            return user;
         }
-        Role userRole = roleRepository.findByRole("USER"); //new user's role is set as admin
-        user.setRoles(new HashSet(Arrays.asList(userRole)));
-        userRepository.save(user);
+
     }
-
-
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
