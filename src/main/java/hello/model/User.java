@@ -6,12 +6,16 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.awt.print.Book;
 import java.util.Set;
 
 @Document(collection = "user")
 public class User {
     @Id
     private String id;
+
+//    @DBRef
+//    private Customer customer;
 
     @DBRef
     private Set<Role> roles;
@@ -22,6 +26,12 @@ public class User {
     private String password;
     private boolean enabled;
 
+    public User(){}
+
+//    public User(Customer customer) {
+//        this.customer = customer;
+//    }
+
     public String getUserName() {
         return userName;
     }
@@ -29,6 +39,14 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
 
 
     public String getId() {
