@@ -1,17 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/index.css">
 
-    <title>Main page</title>
+<head th:replace="Fragments/head :: head"/>
 
-</head>
 <body>
+
 <nav th:replace="Fragments/nav :: nav"></nav>
-<body>
+
 <div class="container">
     <h2 th:text="${successMessage}"></h2>
     <table class="table table-striped">
@@ -25,5 +20,6 @@
         </tr>
     </table>
 </div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

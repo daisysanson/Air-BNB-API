@@ -44,6 +44,7 @@ public class BookingUIController {
     @GetMapping("/booking")
     public String showBookingLandingPage(Model model) {
         model.addAttribute("activeLink", "Booking");
+        model.addAttribute("title", "Bookings!");
         return "booking";
     }
 
@@ -54,6 +55,7 @@ public class BookingUIController {
         model.addAttribute("apartments", apartmentService.getAllApartments());
         model.addAttribute("customers", customerService.getAllCustomers());
         model.addAttribute("activeLink", "Booking");
+        model.addAttribute("title", "Create a New Booking");
         model.addAttribute("booking", booking);
 
         return "newBookingCreate";
@@ -75,6 +77,7 @@ public class BookingUIController {
             model.addAttribute("booking", b);
             model.addAttribute("name", c);
             model.addAttribute("activeLink", "Booking");
+            model.addAttribute("title", "Success!");
 
             return "newBooking";
         } catch (NotFoundException e) {
@@ -89,6 +92,7 @@ public class BookingUIController {
         Booking booking = new Booking();
         model.addAttribute("booking", booking);
         model.addAttribute("activeLink", "Booking");
+        model.addAttribute("title", "Find a Booking");
         return "getBooking";
     }
 
@@ -98,6 +102,7 @@ public class BookingUIController {
                                           Model model) {
         try {
             model.addAttribute("booking", bookingService.selectBookingById(id));
+            model.addAttribute("title", "Result");
             model.addAttribute("activeLink", "Booking");
         } catch (BadRequestException e) {
             return "badRequest";
@@ -115,6 +120,7 @@ public class BookingUIController {
     public String showDeleteBookingForm(Model model) {
         Booking booking = new Booking();
         model.addAttribute("booking", booking);
+        model.addAttribute("title", "Delete a Booking");
         model.addAttribute("activeLink", "Booking");
         return "deleteBookingForm";
     }
@@ -125,6 +131,7 @@ public class BookingUIController {
         try {
             model.addAttribute("booking", bookingService.deleteBookingById(id));
             model.addAttribute("activeLink", "Booking");
+            model.addAttribute("title", "Success!");
             return "deleteBookingResult";
         } catch (NotFoundException e) {
             return "notFound";

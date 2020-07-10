@@ -1,29 +1,19 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="Fragments/head :: head"/>
 
-    <link rel="stylesheet" href="bootstrap/js/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
+<nav th:replace="Fragments/nav :: nav"></nav>
 
-
-    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/header.css">
-    <link rel="stylesheet" href="/index.css">
-
-    <title>Main page</title>
-<head>
-    <title>Dashboard</title>
-</head>
 <body>
-    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-    <h2>This will be your account page with everything in it like bookings and shite</h2>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<h2>This will be your account page with everything in it like bookings and shite</h2>
 </div>
-    <div>
-        <a href="/index">Go to main page</a></li>
-    </div>
+<div>
+    <a href="/index">Go to main page</a></li>
+</div>
 
 </section>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

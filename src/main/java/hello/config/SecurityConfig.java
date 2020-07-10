@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/registrationForm/**").permitAll()
                 .antMatchers("/registrationResult/**").permitAll()
-                .antMatchers("/dashboard/**").hasAuthority("ADMIN").anyRequest()
+                .antMatchers("/dashboard/**").permitAll().anyRequest()
                 .authenticated().and().csrf().disable().formLogin().successHandler(customAuthHandler)
                 .loginPage("/login").failureUrl("/login?error=true")
                 .usernameParameter("email")

@@ -26,6 +26,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
+        model.addAttribute("title", "Login");
         return "login";
     }
 
@@ -34,6 +35,7 @@ public class LoginController {
     public String registration(Model model) {
         User user = new User();
         model.addAttribute("user", user);
+        model.addAttribute("title", "Register an Account");
 
 
         return "registrationForm";
@@ -50,6 +52,7 @@ public class LoginController {
         }
         userService.saveNewUser(user);
         model.addAttribute("successMessage", "User has been registered successfully!");
+        model.addAttribute("title", "Registration Success!");
         model.addAttribute("user", new User());
 
         return "registrationResult";
@@ -62,6 +65,7 @@ public class LoginController {
     @GetMapping("/error")
     public String redirectToError(Model model, Error error) {
         model.addAttribute("error", error);
+        model.addAttribute("title", "Error");
 
         return "error";
 
@@ -74,6 +78,7 @@ public class LoginController {
         User user = userService.findUserByEmail(auth.getName());
         model.addAttribute("currentUser", user);
         model.addAttribute("userName", "Welcome " + user.getUserName());
+        model.addAttribute("title", "Your Account!");
         model.addAttribute("adminMessage", "Content Available Only for Users with Admin Role");
 
         return "dashboard";

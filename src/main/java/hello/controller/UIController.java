@@ -30,12 +30,14 @@ public class UIController {
     public String getHomePage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("loggedinuser", authentication.getName());
+        model.addAttribute("title", "Home");
         return "index";
     }
 
     @GetMapping("/customer")
     public String showCustomerLandingPage(Model model) {
         model.addAttribute("activeLink", "Customer");
+        model.addAttribute("title", "Customers");
         return "customer";
     }
 
@@ -44,6 +46,7 @@ public class UIController {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         model.addAttribute("activeLink", "Customer");
+        model.addAttribute("title", "Find a Customer");
         return "findACustomerForm";
     }
 
@@ -56,6 +59,7 @@ public class UIController {
         try {
             model.addAttribute("customer", customerService.selectCustomerById(id));
             model.addAttribute("activeLink", "Customer");
+            model.addAttribute("title", "Result");
         } catch (BadRequestException e) {
             log.info("name field is empty");
             return "badRequest";
@@ -71,6 +75,7 @@ public class UIController {
     public String showAllCustomers(Model model) {
         model.addAttribute("customer", customerService.getAllCustomers());
         model.addAttribute("activeLink", "Customer");
+        model.addAttribute("title", "All Customers");
         return "getAllCustomers";
     }
 
@@ -79,6 +84,7 @@ public class UIController {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         model.addAttribute("activeLink", "Customer");
+        model.addAttribute("title", "Add a new Customer");
         return "addCustomerForm";
     }
 
@@ -91,6 +97,7 @@ public class UIController {
         try {
             model.addAttribute("customer", customerService.addCustomer(customer));
             model.addAttribute("activeLink", "Customer");
+            model.addAttribute("title", "Success!");
             return "addResult";
         } catch (MultiErrorException e) {
             log.info("name/username field is empty");
@@ -104,6 +111,7 @@ public class UIController {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         model.addAttribute("activeLink", "Customer");
+        model.addAttribute("title", "Delete a Customer");
         return "deleteCustomerForm";
     }
 
@@ -113,6 +121,7 @@ public class UIController {
         try {
             model.addAttribute("customer", customerService.deleteCustomerById(id));
             model.addAttribute("activeLink", "Customer");
+            model.addAttribute("title", "Customer Deleted!");
             return "customerDeleted";
         } catch (NotFoundException e) {
             log.info("customer with id" + id + "not found");
@@ -126,6 +135,7 @@ public class UIController {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         model.addAttribute("activeLink", "Customer");
+        model.addAttribute("title", "Update a Customer's Details");
         return "updateCustomerForm";
     }
 
@@ -136,6 +146,7 @@ public class UIController {
         try {
             model.addAttribute("customer", customerService.updateCustomerById(id, customerToupdate));
             model.addAttribute("activeLink", "Customer");
+            model.addAttribute("title", "Success!");
             return "updateCustomer";
         } catch (BadRequestException e) {
             log.info("customer with id " + id + "not found");

@@ -1,25 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="bootstrap/js/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
 
+<head th:replace="Fragments/head :: head"/>
 
-    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/header.css">
-    <link rel="stylesheet" href="/index.css">
-
-    <title>Login</title>
-    <head>
 <body>
-<nav th:replace="Fragments/nav :: nav"></nav>
 
-<!--<div layout:fragment="content">-->
-<!--<div class="container">-->
-<!--    <div class="row">-->
-<!--        <div class="col">-->
+<nav th:replace="Fragments/nav :: nav"></nav>
 
 <section id="cover">
     <div id="cover-caption">
@@ -70,9 +56,9 @@
     </div>
 </section>
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>

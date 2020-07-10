@@ -1,15 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/index.css">
 
-    <title>Main page</title>
+<head th:replace="Fragments/head :: head"/>
 
-</head>
 <body>
+
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 <div class="container">
@@ -30,10 +25,7 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>
