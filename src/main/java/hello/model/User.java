@@ -1,36 +1,43 @@
 package hello.model;
 
+import com.querydsl.core.annotations.QueryEntity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.awt.print.Book;
 import java.util.Set;
 
-@Document(collection = "user")
+@QueryEntity
+@Document(collection = "users")
 public class User {
     @Id
     private String id;
 
-//    @DBRef
-//    private Customer customer;
+    @DBRef
+    private Customer customer;
 
     @DBRef
     private Set<Role> roles;
 
     @Indexed(unique = true, direction = IndexDirection.DESCENDING)
+    @Field(value = "email")
     private String email;
+    @Field(value = "userName")
     private String userName;
+    @Field(value = "Password]")
     private String password;
+    @Field(value = "enabled")
     private boolean enabled;
 
     public User(){}
 
-//    public User(Customer customer) {
-//        this.customer = customer;
-//    }
+    public User(Customer customer) {
+        this.customer = customer;
+    }
 
     public String getUserName() {
         return userName;
@@ -40,13 +47,13 @@ public class User {
         this.userName = userName;
     }
 
-//    public Customer getCustomer() {
-//        return customer;
-//    }
+    public Customer getCustomer() {
+        return customer;
+    }
 
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
 
     public String getId() {
