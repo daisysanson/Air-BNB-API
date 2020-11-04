@@ -18,9 +18,6 @@ public class User {
     private String id;
 
     @DBRef
-    private Customer customer;
-
-    @DBRef
     private Set<Role> roles;
 
     @Indexed(unique = true, direction = IndexDirection.DESCENDING)
@@ -28,16 +25,17 @@ public class User {
     private String email;
     @Field(value = "userName")
     private String userName;
+    @Field(value = "address")
+    private String address;
     @Field(value = "Password]")
     private String password;
+    @Field(value = "firstName")
+    private String firstName;
+    @Field(value = "lastName" )
+    private String lastName;
     @Field(value = "enabled")
     private boolean enabled;
 
-    public User(){}
-
-    public User(Customer customer) {
-        this.customer = customer;
-    }
 
     public String getUserName() {
         return userName;
@@ -46,15 +44,6 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
 
     public String getId() {
         return id;
@@ -88,6 +77,30 @@ public class User {
         this.enabled = enabled;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public Set<Role> getRoles () {
         return roles;
     }
@@ -95,4 +108,7 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+
+
 }

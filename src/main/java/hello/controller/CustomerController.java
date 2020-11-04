@@ -36,7 +36,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
-        Customer customer1 = customerService.addCustomer(customer);
+
         log.info("customer added");
         return ResponseEntity.status(HttpStatus.OK).body(customer);
 

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import hello.controller.CustomerController;
+import hello.dao.CustomerRepository;
 import hello.dao.RoleRepository;
 import hello.dao.UserRepository;
 import hello.exceptions.BadRequestException;
@@ -35,6 +36,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
+    private CustomerService customerService;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     static Logger log = Logger.getLogger(UserService.class);
@@ -45,11 +48,10 @@ public class UserService implements UserDetailsService {
     }
 
     public User saveNewUser(User user) {
-
         List<User> users = userRepository.findByEmailList(user.getEmail());
         if (users.size() >= 1) {
-            log.info("Username already exists");
-            throw new BadRequestException("username already exists");
+            log.info("email already exists");
+            throw new BadRequestException("email already exists");
 
         } else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

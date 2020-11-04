@@ -10,6 +10,8 @@ import hello.service.BookingService;
 import hello.service.CustomerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,26 +66,28 @@ public class BookingUIController {
 
     @PostMapping(value = "/newBooking")
     public String showBooking(@ModelAttribute("booking") BookingRequest booking, Model model) {
-        try {
-            List<Customer> c = customerService.findByName(booking.name);
-            if (c.isEmpty()) {
-                log.info("Customer name does not exist");
-                return "badRequest";
-            }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("loggedinuser", authentication.getName());
+//        try {
+//            List<Customer> c = customerService.findByName(booking.name);
+//            if (c.isEmpty()) {
+//                log.info("Customer name does not exist");
+//                return "badRequest";
+//            }
+//
+        Booking newBooking = new Booking();
 
-            Booking newBooking = new Booking(c.get(0), booking.apartment);
+        Booking b = bookingService.addBooking(newBooking);
+        model.addAttribute("booking", b);
+        model.addAttribute("activeLink", "Booking");
+        model.addAttribute("title", "Success!");
 
-            Booking b = bookingService.addBooking(newBooking);
-            model.addAttribute("booking", b);
-            model.addAttribute("name", c);
-            model.addAttribute("activeLink", "Booking");
-            model.addAttribute("title", "Success!");
-
-            return "newBooking";
-        } catch (NotFoundException e) {
-            log.info("Customer name not found");
-        }
-        return "notFound";
+        return "newBooking";
+//        } catch (NotFoundException e) {
+//            log.info("Customer name not found");
+//        }
+//        return "notFound";
+//    }
     }
 
 

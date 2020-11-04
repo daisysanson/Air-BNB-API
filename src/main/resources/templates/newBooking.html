@@ -24,9 +24,12 @@
             <th>Customer Booking Confirmation</th>
         </tr>
         <tr>
-            <td th:text="${booking.getCustomer().getId()}"></td>
-            <td th:text="${booking.getCustomer().getName()}"></td>
-            <td th:text="${booking.getCustomer().getBookingConfirmed()}"></td>
+            <td th:text="${booking.getUser().getId()}"></td>
+            <td th:text="${booking.getUser().getFirstName()}"></td>
+            <td th:text="${booking.getUser().getLastName()}"></td>
+            <td th:text="${booking.getUser().getUserName()}"></td>
+            <td th:text="${booking.getUser().getEmail()}"></td>
+            <td th:text="${booking.getUser().getAddress()}"></td>
         </tr>
         <tr>
             <th>Apartment ID</th>

@@ -3,6 +3,7 @@ package hello.controller;
 import hello.dao.BookingRepository;
 import hello.dao.UserRepository;
 import hello.model.Booking;
+import hello.model.Customer;
 import hello.model.User;
 import hello.service.BookingService;
 import hello.service.UserService;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RequestMapping(value = "/api/v1/users")
@@ -34,6 +37,15 @@ public class UserController {
     public ResponseEntity<Object> getUserById(@PathVariable("id") String id) {
         return ResponseEntity.ok(userRepository.findById(id));
     }
+
+    @GetMapping(path = "/{email}")
+    public ResponseEntity<Object> getUserByEmail(@PathVariable("email") String email) {
+        User users = userService.findUserByEmail(email);
+        return ResponseEntity.status(HttpStatus.OK).body(users);
+
+    }
+
+
 
 
     @PostMapping(value = "/")

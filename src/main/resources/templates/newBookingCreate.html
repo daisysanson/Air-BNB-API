@@ -12,8 +12,8 @@
             <h2>Customer details: </h2>
             <form action="#" th:action="@{/newBooking}" th:object="${booking}" method="POST">
                 <div class="form-group">
-                    <label> Customer Name </label>
-                    <input type="text" class="form-control" th:field="*{name}"/>
+                    <label> Your Name </label>
+                    <div th:text="${#authentication.name}">
                 </div>
                 <div class="form-group">
                     <select th:field="*{apartment.id}">

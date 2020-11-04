@@ -53,7 +53,7 @@ public class LoginController {
         userService.saveNewUser(user);
         model.addAttribute("successMessage", "User has been registered successfully!");
         model.addAttribute("title", "Registration Success!");
-        model.addAttribute("user", new User());
+        model.addAttribute("user", user);
 
         return "registrationResult";
     }
