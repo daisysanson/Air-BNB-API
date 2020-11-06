@@ -6,19 +6,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import hello.controller.CustomerController;
-import hello.dao.CustomerRepository;
 import hello.dao.RoleRepository;
 import hello.dao.UserRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
-import hello.model.Booking;
-import hello.model.Customer;
 import hello.model.Role;
 import hello.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.tomcat.jni.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -75,20 +70,19 @@ public class UserService implements UserDetailsService {
     }
 
     public User updateUser(String id, User userUpdated) {
-//        if (StringUtils.isBlank(id)) {
-//            throw new BadRequestException("Please enter an id");
-//        }
-//
-//        if (StringUtils.isBlank(userUpdated.getId())) {
-//            throw new BadRequestException("Please enter an id ");
-//        }
-//
-//        if (!userRepository.existsById(id)) {
-//            throw new NotFoundException("id " + id + " not found");
-//        }
+        if (StringUtils.isBlank(id)) {
+            throw new BadRequestException("Please enter an id");
+        }
+
+        if (StringUtils.isBlank(userUpdated.getId())) {
+            throw new BadRequestException("Please enter an id ");
+        }
+
+        if (!userRepository.existsById(id)) {
+            throw new NotFoundException("id " + id + " not found");
+        }
         return userRepository.save(userUpdated);
     }
-
 
 
     @Override

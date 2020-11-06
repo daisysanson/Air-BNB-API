@@ -1,11 +1,8 @@
 package hello.controller;
 
-import hello.dao.BookingRepository;
+
 import hello.dao.UserRepository;
-import hello.model.Booking;
-import hello.model.Customer;
 import hello.model.User;
-import hello.service.BookingService;
 import hello.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,9 +41,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(users);
 
     }
-
-
-
 
     @PostMapping(value = "/")
     public ResponseEntity<Object> addUser(@RequestBody User user) {

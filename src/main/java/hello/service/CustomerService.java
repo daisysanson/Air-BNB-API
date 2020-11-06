@@ -1,6 +1,5 @@
 package hello.service;
 
-import hello.controller.CustomerController;
 import hello.dao.CustomerRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.MultiErrorException;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.ResponseEntity.status;
 

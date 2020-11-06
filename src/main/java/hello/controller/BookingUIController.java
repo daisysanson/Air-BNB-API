@@ -3,15 +3,16 @@ package hello.controller;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
 import hello.model.Booking;
-import hello.model.BookingRequest;
-import hello.model.Customer;
+import hello.model.User;
 import hello.service.ApartmentService;
 import hello.service.BookingService;
 import hello.service.CustomerService;
+import hello.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -29,14 +30,14 @@ public class BookingUIController {
     private BookingService bookingService;
     private ApartmentService apartmentService;
     private CustomerService customerService;
-
+    private UserService userService;
 
     @Autowired
-    public BookingUIController(BookingService bookingService, ApartmentService apartmentService, CustomerService customerService) {
+    public BookingUIController(BookingService bookingService, ApartmentService apartmentService, CustomerService customerService, UserService userService) {
         this.bookingService = bookingService;
         this.apartmentService = apartmentService;
         this.customerService = customerService;
-
+        this.userService = userService;
 
     }
 
@@ -52,10 +53,17 @@ public class BookingUIController {
 
 
     @GetMapping("/newBookingCreate")
-    public String showAddBookingForm(Model model) {
-        BookingRequest booking = new BookingRequest();
+    public String showAddBookingForm(Model model, HttpServletRequest request) {
+        Booking booking = new Booking();
         model.addAttribute("apartments", apartmentService.getAllApartments());
-        model.addAttribute("customers", customerService.getAllCustomers());
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        model.addAttribute("loggedinuser", authentication.getName());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        User user = userService.findUserByEmail(userDetail.getUsername());
+        request.getSession().setAttribute("userId", user.getId());
+        model.addAttribute("userId", user.getId()); //user id exists here
         model.addAttribute("activeLink", "Booking");
         model.addAttribute("title", "Create a New Booking");
         model.addAttribute("booking", booking);
@@ -65,20 +73,10 @@ public class BookingUIController {
 
 
     @PostMapping(value = "/newBooking")
-    public String showBooking(@ModelAttribute("booking") BookingRequest booking, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("loggedinuser", authentication.getName());
-//        try {
-//            List<Customer> c = customerService.findByName(booking.name);
-//            if (c.isEmpty()) {
-//                log.info("Customer name does not exist");
-//                return "badRequest";
-//            }
-//
-        Booking newBooking = new Booking();
+    public String showBooking(@ModelAttribute("booking") Booking booking,  Model model){
 
-        Booking b = bookingService.addBooking(newBooking);
-        model.addAttribute("booking", b);
+
+        model.addAttribute("booking", bookingService.addBooking(booking));
         model.addAttribute("activeLink", "Booking");
         model.addAttribute("title", "Success!");
 

@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.awt.print.Book;
 import java.util.Set;
 
 @QueryEntity
@@ -23,16 +22,22 @@ public class User {
     @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     @Field(value = "email")
     private String email;
+
     @Field(value = "userName")
     private String userName;
+
     @Field(value = "address")
     private String address;
+
     @Field(value = "Password]")
     private String password;
+
     @Field(value = "firstName")
     private String firstName;
+
     @Field(value = "lastName" )
     private String lastName;
+
     @Field(value = "enabled")
     private boolean enabled;
 

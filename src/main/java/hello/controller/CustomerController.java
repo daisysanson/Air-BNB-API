@@ -1,6 +1,5 @@
 package hello.controller;
 
-import hello.dao.CustomerRepository;
 import hello.model.Customer;
 import hello.service.CustomerService;
 import org.apache.log4j.Logger;
