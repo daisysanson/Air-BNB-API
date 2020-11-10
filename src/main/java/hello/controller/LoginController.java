@@ -3,9 +3,11 @@ package hello.controller;
 import hello.dao.UserRepository;
 import hello.exceptions.BadRequestException;
 import hello.model.User;
+import hello.service.SiteUserDetails;
 import hello.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,6 +71,20 @@ public class LoginController {
 
         return "error";
 
+    }
+
+
+    @GetMapping("/account")
+    public String viewUserAccountForm(
+            @AuthenticationPrincipal SiteUserDetails userDetails,
+            Model model) {
+        String userEmail = userDetails.getUsername();
+        User user = userService.findUserByEmail(userEmail);
+
+        model.addAttribute("user", user);
+        model.addAttribute("pageTitle", "Account Details");
+
+        return "users/account_form";
     }
 
 

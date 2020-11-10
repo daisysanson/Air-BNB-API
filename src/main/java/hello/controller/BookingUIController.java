@@ -7,10 +7,13 @@ import hello.model.User;
 import hello.service.ApartmentService;
 import hello.service.BookingService;
 import hello.service.CustomerService;
+import hello.service.SiteUserDetails;
 import hello.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -53,16 +56,26 @@ public class BookingUIController {
 
 
     @GetMapping("/newBookingCreate")
-    public String showAddBookingForm(Model model, HttpServletRequest request) {
+    public String showAddBookingForm(  @AuthenticationPrincipal SiteUserDetails userDetails,
+                                       Model model, HttpServletRequest request) {
         Booking booking = new Booking();
-        model.addAttribute("apartments", apartmentService.getAllApartments());
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        model.addAttribute("loggedinuser", authentication.getName());
+//        model.addAttribute("apartments", apartmentService.getAllApartments());
+////        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+////        model.addAttribute("loggedinuser", authentication.getName());
+//
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+//        User user = userService.findUserByEmail(userDetail.getUsername());
+//        request.getSession().setAttribute("userId", user.getId());
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetail = (UserDetails) auth.getPrincipal();
-        User user = userService.findUserByEmail(userDetail.getUsername());
-        request.getSession().setAttribute("userId", user.getId());
+
+
+
+            model.addAttribute("user", user);
+
+
+
+
         model.addAttribute("userId", user.getId()); //user id exists here
         model.addAttribute("activeLink", "Booking");
         model.addAttribute("title", "Create a New Booking");
