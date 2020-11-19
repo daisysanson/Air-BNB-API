@@ -41,7 +41,7 @@ public class BookingUIController {
 
     }
 
-    static Logger log = Logger.getLogger(CustomerController.class);
+    static Logger log = Logger.getLogger(BookingUIController.class);
 
 
     @GetMapping("/booking")
@@ -53,8 +53,8 @@ public class BookingUIController {
 
 
     @GetMapping("/newBookingCreate")
-    public String showAddBookingForm(Model model, HttpServletRequest request) {
-        Booking booking = new Booking();
+    public String showAddBookingForm(@ModelAttribute("booking") Booking booking, Model model, HttpServletRequest request) {
+       booking = new Booking();
         model.addAttribute("apartments", apartmentService.getAllApartments());
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        model.addAttribute("loggedinuser", authentication.getName());
@@ -63,7 +63,7 @@ public class BookingUIController {
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
         User user = userService.findUserByEmail(userDetail.getUsername());
         request.getSession().setAttribute("userId", user.getId());
-        model.addAttribute("userId", user.getId()); //user id exists here
+        model.addAttribute("userId", booking.getUser().getId()); //user id exists here
         model.addAttribute("activeLink", "Booking");
         model.addAttribute("title", "Create a New Booking");
         model.addAttribute("booking", booking);

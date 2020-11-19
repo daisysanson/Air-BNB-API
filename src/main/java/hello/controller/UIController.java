@@ -23,7 +23,7 @@ public class UIController {
         this.customerService = customerService;
     }
 
-    static Logger log = Logger.getLogger(CustomerController.class);
+    static Logger log = Logger.getLogger(UIController.class);
 
 
     @GetMapping("/index")
