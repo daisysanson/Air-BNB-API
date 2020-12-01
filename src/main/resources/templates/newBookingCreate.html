@@ -15,16 +15,14 @@
 
             <form action="#" th:action="@{/newBooking}" th:object="${booking}" method="POST">
                 <div class="form-group">
-                    <label> Your Email </label>
-                    <div th:text="${#authentication.username}">
+                    <input type="text" th:value="${user}" name="User"/>
                 </div>
-                <div class="form-group">
                     <select th:field="*{apartment.id}">
                         <option th:each="apartment : ${apartments}"
                                 th:value="${apartment.id}"
                                 th:text="${apartment.title}">
                     </select>
-                </div>
+            </div>
                 <div class="col-sm-10 offset-sm-1 text-center">
                 <input class="btn btn-lg btn-block display-3" type="submit" value="Submit"/> <input class="btn btn-lg btn-block display-3" type="reset"
                                                                             value="Reset"/>

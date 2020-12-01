@@ -42,6 +42,12 @@ public class UserService implements UserDetailsService {
 
     }
 
+
+    public User findUserByDetails(String firstName, String lastName, String email, String id) {
+        return userRepository.findByName(firstName,lastName, email, id);
+
+    }
+
     public User saveNewUser(User user) {
         List<User> users = userRepository.findByEmailList(user.getEmail());
         if (users.size() >= 1) {
@@ -88,14 +94,30 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User user = userRepository.findByEmail(email);
+    User user = userRepository.findByEmail(email);
         if(user != null) {
-            List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
-            return buildUserForAuthentication(user, authorities);
-        } else {
-            throw new UsernameNotFoundException("username not found");
-        }
+        List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
+        return buildUserForAuthentication(user, authorities);
+    } else {
+        throw new UsernameNotFoundException("username not found");
     }
+}
+
+
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        /*Here add user data layer fetching from the MongoDB.
+//          I have used userRepository*/
+//        User user = userRepository.findByEmail(email);
+//        if(user == null){
+//            throw new UsernameNotFoundException(email);
+//        }else{
+//            UserDetails details = new LoggedUser(user);
+//            return details;
+//        }
+//    }
+
     private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
         userRoles.forEach((role) -> {

@@ -2,6 +2,7 @@ package hello.config;
 
 
 import hello.component.CustomAuthHandler;
+import hello.service.SiteUserDetailsService;
 import hello.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,19 +32,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomAuthHandler customAuthHandler;
 
 
-    @Bean
-    public UserService mongoUserDetails() {
-        return new UserService();
-    }
+//    @Bean
+//    public UserService mongoUserDetails() {
+//        return new UserService();
+//    }
+@Bean
+public SiteUserDetailsService mongoUserDetails() {
+    return new SiteUserDetailsService();
+}
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        UserDetailsService userDetailsService = mongoUserDetails();
+//        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+//
+//    }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        UserDetailsService userDetailsService = mongoUserDetails();
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(bCryptPasswordEncoder);
+      SiteUserDetailsService siteUserDetailsService = mongoUserDetails();
+        auth.userDetailsService(siteUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
 
     }
+    
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
