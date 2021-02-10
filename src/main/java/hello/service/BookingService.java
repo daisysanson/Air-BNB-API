@@ -32,6 +32,8 @@ public class BookingService {
         return repository.findById(savedBooking.getId()).orElse(null);
     }
 
+
+
     public boolean deleteBookingById(String id) {
         if (!repository.existsById(id)) {
             throw new NotFoundException("id " + id + "  not found");

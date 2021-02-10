@@ -27,6 +27,7 @@ public class ApartmentUIController {
     @GetMapping("/apartment")
     public String getApartmentLandingPage(Model model) {
         model.addAttribute("activeLink", "Apartment");
+        model.addAttribute("title", "Apartments");
         return "apartment";
     }
 
@@ -35,6 +36,7 @@ public class ApartmentUIController {
         Apartment apartment = new Apartment();
         model.addAttribute("apartment", apartment);
         model.addAttribute("activeLink", "Apartment");
+        model.addAttribute("title", "Find an Apartment");
         return "findAnApartment";
     }
 
@@ -42,6 +44,7 @@ public class ApartmentUIController {
     public String showFindApartmentResult(@ModelAttribute("apartment") Apartment apartment, @RequestParam("id") String id, Model model) {
         try {
             model.addAttribute("activeLink", "Apartment");
+            model.addAttribute("title", "Result!");
             model.addAttribute("apartment", apartmentService.selectApartmentById(id));
         } catch (BadRequestException e) {
             return "badRequest";
@@ -56,6 +59,7 @@ public class ApartmentUIController {
     public String showAllApartments(Model model) {
         model.addAttribute("apartment", apartmentService.getAllApartments());
         model.addAttribute("activeLink", "Apartment");
+        model.addAttribute("title", "All Apartments");
         return "showAllApartments";
     }
 
@@ -63,6 +67,7 @@ public class ApartmentUIController {
     public String showAddForm(Model model) {
         Apartment apartment = new Apartment();
         model.addAttribute("apartment", apartment);
+        model.addAttribute("title", "Add a New Apartment");
         return "addApartment";
     }
 
@@ -76,6 +81,7 @@ public class ApartmentUIController {
                                       @RequestParam("rooms") int rooms, Model model) {
         try {
             model.addAttribute("apartment", apartmentService.addApartment(apartment));
+            model.addAttribute("title", "Success");
             return "apartmentResult";
         } catch (BadRequestException e) {
             return "badRequest";
@@ -88,6 +94,7 @@ public class ApartmentUIController {
         Apartment apartment = new Apartment();
         model.addAttribute("apartment", apartment);
         model.addAttribute("activeLink", "Apartment");
+        model.addAttribute("title", "Delete an Apartment");
         return "deleteApartmentForm";
     }
 
@@ -97,6 +104,7 @@ public class ApartmentUIController {
         try {
             apartmentService.deleteApartmentById(id);
             model.addAttribute("activeLink", "Apartment");
+            model.addAttribute("title", "Success!");
             return "deleteApartmentResult";
         } catch (NotFoundException e) {
             return "notFound";
@@ -108,6 +116,7 @@ public class ApartmentUIController {
         Apartment apartment = new Apartment();
         model.addAttribute("apartment", apartment);
         model.addAttribute("activeLink", "Apartment");
+        model.addAttribute("title", "Update an Apartment");
         return "updateApartmentForm";
     }
 
@@ -118,6 +127,7 @@ public class ApartmentUIController {
         try {
             model.addAttribute("apartment", apartmentService.updateApartmentById(id, apartmentToUpdate));
             model.addAttribute("activeLink", "Apartment");
+            model.addAttribute("title", "Success!");
             return "updateApartmentResult";
         } catch (BadRequestException e) {
             return "badRequest";

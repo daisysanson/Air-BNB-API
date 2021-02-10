@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="Fragments/head :: head"/>
+
+<body>
+
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+<div class="container">
+    <h2 th:text="${successMessage}"></h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Your Email</th>
+            <th>Your User Name</th>
+        </tr>
+        <tr>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.userName}"></td>
+        </tr>
+    </table>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

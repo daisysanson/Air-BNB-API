@@ -1,24 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
+<head th:replace="Fragments/head :: head"/>
 
-    <link rel="stylesheet" href="bootstrap/js/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/header.css">
-    <link rel="stylesheet" href="/index.css">
-
-    <title>Main page</title>
-
-
-</head>
 <body>
+
 <nav th:replace="Fragments/nav :: nav"></nav>
-<header th:replace="Fragments/header :: header"></header>
+<header th:replace="Fragments/carousel :: carousel"></header>
 
 
 <section id="header">
@@ -27,70 +15,72 @@
     </div>
 </section>
 
-<section id="content">
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 id="content-header" class="text-center">Home Page!</h1>
-                <hr>
-            </div>
-        </div>
-        <div class="row">
-            <!-- bootstrap box has to add up to 12 -->
-            <div class="col-md-4">
-                <div class="event-box">
-                    <a href="customer" target="_blank">
-                        <div class="event-inner" id="customers">
-                            <div class="event-info">
-                                <hr>
-                                <h1>
-                                    <strong>Customers</strong>
-                                </h1>
-                                <hr>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="event-box">
-                    <a href="booking" target="_blank">
-                        <div class="event-inner" id="bookings">
-                            <div class="event-info">
-                                <hr>
-                                <h1>
-                                    <strong>Bookings</strong>
-                                </h1>
-                                <hr>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="event-box">
-                    <a href="apartment" target="_blank">
-                        <div class="event-inner" id="apartments">
-                            <div class="event-info">
-                                <hr>
-                                <h1>
-                                    <strong>Apartments</strong>
-                                </h1>
-                                <hr>
-                            </div>
-                        </div>
-                    </a>
+                <div sec:authorize="isAuthenticated()">
+                    <h1 id="content-header" class="text-center" th:inline="text">Welcome,
+                        [[${#httpServletRequest.remoteUser}]]!</h1>
                 </div>
             </div>
         </div>
     </div>
+<section id="content">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="event-box">
+                <a href="customer" target="_blank">
+                    <div class="event-inner" id="customers">
+                        <div class="event-info">
+                            <hr>
+                            <h1>
+                                <strong>Customers</strong>
+                            </h1>
+                            <hr>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+            <div class="event-box">
+                <a href="booking" target="_blank">
+                    <div class="event-inner" id="bookings">
+                        <div class="event-info">
+                            <hr>
+                            <h1>
+                                <strong>Bookings</strong>
+                            </h1>
+                            <hr>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="event-box">
+            <a href="apartment" target="_blank">
+                <div class="event-inner" id="apartments">
+                    <div class="event-info">
+                        <hr>
+                        <h1>
+                            <strong>Apartments</strong>
+                        </h1>
+                        <hr>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 </section>
 
-<script src="js/carousel.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/nav.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<div th:replace="fragments/footer :: footer"></div>
+
+
 </body>
 </html>

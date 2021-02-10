@@ -28,7 +28,7 @@ public class ApartmentService {
         this.apartmentRepository = apartmentRepository;
     }
 
-    static Logger log = Logger.getLogger(CustomerController.class);
+    static Logger log = Logger.getLogger(ApartmentService.class);
 
     public Apartment selectApartmentById(String id) {
         if (StringUtils.isBlank(id)) {

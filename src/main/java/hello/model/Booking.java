@@ -12,21 +12,21 @@ public class Booking {
     private String id;
 
     @DBRef
-    private Customer customer;
+    private User user;
 
     @DBRef
     private Apartment apartment;
 
-    public Booking(Customer customer, Apartment apartment) {
-        this.customer = customer;
+    public Booking(User user, Apartment apartment) {
+        this.user = user;
         this.apartment = apartment;
     }
 
     public Booking() {
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public User getUser() {
+        return user;
     }
 
     public Apartment getApartment() {
@@ -37,8 +37,8 @@ public class Booking {
         this.apartment = apartment;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getId() {

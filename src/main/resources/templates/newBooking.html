@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
-<head>
-    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/index.css">
-</head>
-<body>
-<nav th:replace="Fragments/nav :: nav"></nav>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="Fragments/head :: head"/>
+
+<body>
+
+<nav th:replace="Fragments/nav :: nav"></nav>
 
 <div class="container">
     <h2>Booking added successfully!: </h2>
@@ -19,7 +16,7 @@
             <th>Booking ID</th>
         </tr>
         <tr>
-            <td th:text="${booking.id}"></td>
+            <td th:text="${booking.getId()}"></td>
         </tr>
         <tr>
             <th>Customer ID</th>
@@ -27,33 +24,34 @@
             <th>Customer Booking Confirmation</th>
         </tr>
         <tr>
-            <td th:text="${booking.getCustomer().getId()}"></td>
-            <td th:text="${booking.getCustomer().getName()}"></td>
-            <td th:text="${booking.getCustomer().getBookingConfirmed()}"></td>
-        </tr>
-        <tr>
-            <th>Apartment ID</th>
-            <th>Apartment Title</th>
-            <th>Apartment Address</th>
-            <th>Apartment Guest Capacity</th>
-            <th>Apartment Rooms</th>
-            <th>Apartment Rating</th>
-        </tr>
-        <tr>
-            <td th:text="${booking.getApartment().getId()}"></td>
-            <td th:text="${booking.getApartment().getTitle()}"></td>
-            <td th:text="${booking.getApartment().getAddress()}"></td>
-            <td th:text="${booking.getApartment().getGuestCapacity()}"></td>
-            <td th:text="${booking.getApartment().getRooms()}"></td>
-            <td th:text="${booking.getApartment().getRating()}"></td>
+            <td th:text="${user.getId()}"></td>
+<!--            <td th:text="${booking.getUser().getFirstName()}"></td>-->
+<!--            <td th:text="${booking.getUser().getLastName()}"></td>-->
+<!--            <td th:text="${booking.getUser().getUserName()}"></td>-->
+<!--            <td th:text="${booking.getUser().getEmail()}"></td>-->
+<!--            <td th:text="${booking.getUser().getAddress()}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>Apartment ID</th>-->
+<!--            <th>Apartment Title</th>-->
+<!--            <th>Apartment Address</th>-->
+<!--            <th>Apartment Guest Capacity</th>-->
+<!--            <th>Apartment Rooms</th>-->
+<!--            <th>Apartment Rating</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td th:text="${booking.getApartment().getId()}"></td>-->
+<!--            <td th:text="${booking.getApartment().getTitle()}"></td>-->
+<!--            <td th:text="${booking.getApartment().getAddress()}"></td>-->
+<!--            <td th:text="${booking.getApartment().getGuestCapacity()}"></td>-->
+<!--            <td th:text="${booking.getApartment().getRooms()}"></td>-->
+<!--            <td th:text="${booking.getApartment().getRating()}"></td>-->
         </tr>
     </table>
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>

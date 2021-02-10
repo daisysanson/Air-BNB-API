@@ -1,19 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <link rel="stylesheet" href="bootstrap/js/js/bootstrap.bundle.min.js">
-
-    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/header.css">
-
-
-    <link th:href="@{/nav.css}" rel="stylesheet"/>
 </head>
 <body>
-<div th:fragment="header>">
+<div th:fragment="carousel>">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/index">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -23,22 +12,48 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul id="myDIV" class="navbar-nav">
                 <li th:class="${#strings.equals(activeLink, 'Booking')} ? 'nav-item active' : 'nav-item'">
-                    <a class="nav-link" href="booking">Bookings</a>
+                    <a class="nav-link dropdown-toggle" href="booking" id="bookings-dropdown"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bookings
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="bookings-dropdown">
+                        <a class="dropdown-item" href="/newBookingCreate">Make a new booking</a>
+                        <a class="dropdown-item" href="/getBooking">View a booking</a>
+                        <a class="dropdown-item" href="/deleteBookingForm">Delete a booking</a>
+                    </div>
                 </li>
-                <li th:class="${#strings.equals(activeLink, 'Apartment')} ? 'nav-item active' : 'nav-item'">
-                    <a class="nav-link" href="apartment">Apartment</a>
+                <li th:class="${#strings.equals(activeLink, 'Apartment')} ? 'nav-item dropdown active' : 'nav-item'">
+                    <a class="nav-link dropdown-toggle" href="apartment" id="apartment-dropdown"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apartment
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="apartment-dropdown">
+                        <a class="dropdown-item" href="/addApartment">Add an apartment</a>
+                        <a class="dropdown-item" href="/findAnApartment">Find an apartment</a>
+                        <a class="dropdown-item" href="/showAllApartments">List of all apartments</a>
+                        <a class="dropdown-item" href="/deleteApartmentForm">Delete an apartment</a>
+                        <a class="dropdown-item" href="/updateApartmentForm">Update an apartment</a>
+                    </div>
                 </li>
                 <li th:class="${#strings.equals(activeLink, 'Customer')} ? 'nav-item dropdown active' : 'nav-item'">
-                    <a class="nav-link dropdown-toggle" href="customer" id="navbarDropdownMenuLink"
+                    <a class="nav-link dropdown-toggle" href="customer" id="customer-dropdown"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="addCustomerForm">Add a customer</a>
+                    <div class="dropdown-menu" aria-labelledby="customer-dropdown">
+                        <a class="dropdown-item" href="/addCustomerForm">Add a customer</a>
                         <a class="dropdown-item" href="/findACustomerForm">Find a customer</a>
                         <a class="dropdown-item" href="/getAllCustomers">See list of all customers</a>
                         <a class="dropdown-item" href="/deleteCustomerForm">Delete a customer</a>
                         <a class="dropdown-item" href="/updateCustomerForm">Update a customer</a>
                     </div>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Sign Out</a>
                 </li>
             </ul>
         </div>

@@ -1,23 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
 
-    <title>Update an Apartment's details</title>
-
-    <link rel="stylesheet" href="bootstrap/css/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Scope+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/nav.css">
-    <link rel="stylesheet" href="/index.css">
-</head>
+<head th:replace="Fragments/head :: head"/>
 
 <body>
 
 <nav th:replace="Fragments/nav :: nav"></nav>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -25,29 +14,31 @@
             <form action="#" th:action="@{/updateApartmentResult}" th:object="${apartment}" method="put">
                 <div class="form-group">
                     <label> Apartment id </label>
-                    <input type="text" class="form-control" th:field="*{id}"/>
+                    <input type="text" class="form-control col-lg-4" th:field="*{id}"/>
                 </div>
                 <div class="form-group">
                     <label> Apartment title </label>
-                    <input type="text" class="form-control" th:field="*{title}"/>
+                    <input type="text" class="form-control col-lg-4" th:field="*{title}"/>
                 </div>
                 <div class="form-group">
                     <label> Address: </label>
-                    <input type="text" class="form-control" th:field="*{address}"/>
+                    <input type="text" class="form-control col-lg-4" th:field="*{address}"/>
                 </div>
                 <div class="form-group">
                     <label> Guest Capacity: </label>
-                    <input type="number" class="form-control" th:field="*{guestCapacity}" required/>
+                    <input type="number" class="form-control col-lg-4" th:field="*{guestCapacity}" required/>
                 </div>
                 <div class="form-group">
                     <label> Rating: </label>
-                    <input type="number" class="form-control" th:field="*{rating}" required/>
+                    <input type="number" class="form-control col-lg-4" th:field="*{rating}" required/>
                 </div>
                 <div class="form-group">
                     <label> Rooms: </label>
-                    <input type="number" class="form-control" th:field="*{rooms}" required/>
-                </div>
-                <input class="button" type="submit" value="Submit"/> <input class="button" type="reset" value="Reset"/>
+                    <input type="number" class="form-control col-lg-4" th:field="*{rooms}" required/>
+                    <div class="form-group">
+                        <input class="btn btn-md col-lg-2" type="submit" value="Submit"/>
+                        <input class="btn btn-md col-lg-2" type="reset" value="Reset"/>
+                    </div>
             </form>
         </div>
     </div>
@@ -55,9 +46,7 @@
 
 <script src="js/carousel.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>
