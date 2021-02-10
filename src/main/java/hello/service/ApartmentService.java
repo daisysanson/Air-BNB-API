@@ -30,6 +30,11 @@ public class ApartmentService {
 
     static Logger log = Logger.getLogger(ApartmentService.class);
 
+    public ApartmentService() {
+
+    }
+
+
     public Apartment selectApartmentById(String id) {
         if (StringUtils.isBlank(id)) {
             log.info("No id entered");

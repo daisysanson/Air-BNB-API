@@ -1,15 +1,15 @@
 package hello.model;
 
 public class BookingRequest {
-    public String name;
+    public User user;
     public Apartment apartment;
 
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Apartment getApartment() {

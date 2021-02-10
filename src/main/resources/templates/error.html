@@ -5,14 +5,16 @@
 
 <body>
 
+<div th:replace="fragments/scripts :: scripts"></div>
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 <h1 th:text="${status}|"></h1>
 <h2 th:text="${message}"></h2>
 
 
-<button class="btn btn-lg btn-block display-3" onclick="goBack()">Go Back</button>
-<a href="/" th:href="@{/}">Back to Home Page</a>
+<button class="btn btn-lg btn-block display-3" onclick="goBack">Go Back</button>
+<a href="index.html">Home</a>
+
 <div th:replace="fragments/footer :: footer"></div>
 
 </body>

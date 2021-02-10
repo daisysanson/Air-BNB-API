@@ -3,25 +3,33 @@ package hello.controller;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
 import hello.model.Booking;
+import hello.model.BookingRequest;
 import hello.model.User;
+import hello.model.UserUtil;
 import hello.service.ApartmentService;
 import hello.service.BookingService;
 import hello.service.CustomerService;
+import hello.service.SiteUserDetails;
 import hello.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -53,28 +61,22 @@ public class BookingUIController {
 
 
     @GetMapping("/newBookingCreate")
-    public String showAddBookingForm(@ModelAttribute("booking") Booking booking, Model model, HttpServletRequest request) {
-       booking = new Booking();
+    public String showAddBookingForm(Model model) {
+        User user1 = userService.findUserByEmail(UserUtil.userName());
+        model.addAttribute("booking", new Booking());
         model.addAttribute("apartments", apartmentService.getAllApartments());
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        model.addAttribute("loggedinuser", authentication.getName());
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetail = (UserDetails) auth.getPrincipal();
-        User user = userService.findUserByEmail(userDetail.getUsername());
-        request.getSession().setAttribute("userId", user.getId());
-        model.addAttribute("userId", booking.getUser().getId()); //user id exists here
+        model.addAttribute("user", user1.getId());
         model.addAttribute("activeLink", "Booking");
         model.addAttribute("title", "Create a New Booking");
-        model.addAttribute("booking", booking);
+
 
         return "newBookingCreate";
     }
 
 
     @PostMapping(value = "/newBooking")
-    public String showBooking(@ModelAttribute("booking") Booking booking,  Model model){
-
+    public String showBooking(@ModelAttribute("booking") Booking booking,Model model){
+        log.info(UserUtil.userName());
 
         model.addAttribute("booking", bookingService.addBooking(booking));
         model.addAttribute("activeLink", "Booking");
