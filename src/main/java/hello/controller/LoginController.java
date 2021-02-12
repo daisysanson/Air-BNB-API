@@ -50,13 +50,12 @@ public class LoginController {
 
     @PostMapping("/registrationResult")
     public String createNewUser(@Valid User user,  BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes)  {
-
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             redirectAttributes.addFlashAttribute("rejectMessage", "Sorry! That email has already been used!");
             return "redirect:registrationForm";
         } if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("rejectMessage", "Sorry! Your Passwords don't match!");
+            redirectAttributes.addFlashAttribute("rejectMessage", bindingResult.getFieldError().getDefaultMessage() );
             log.info("Passwords don't match");
              return "redirect:registrationForm";
         }

@@ -3,6 +3,7 @@ package hello.model;
 import com.querydsl.core.annotations.QueryEntity;
 //import hello.component.ConfirmPassword;
 import hello.component.ConfirmPassword;
+import hello.component.PasswordsValueMatch;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -13,7 +14,13 @@ import java.util.Set;
 
 @QueryEntity
 @Document(collection = "users")
-@ConfirmPassword(message = "passwords are not equal")
+@PasswordsValueMatch.List({
+        @PasswordsValueMatch(
+                field = "password",
+                fieldMatch = "confirmPassword",
+                message = "Passwords do not match!"
+        )
+})
 public class User {
     @Id
     private String id;
@@ -127,12 +134,6 @@ public class User {
         this.roles = roles;
     }
 
-//@PasswordsValueMatch.List({
-//        @PasswordsValueMatch(
-//                field = "password",
-//                fieldMatch = "confirmPassword",
-//                message = "Passwords do not match!"
-//        )
-//})
+//    @ConfirmPassword(message = "passwords are not equal")
 
 }
