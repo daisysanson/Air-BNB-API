@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication();
         SiteUserDetailsService siteUserDetailsService = mongoUserDetails();
         auth.userDetailsService(siteUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
-
     }
 
 

@@ -55,15 +55,19 @@ public class UserService implements UserDetailsService {
             throw new BadRequestException("email already exists");
 
         } else {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            user.setEnabled(true);
-            Role userRole = roleRepository.findByRole("USER"); //new user's role is set as admin
-            user.setRoles(new HashSet(Arrays.asList(userRole)));
-            userRepository.save(user);
+            try {
+                user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+                user.setConfirmPassword(bCryptPasswordEncoder.encode(user.getConfirmPassword()));
+                user.setEnabled(true);
+                Role userRole = roleRepository.findByRole("USER"); //new user's role is set as admin
+                user.setRoles(new HashSet(Arrays.asList(userRole)));
+                userRepository.save(user);
 
-            return user;
+                return user;
+            } catch (BadRequestException e) {
+                throw new BadRequestException("email already exists");
+            }
         }
-
     }
 
 
@@ -104,19 +108,6 @@ public class UserService implements UserDetailsService {
 }
 
 
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        /*Here add user data layer fetching from the MongoDB.
-//          I have used userRepository*/
-//        User user = userRepository.findByEmail(email);
-//        if(user == null){
-//            throw new UsernameNotFoundException(email);
-//        }else{
-//            UserDetails details = new LoggedUser(user);
-//            return details;
-//        }
-//    }
 
     private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();

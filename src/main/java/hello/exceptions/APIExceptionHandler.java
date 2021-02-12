@@ -10,12 +10,15 @@
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.http.converter.HttpMessageNotReadableException;
 //import org.springframework.ui.Model;
+//import org.springframework.web.bind.MethodArgumentNotValidException;
 //import org.springframework.web.bind.annotation.ControllerAdvice;
 //import org.springframework.web.bind.annotation.ExceptionHandler;
 //import org.springframework.web.bind.annotation.ResponseStatus;
 //
 //import java.time.ZoneId;
 //import java.time.ZonedDateTime;
+//import java.util.HashMap;
+//import java.util.Map;
 //
 //@ControllerAdvice
 //public class APIExceptionHandler {
@@ -50,7 +53,6 @@
 //        );
 //        return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
 //    }
-//
 //
 //
 //    @ExceptionHandler(value = NotFoundException.class)
@@ -151,9 +153,6 @@
 //    }
 //
 //
-//
-//
-//
 //    @ExceptionHandler(value = Exception.class)
 //    public ResponseEntity<APIException> handleAllExceptions(Exception e) {
 //        log.error("exception caught: " + e);
@@ -174,11 +173,32 @@
 //                HttpStatus.BAD_REQUEST,
 //                ZonedDateTime.now(ZoneId.of("Z")));
 //
-//
 //        return new ResponseEntity(apiException, HttpStatus.BAD_REQUEST);
 //    }
 //
 //
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity handleValidationExceptions(MethodArgumentNotValidException ex) {
 //
+//        Map<String, String> apiException = new HashMap<>();
+//
+//        ex.getBindingResult().getFieldErrors().forEach(error -> {
+//                    if (apiException.containsKey(error.getField())) {
+//                        apiException.put(error.getField(), String.format("%s, %s", apiException.get(error.getField()), error.getDefaultMessage()));
+//
+//                    } else {
+//                        apiException.put(error.getField(), error.getDefaultMessage());
+//
+//                    }
+//
+//                }
+//
+//        );
+//
+//        return new ResponseEntity(apiException, HttpStatus.BAD_REQUEST);
+//
+//    }
 //
 //}
+//
+//

@@ -5,17 +5,24 @@ import hello.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class SiteUserDetails implements UserDetails {
     private User user;
 
+
     public SiteUserDetails (User user) {
         this.user = user;
+    }
+
+    public SiteUserDetails() {
     }
 
     @Override
@@ -24,7 +31,7 @@ public class SiteUserDetails implements UserDetails {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
         for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+            authorities.add(new SimpleGrantedAuthority(role.getRole()) );
         }
         return authorities;
     }
@@ -37,6 +44,11 @@ public class SiteUserDetails implements UserDetails {
     @Override
     public String getPassword() {
         return user.getPassword();
+    }
+
+
+    public Boolean isPasswordConfirmPasswordMatched(User user) {
+        return (user.getPassword() != null && user.getConfirmPassword() != null && user.getPassword().equals(user.getConfirmPassword()));
     }
 
     @Override
@@ -63,5 +75,7 @@ public class SiteUserDetails implements UserDetails {
     public boolean isEnabled() {
         return user.isEnabled();
     }
+
+
 }
 

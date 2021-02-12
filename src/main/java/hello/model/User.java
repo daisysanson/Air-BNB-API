@@ -1,17 +1,19 @@
 package hello.model;
 
 import com.querydsl.core.annotations.QueryEntity;
+//import hello.component.ConfirmPassword;
+import hello.component.ConfirmPassword;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import java.util.Set;
 
 @QueryEntity
 @Document(collection = "users")
+@ConfirmPassword(message = "passwords are not equal")
 public class User {
     @Id
     private String id;
@@ -29,8 +31,11 @@ public class User {
     @Field(value = "address")
     private String address;
 
+
     @Field(value = "Password]")
     private String password;
+
+    private String confirmPassword;
 
     @Field(value = "firstName")
     private String firstName;
@@ -66,12 +71,20 @@ public class User {
         this.email = email;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public boolean isEnabled() {
@@ -114,6 +127,12 @@ public class User {
         this.roles = roles;
     }
 
-
+//@PasswordsValueMatch.List({
+//        @PasswordsValueMatch(
+//                field = "password",
+//                fieldMatch = "confirmPassword",
+//                message = "Passwords do not match!"
+//        )
+//})
 
 }

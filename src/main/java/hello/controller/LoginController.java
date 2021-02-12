@@ -5,12 +5,14 @@ import hello.exceptions.BadRequestException;
 import hello.model.User;
 import hello.service.SiteUserDetails;
 import hello.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.net.BindException;
 
 @Controller
 public class LoginController {
+    static Logger log = Logger.getLogger(LoginController.class);
 
     @Autowired
     private UserService userService;
@@ -45,12 +49,16 @@ public class LoginController {
 
 
     @PostMapping("/registrationResult")
-    public String createNewUser(@Valid User user, Model model, RedirectAttributes redirectAttributes) {
+    public String createNewUser(@Valid User user,  BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes)  {
 
         User userExists = userService.findUserByEmail(user.getEmail());
-        if (userExists != null){
+        if (userExists != null) {
             redirectAttributes.addFlashAttribute("rejectMessage", "Sorry! That email has already been used!");
-        return "redirect:registrationForm" ;
+            return "redirect:registrationForm";
+        } if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("rejectMessage", "Sorry! Your Passwords don't match!");
+            log.info("Passwords don't match");
+             return "redirect:registrationForm";
         }
         userService.saveNewUser(user);
         model.addAttribute("successMessage", "User has been registered successfully!");
