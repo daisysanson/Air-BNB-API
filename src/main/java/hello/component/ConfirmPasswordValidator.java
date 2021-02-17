@@ -1,15 +1,10 @@
 package hello.component;
 
-import hello.model.User;
-import hello.service.SiteUserDetails;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-
-import hello.model.User;
-import hello.service.SiteUserDetails;
 import lombok.SneakyThrows;
+
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.EnglishSequenceData;
@@ -19,30 +14,18 @@ import org.passay.MessageResolver;
 import org.passay.PasswordData;
 import org.passay.PasswordValidator;
 import org.passay.PropertiesMessageResolver;
-import org.passay.Rule;
 import org.passay.RuleResult;
-import org.passay.RuleResultDetail;
 import org.passay.WhitespaceRule;
-import org.springframework.validation.BindingResult;
-import org.thymeleaf.messageresolver.IMessageResolver;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-import javax.validation.Valid;
-import javax.validation.Validation;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 public class ConfirmPasswordValidator implements ConstraintValidator<ConfirmPassword, String> {
 
-    private SiteUserDetails userDetails = new SiteUserDetails();
 
     @Override
     public void initialize(final ConfirmPassword constraintAnnotation) {

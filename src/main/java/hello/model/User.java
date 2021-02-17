@@ -1,8 +1,6 @@
 package hello.model;
 
-import com.mongodb.lang.NonNull;
 import com.querydsl.core.annotations.QueryEntity;
-//import hello.component.ConfirmPassword;
 import hello.component.ConfirmPassword;
 import hello.component.PasswordsValueMatch;
 import org.springframework.data.annotation.Id;
@@ -13,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @QueryEntity
@@ -143,6 +140,6 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    
+
 
 }
