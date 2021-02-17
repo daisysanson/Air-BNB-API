@@ -177,7 +177,7 @@ public class APIExceptionHandler {
     }
 
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity handleValidationExceptions(MethodArgumentNotValidException e) {
 
         Map<String, String> apiException = new HashMap<>();

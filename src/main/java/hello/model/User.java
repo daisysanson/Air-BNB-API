@@ -1,5 +1,6 @@
 package hello.model;
 
+import com.mongodb.lang.NonNull;
 import com.querydsl.core.annotations.QueryEntity;
 //import hello.component.ConfirmPassword;
 import hello.component.ConfirmPassword;
@@ -10,6 +11,9 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @QueryEntity
@@ -32,6 +36,8 @@ public class User {
     @Field(value = "email")
     private String email;
 
+
+    @NotBlank(message = "username is mandatory")
     @Field(value = "userName")
     private String userName;
 
@@ -39,9 +45,13 @@ public class User {
     private String address;
 
 
-    @Field(value = "Password]")
+    @ConfirmPassword
+    @NotBlank(message = "New password is mandatory")
+    @Field(value = "Password")
     private String password;
 
+    @ConfirmPassword
+    @NotBlank(message = "Confirm Password is mandatory")
     private String confirmPassword;
 
     @Field(value = "firstName")
@@ -133,7 +143,6 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
-//    @ConfirmPassword(message = "passwords are not equal")
+    
 
 }
