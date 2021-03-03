@@ -27,6 +27,7 @@ public class User {
     private String id;
 
     @DBRef
+    @Field(value = "role")
     private Set<Role> roles;
 
     @Indexed(unique = true, direction = IndexDirection.DESCENDING)
@@ -59,6 +60,8 @@ public class User {
 
     @Field(value = "enabled")
     private boolean enabled;
+
+
 
 
     public String getUserName() {

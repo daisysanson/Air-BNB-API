@@ -4,7 +4,7 @@ import com.mongodb.MongoException;
 import com.mongodb.MongoSocketOpenException;
 import com.mongodb.MongoSocketReadException;
 import com.mongodb.MongoTimeoutException;
-import hello.controller.CustomerController;
+//import hello.controller.CustomerController;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

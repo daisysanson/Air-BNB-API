@@ -31,9 +31,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private CustomerService customerService;
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     static Logger log = Logger.getLogger(UserService.class);
 
@@ -44,12 +43,14 @@ public class UserService implements UserDetailsService {
 
 
     public User findUserByDetails(String firstName, String lastName, String email, String id) {
-        return userRepository.findByName(firstName,lastName, email, id);
+        return userRepository.findByName(firstName, lastName, email, id);
 
     }
 
+
     public User saveNewUser(User user) {
         List<User> users = userRepository.findByEmailList(user.getEmail());
+
         if (users.size() >= 1) {
             log.info("email already exists");
             throw new BadRequestException("email already exists");
@@ -59,10 +60,7 @@ public class UserService implements UserDetailsService {
                 user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
                 user.setConfirmPassword(bCryptPasswordEncoder.encode(user.getConfirmPassword()));
                 user.setEnabled(true);
-                Role userRole = roleRepository.findByRole("USER"); //new user's role is set as admin
-                user.setRoles(new HashSet(Arrays.asList(userRole)));
                 userRepository.save(user);
-
                 return user;
             } catch (BadRequestException e) {
                 throw new BadRequestException("email already exists");

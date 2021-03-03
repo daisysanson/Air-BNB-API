@@ -1,5 +1,6 @@
 package hello.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.index.IndexDirection;
@@ -10,10 +11,20 @@ public class Role {
 
     @Id
     private String id;
-    @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
+    @Indexed(unique = true, direction = IndexDirection.DESCENDING)
 
     private String role;
     private String description;
+
+    public Role() {
+    }
+
+    public Role(@JsonProperty String id, @JsonProperty String role,
+                @JsonProperty String description) {
+        this.id = id;
+        this.role = role;
+        this.description = description;
+    }
 
     public String getId() {
         return id;

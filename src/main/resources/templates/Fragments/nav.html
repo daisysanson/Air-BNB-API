@@ -33,18 +33,6 @@
                         <a class="dropdown-item" href="/updateApartmentForm">Update an apartment</a>
                     </div>
                 </li>
-                <li th:class="${#strings.equals(activeLink, 'Customer')} ? 'nav-item dropdown active' : 'nav-item'">
-                    <a class="nav-link dropdown-toggle" href="customer" id="customer-dropdown"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="customer-dropdown">
-                        <a class="dropdown-item" href="/addCustomerForm">Add a customer</a>
-                        <a class="dropdown-item" href="/findACustomerForm">Find a customer</a>
-                        <a class="dropdown-item" href="/getAllCustomers">See list of all customers</a>
-                        <a class="dropdown-item" href="/deleteCustomerForm">Delete a customer</a>
-                        <a class="dropdown-item" href="/updateCustomerForm">Update a customer</a>
-                    </div>
-                </li>
             </ul>
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">

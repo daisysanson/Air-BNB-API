@@ -45,13 +45,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(siteUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
-
+///login is broken ;( 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
                 .antMatchers("/login/**").permitAll()
+                .antMatchers("/apartment/**").access("USER_HOST")
                 .antMatchers("/registrationForm/**").permitAll()
                 .antMatchers("/registrationResult/**").permitAll()
                 .antMatchers("/dashboard/**").permitAll().anyRequest()
@@ -59,9 +60,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").failureUrl("/login?error=true")
                 .usernameParameter("email")
                 .passwordParameter("password")
+
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and().exceptionHandling();
+                .logoutSuccessUrl("/").and().exceptionHandling().and()
+
+                .exceptionHandling();
     }
 
 
@@ -73,3 +77,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+
+//                Do we want this at later date
+//                .deleteCookies("my-remember-me-cookie")
+//                .permitAll()
+//                .and()
+//                .rememberMe()
+//                //.key("my-secure-key")
+//                .rememberMeCookieName("my-remember-me-cookie")
+//                .tokenRepository(persistentTokenRepository())
+//                .tokenValiditySeconds(24 * 60 * 60)
+//                .and()

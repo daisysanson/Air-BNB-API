@@ -1,6 +1,9 @@
 package hello.controller;
 
+import hello.dao.RoleRepository;
+import hello.model.Role;
 import hello.model.User;
+import hello.service.RoleService;
 import hello.service.SiteUserDetails;
 import hello.service.UserService;
 
@@ -30,22 +33,35 @@ import java.util.List;
 
 @Controller
 public class LoginController {
+    public static final String REDIRECT= "redirect:registrationForm";
     static Logger log = Logger.getLogger(LoginController.class);
+    private UserService userService;
+    private RoleService roleService;
 
     @Autowired
-    private UserService userService;
+    public LoginController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping(value = "/login")
     public String login(Model model) {
         model.addAttribute("title", "Login");
         return "login";
     }
 
+    @GetMapping("/index")
+    public String getHomePage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("loggedinuser", authentication.getName());
+        model.addAttribute("title", "Home");
+        return "index";
+    }
 
     @GetMapping("/registrationForm")
     public String registration(Model model) {
         User user = new User();
+        model.addAttribute("bob", roleService.getAllRoles());
         model.addAttribute("user", user);
         model.addAttribute("title", "Register an Account");
 
@@ -59,6 +75,7 @@ public class LoginController {
         List<BindingResult> listOfErrorMessages = new ArrayList<>();
 
         User userExists = userService.findUserByEmail(user.getEmail());
+        System.out.print(user.getRoles().isEmpty());
 
         if (userExists != null) {
             redirectAttributes.addFlashAttribute("rejectMessage", "Sorry! That email has already been used!");

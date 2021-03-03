@@ -9,13 +9,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2>Customer details: </h2>
-
-            <span sec:authentication="principal.authorities">Roles</span>
+            <h2>Select Your Apartment: </h2>
 
             <form action="#" th:action="@{/newBooking}" th:object="${booking}" method="POST">
                 <div class="form-group">
-                    <input type="text" th:value="${user}" name="User"/>
+                    <input  type="hidden"  th:value="${user}" name="User"/>
                 </div>
                     <select th:field="*{apartment.id}">
                         <option th:each="apartment : ${apartments}"

@@ -181,9 +181,10 @@ margin-right:20px;}
     border: 2px solid #ff0066;
 }
 
-#customers {
-    background-size: cover;
-}
+#roleSelect {
+margin:10px;
+margin-top:26px;
+ position: align; }
 
 #apartments {
     background-size: cover;

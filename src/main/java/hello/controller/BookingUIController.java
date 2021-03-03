@@ -8,11 +8,11 @@ import hello.model.User;
 import hello.model.UserUtil;
 import hello.service.ApartmentService;
 import hello.service.BookingService;
-import hello.service.CustomerService;
 import hello.service.SiteUserDetails;
 import hello.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -37,14 +37,13 @@ public class BookingUIController {
 
     private BookingService bookingService;
     private ApartmentService apartmentService;
-    private CustomerService customerService;
+//    private CustomerService customerService;
     private UserService userService;
 
     @Autowired
-    public BookingUIController(BookingService bookingService, ApartmentService apartmentService, CustomerService customerService, UserService userService) {
+    public BookingUIController(BookingService bookingService, ApartmentService apartmentService,  UserService userService) {
         this.bookingService = bookingService;
         this.apartmentService = apartmentService;
-        this.customerService = customerService;
         this.userService = userService;
 
     }
@@ -52,6 +51,7 @@ public class BookingUIController {
     static Logger log = Logger.getLogger(BookingUIController.class);
 
 
+    @PreAuthorize("@securityService.hasAccess(2)")
     @GetMapping("/booking")
     public String showBookingLandingPage(Model model) {
         model.addAttribute("activeLink", "Booking");

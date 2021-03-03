@@ -18,23 +18,25 @@ public class AirBnbApplication {
     public static void main(String[] args) {
         SpringApplication.run(AirBnbApplication.class, args);
         BasicConfigurator.configure();
+
     }
+
     @Bean
-    public MessageSource messageSource() {
+    public static MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:messages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
     @Bean
-    public LocalValidatorFactoryBean validator() {
+    public static LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
 
     @Bean
-    CommandLineRunner init(RoleRepository roleRepository) {
+    public static CommandLineRunner init(RoleRepository roleRepository) {
 
         return args -> {
 
