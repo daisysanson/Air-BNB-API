@@ -32,12 +32,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.NoSuchElementException;
 
+
 @Controller
 public class BookingUIController {
 
     private BookingService bookingService;
     private ApartmentService apartmentService;
-//    private CustomerService customerService;
     private UserService userService;
 
     @Autowired
@@ -51,7 +51,6 @@ public class BookingUIController {
     static Logger log = Logger.getLogger(BookingUIController.class);
 
 
-    @PreAuthorize("@securityService.hasAccess(2)")
     @GetMapping("/booking")
     public String showBookingLandingPage(Model model) {
         model.addAttribute("activeLink", "Booking");

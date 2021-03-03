@@ -28,9 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private CustomAuthHandler customAuthHandler;
-    
+//    @Autowired
+//    private CustomAuthHandler customAuthHandler;
+
 
     @Bean
     public SiteUserDetailsService mongoUserDetails() {
@@ -45,46 +45,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(siteUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
-///login is broken ;( 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/","/index").permitAll()
                 .antMatchers("/login/**").permitAll()
-                .antMatchers("/apartment/**").access("USER_HOST")
                 .antMatchers("/registrationForm/**").permitAll()
                 .antMatchers("/registrationResult/**").permitAll()
-                .antMatchers("/dashboard/**").permitAll().anyRequest()
-                .authenticated().and().csrf().disable().formLogin().successHandler(customAuthHandler)
-                .loginPage("/login").failureUrl("/login?error=true")
+                .antMatchers("/dashboard/**").permitAll()
+                .antMatchers("/booking").hasAuthority("USER_CUSTOMER")
+                .and().csrf().disable()
+                .formLogin()
+                .loginPage("/login").failureUrl("/login?error=true").permitAll()
                 .usernameParameter("email")
                 .passwordParameter("password")
 
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and().exceptionHandling().and()
+                .logoutSuccessUrl("/index").and().exceptionHandling().and()
 
                 .exceptionHandling();
     }
 
-
     @Override
-    public void configure(WebSecurity web) throws Exception {
+     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
                 .antMatchers("/resources/**", "/static/**", "css/css/**", "js/js/**", "/images/**", "/vendor/ **");
     }
 
-}
 
-//                Do we want this at later date
-//                .deleteCookies("my-remember-me-cookie")
-//                .permitAll()
-//                .and()
-//                .rememberMe()
-//                //.key("my-secure-key")
-//                .rememberMeCookieName("my-remember-me-cookie")
-//                .tokenRepository(persistentTokenRepository())
-//                .tokenValiditySeconds(24 * 60 * 60)
-//                .and()
+}

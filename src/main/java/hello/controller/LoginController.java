@@ -1,7 +1,4 @@
 package hello.controller;
-
-import hello.dao.RoleRepository;
-import hello.model.Role;
 import hello.model.User;
 import hello.service.RoleService;
 import hello.service.SiteUserDetails;
@@ -33,7 +30,7 @@ import java.util.List;
 
 @Controller
 public class LoginController {
-    public static final String REDIRECT= "redirect:registrationForm";
+    public static final String REDIRECT = "redirect:registrationForm";
     static Logger log = Logger.getLogger(LoginController.class);
     private UserService userService;
     private RoleService roleService;

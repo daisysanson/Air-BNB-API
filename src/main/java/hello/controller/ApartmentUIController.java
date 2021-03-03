@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@PreAuthorize("hasRole('USER_HOST')")
+
 public class ApartmentUIController {
     private ApartmentService apartmentService;
 
