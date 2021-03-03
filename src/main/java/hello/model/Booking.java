@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Document(collection = "bookings")
 public class Booking {
@@ -16,6 +17,8 @@ public class Booking {
 
     @DBRef
     private Apartment apartment;
+
+    private Date bookingDate;
 
     public Booking(User user, Apartment apartment) {
         this.user = user;
@@ -47,6 +50,14 @@ public class Booking {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
     }
 }
 

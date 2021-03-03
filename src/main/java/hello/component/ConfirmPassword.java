@@ -16,7 +16,7 @@ import static java.lang.annotation.ElementType.FIELD;
 @Target({ElementType.TYPE, FIELD, ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 
-public @interface  ConfirmPassword {
+public @interface ConfirmPassword {
 
     String message() default "Invalid Password";
     Class<?>[] groups() default {};

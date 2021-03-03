@@ -4,10 +4,13 @@ import hello.dao.BookingRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
 import hello.model.Booking;
+import hello.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,6 +35,16 @@ public class BookingService {
         return repository.findById(savedBooking.getId()).orElse(null);
     }
 
+    public List<Booking> getAllBookingsForUser(User user){
+        List<Booking> userBookings = new ArrayList<>();
+        List<Booking> bookings = repository.findAll();
+        for (Booking booking : bookings) {
+            if (booking.getUser().getId().equals(user.getId())) {
+                userBookings.add(booking);
+            }
+        }
+        return userBookings;
+    }
 
 
     public boolean deleteBookingById(String id) {
