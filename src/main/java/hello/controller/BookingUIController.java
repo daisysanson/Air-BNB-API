@@ -3,7 +3,6 @@ package hello.controller;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
 import hello.model.Booking;
-import hello.model.BookingRequest;
 import hello.model.User;
 import hello.model.UserUtil;
 import hello.service.ApartmentService;
@@ -63,6 +62,7 @@ public class BookingUIController {
     public String showAddBookingForm(Model model) {
         User user1 = userService.findUserByEmail(UserUtil.userName());
         model.addAttribute("booking", new Booking());
+        model.addAttribute("bookings" , bookingService.getAllBookings());
         model.addAttribute("apartments", apartmentService.getAllApartments());
         model.addAttribute("user", user1.getId());
         model.addAttribute("activeLink", "Booking");
@@ -82,11 +82,6 @@ public class BookingUIController {
         model.addAttribute("title", "Success!");
 
         return "newBooking";
-//        } catch (NotFoundException e) {
-//            log.info("Customer name not found");
-//        }
-//        return "notFound";
-//    }
     }
 
 

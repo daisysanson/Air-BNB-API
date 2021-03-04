@@ -1,7 +1,70 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="footer">
+<footer xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:fragment="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 footer-column">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <span class="footer-title">Quick Links</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">View Apartments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Your Profile</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4 footer-column">
+                <ul class="nav flex-column">
+                        <span class="footer-title">Company Information</span>
+                    <p></p>
+                </ul>
+            </div>
+            <div class="col-md-4 footer-column">
+                <ul class="nav flex-column">
+                        <span class="footer-title">Contact & Support</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
+        <div class="text-center"><i class="fas fa-ellipsis-h"></i></div>
 
-</div>
-</html>
+        <div class="row text-center">
+            <div class="col-md-4 box">
+        <span class="copyright quick-links">Copyright &copy; BNBBOOK <script>document.write(new Date().getFullYear())</script>
+        </span>
+            </div>
+            <div class="col-md-4 box">
+                <ul class="list-inline social-buttons">
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4 box">
+                <ul class="list-inline quick-links">
+                    <li class="list-inline-item">
+                        <a href="#">Privacy Policy</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">Terms of Use</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

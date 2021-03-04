@@ -1,14 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="Fragments/head :: head"></head>/>
+<head th:replace="Fragments/head :: head"></head>
 
 <body>
 
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 <div class="container">
-    <h2>Booking added successfully!: </h2>
+    <h2>Booking added successfully! </h2>
+<h3> Thank you for booking!
+     We will see you soon!
+     Please don't forget to bring some ID to present to your host </h3>
+    <div class="col-md-6">
+    <div class="left-box">
+        <img src="imag/beach.jpeg" alt="" class="img-fluid">
+    </div>
 
 
     <table class="table table-striped">
@@ -37,6 +44,8 @@
             <th>Apartment Guest Capacity</th>
             <th>Apartment Rooms</th>
             <th>Apartment Rating</th>
+            <th>Check In Date</th>
+            <th>Check Out Date</th>
         </tr>
         <tr>
             <td th:text="${booking.getApartment().getId()}"></td>
@@ -45,6 +54,8 @@
             <td th:text="${booking.getApartment().getGuestCapacity()}"></td>
             <td th:text="${booking.getApartment().getRooms()}"></td>
             <td th:text="${booking.getApartment().getRating()}"></td>
+            <td th:text="${booking.getStartDate()}"></td>
+            <td th:text="${booking.getEndDate()}"></td>
         </tr>
     </table>
 

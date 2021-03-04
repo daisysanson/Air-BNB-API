@@ -1,5 +1,49 @@
+
+
+a {
+  color: $link-light-grey;
+}
+a:hover {
+  color: $#ff0066;
+  text-decoration: none;
+}
+
+::selection {
+  background: $#ff0066;
+  text-shadow: none;
+}
+
 footer {
-    margin-top: 20px;
-    width: 100%;
-    margin-bottom: 20px;
+  padding: 2rem 0;
+  background-color: #F7F7F7;
+}
+
+.footer-title{
+font-family: 'Questrial', sans-serif;
+font-size: 20px;
+font-color:black;
+
+}
+
+a.nav-link:
+padding: 20px;
+
+.footer-column {
+  text-align: center;
+
+.list-inline quick-links{
+
+}
+
+ul.social-buttons {
+  margin-bottom: 0;
+}
+.list-inline-item{
+text-align:center;
+}
+
+.copyright quick-links{
+font-family: 'Scope One', serif;
+}
+
 }

@@ -1,8 +1,10 @@
 package hello.service;
 
+import hello.dao.ApartmentRepository;
 import hello.dao.BookingRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
+import hello.model.Apartment;
 import hello.model.Booking;
 import hello.model.User;
 import org.apache.commons.lang3.StringUtils;
@@ -16,11 +18,16 @@ import java.util.List;
 @Service
 public class BookingService {
     private BookingRepository repository;
+    private ApartmentService apartmentService;
+
 
     @Autowired
-    public BookingService(BookingRepository repository) {
+    public BookingService(BookingRepository repository, ApartmentService apartmentService) {
         this.repository = repository;
+        this.apartmentService = apartmentService;
     }
+
+
 
     public Booking selectBookingById(String id) {
         return repository.findById(id).get();
@@ -31,9 +38,17 @@ public class BookingService {
     }
 
     public Booking addBooking(Booking booking) {
+//        List<Apartment> apartmentList = apartmentService.getAllApartments();
+        List<Booking> bookingList = getAllBookings();
+
         Booking savedBooking = repository.save(booking);
-        return repository.findById(savedBooking.getId()).orElse(null);
-    }
+//        for (Booking booking1 : bookingList) {
+//            if (booking.getApartment().getId().equals(booking1.getApartment().getId()) && booking.getStartDate().equals(booking1.getStartDate())) {
+//                throw new BadRequestException("no");
+//            }
+//        }
+            return repository.findById(savedBooking.getId()).orElse(null);
+        }
 
     public List<Booking> getAllBookingsForUser(User user){
         List<Booking> userBookings = new ArrayList<>();

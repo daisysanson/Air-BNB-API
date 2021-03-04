@@ -1,8 +1,10 @@
 package hello.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -18,11 +20,22 @@ public class Booking {
     @DBRef
     private Apartment apartment;
 
-    private Date bookingDate;
+    @Field(value = "startDate")
+    private Date startDate;
 
-    public Booking(User user, Apartment apartment) {
+    @Field(value = "endDate")
+    private Date endDate;
+
+
+
+    public Booking(User user, Apartment apartment,
+    @JsonProperty("start_date") Date startDate,
+                   @JsonProperty("end_date") Date endDate) {
         this.user = user;
         this.apartment = apartment;
+        this.startDate = startDate;
+        this.endDate = endDate;
+
     }
 
     public Booking() {
@@ -52,12 +65,20 @@ public class Booking {
         this.id = id;
     }
 
-    public Date getBookingDate() {
-        return bookingDate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }
 

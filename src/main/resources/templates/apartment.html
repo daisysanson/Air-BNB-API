@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec=xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="Fragments/head :: head"/>
 
 <body>
@@ -16,8 +15,10 @@
     </div>
 </section>
 
-<div class="container">
-    <h3>Make a selection:</h3>
+<div sec:authorize="hasAuthority('USER_HOST')">
+     <div class="container">
+    <h3>Welcome Host!
+        Please make a selection:</h3>
     <ul class="list-group list-group-flush">
         <li class="list-group-item"><a href="/addApartment">Add an apartment</a></li>
         <li class="list-group-item"><a href="/findAnApartment">Find an apartment</a></li>
@@ -26,7 +27,15 @@
         <li class="list-group-item"><a href="/updateApartmentForm">Update an apartment</a></li>
     </ul>
 </div>
-
+</div>
+</body>
+    <div sec:authorize access="hasAuthority('USER_CUSTOMER')" class="container">
+            <h3>Welcome Customer! Make a selection:</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><a href="/findAnApartment">Find an apartment</a></li>
+                <li class="list-group-item"><a href="/showAllApartments">List of all apartments</a></li>
+            </ul>
+        </div>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
 </body>

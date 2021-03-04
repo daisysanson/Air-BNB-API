@@ -26,6 +26,7 @@ public class ApartmentUIController {
     }
 
 
+    @PreAuthorize("hasRole('USER_HOST')")
     @GetMapping("/apartment")
     public String getApartmentLandingPage(Model model) {
         model.addAttribute("activeLink", "Apartment");
