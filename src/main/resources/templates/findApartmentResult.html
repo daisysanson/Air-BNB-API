@@ -18,6 +18,7 @@
             <th>Guest Capacity</th>
             <th>Rating</th>
             <th>Rooms</th>
+            <th>Your choices</th>
         </tr>
         <td th:text="${apartment.id}"></td>
         <td th:text="${apartment.title}"></td>
@@ -25,6 +26,7 @@
         <td th:text="${apartment.guestCapacity}"></td>
         <td th:text="${apartment.rating}"></td>
         <td th:text="${apartment.rooms}"></td>
+        <td> <a th:href="@{/bookASpecificApartment/{id}(id=${apartment.id})}">Book</a></td>
         </tr>
     </table>
 </div>

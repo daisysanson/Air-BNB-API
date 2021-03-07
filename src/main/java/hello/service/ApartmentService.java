@@ -34,6 +34,25 @@ public class ApartmentService {
     }
 
 
+
+    public Apartment selectApartmentByTitle(String title) {
+        Apartment apartment = apartmentRepository.findByTitle(title);
+        if (StringUtils.isBlank(apartment.getId())) {
+            log.info("No id entered");
+            throw new BadRequestException("Please enter an id");
+        }
+        if (!apartmentRepository.existsById(apartment.getId())) {
+            log.info("id not found");
+            throw new NotFoundException("Cannot find this apartment");
+        } else {
+            Optional<Apartment> searchApartments = apartmentRepository.findById(apartment.getId());
+            status(HttpStatus.OK).body(searchApartments.get());
+
+            return apartmentRepository.findById(apartment.getId()).get();
+        }
+    }
+
+
     public Apartment selectApartmentById(String id) {
         if (StringUtils.isBlank(id)) {
             log.info("No id entered");

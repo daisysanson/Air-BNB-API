@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-
 public class ApartmentUIController {
     private ApartmentService apartmentService;
 
@@ -26,7 +25,6 @@ public class ApartmentUIController {
     }
 
 
-    @PreAuthorize("hasRole('USER_HOST')")
     @GetMapping("/apartment")
     public String getApartmentLandingPage(Model model) {
         model.addAttribute("activeLink", "Apartment");
@@ -44,11 +42,12 @@ public class ApartmentUIController {
     }
 
     @PostMapping("/findApartmentResult")
-    public String showFindApartmentResult(@ModelAttribute("apartment") Apartment apartment, @RequestParam("id") String id, Model model) {
+    public String showFindApartmentResult(@ModelAttribute("apartment") Apartment apartment, @RequestParam("title") String title, Model model) {
         try {
             model.addAttribute("activeLink", "Apartment");
             model.addAttribute("title", "Result!");
-            model.addAttribute("apartment", apartmentService.selectApartmentById(id));
+            model.addAttribute("apartment", apartmentService.selectApartmentByTitle(title));
+
         } catch (BadRequestException e) {
             return "badRequest";
         } catch (NotFoundException e) {
@@ -65,6 +64,8 @@ public class ApartmentUIController {
         model.addAttribute("title", "All Apartments");
         return "showAllApartments";
     }
+
+
 
     @GetMapping("/addApartment")
     public String showAddForm(Model model) {

@@ -15,27 +15,29 @@
     </div>
 </section>
 
+
 <div sec:authorize="hasAuthority('USER_HOST')">
-     <div class="container">
-    <h3>Welcome Host!
-        Please make a selection:</h3>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"><a href="/addApartment">Add an apartment</a></li>
-        <li class="list-group-item"><a href="/findAnApartment">Find an apartment</a></li>
-        <li class="list-group-item"><a href="/showAllApartments">List of all apartments</a></li>
-        <li class="list-group-item"><a href="/deleteApartmentForm">Delete an apartment</a></li>
-        <li class="list-group-item"><a href="/updateApartmentForm">Update an apartment</a></li>
-    </ul>
-</div>
+    <div class="container">
+        <h3>Welcome Host!
+            Please make a selection:</h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><a href="/addApartment">Add an apartment</a></li>
+            <li class="list-group-item"><a href="/findAnApartment">Find an apartment</a></li>
+            <li class="list-group-item"><a href="/showAllApartments">List of all apartments</a></li>
+            <li class="list-group-item"><a href="/deleteApartmentForm">Delete an apartment</a></li>
+            <li class="list-group-item"><a href="/updateApartmentForm">Update an apartment</a></li>
+        </ul>
+    </div>
 </div>
 </body>
-    <div sec:authorize access="hasAuthority('USER_CUSTOMER')" class="container">
-            <h3>Welcome Customer! Make a selection:</h3>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="/findAnApartment">Find an apartment</a></li>
-                <li class="list-group-item"><a href="/showAllApartments">List of all apartments</a></li>
-            </ul>
-        </div>
+    <div class="container">
+        <h3>Welcome Customer! Make a selection:</h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><a href="/findAnApartment">Find an apartment</a></li>
+            <li class="list-group-item"><a href="/showAllApartments">List of all apartments</a></li>
+        </ul>
+    </div>
+</div>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
 </body>

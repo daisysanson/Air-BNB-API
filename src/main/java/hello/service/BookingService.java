@@ -38,15 +38,7 @@ public class BookingService {
     }
 
     public Booking addBooking(Booking booking) {
-//        List<Apartment> apartmentList = apartmentService.getAllApartments();
-        List<Booking> bookingList = getAllBookings();
-
         Booking savedBooking = repository.save(booking);
-//        for (Booking booking1 : bookingList) {
-//            if (booking.getApartment().getId().equals(booking1.getApartment().getId()) && booking.getStartDate().equals(booking1.getStartDate())) {
-//                throw new BadRequestException("no");
-//            }
-//        }
             return repository.findById(savedBooking.getId()).orElse(null);
         }
 

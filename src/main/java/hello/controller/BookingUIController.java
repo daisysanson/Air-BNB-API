@@ -2,6 +2,7 @@ package hello.controller;
 
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
+import hello.model.Apartment;
 import hello.model.Booking;
 import hello.model.User;
 import hello.model.UserUtil;
@@ -11,24 +12,14 @@ import hello.service.SiteUserDetails;
 import hello.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.util.NoSuchElementException;
 
 
@@ -60,11 +51,11 @@ public class BookingUIController {
 
     @GetMapping("/newBookingCreate")
     public String showAddBookingForm(Model model) {
-        User user1 = userService.findUserByEmail(UserUtil.userName());
+        User user = userService.findUserByEmail(UserUtil.userName());
         model.addAttribute("booking", new Booking());
         model.addAttribute("bookings" , bookingService.getAllBookings());
         model.addAttribute("apartments", apartmentService.getAllApartments());
-        model.addAttribute("user", user1.getId());
+        model.addAttribute("user", user.getId());
         model.addAttribute("activeLink", "Booking");
         model.addAttribute("title", "Create a New Booking");
 
@@ -75,6 +66,7 @@ public class BookingUIController {
 
     @PostMapping(value = "/newBooking")
     public String showBooking(@ModelAttribute("booking") Booking booking,Model model){
+
         log.info(UserUtil.userName());
 
         model.addAttribute("booking", bookingService.addBooking(booking));
@@ -83,6 +75,20 @@ public class BookingUIController {
 
         return "newBooking";
     }
+
+
+    @GetMapping(value = "/bookASpecificApartment/{id}")
+    public String bookASpecificApartment(Model model, @PathVariable("id") String apartmentId){
+        User user = userService.findUserByEmail(UserUtil.userName());
+        model.addAttribute("booking", new Booking());
+        model.addAttribute("apartment", apartmentService.selectApartmentById(apartmentId));
+        model.addAttribute("user", user.getId());
+        model.addAttribute("activeLink", "Booking");
+        model.addAttribute("title", "Create a New Booking");
+
+        return "bookASpecificApartment";
+    }
+
 
 
     @GetMapping("/getBooking")
@@ -95,7 +101,7 @@ public class BookingUIController {
     }
 
     @PostMapping("/getBookingResult")
-    public String showFindApartmentResult(@ModelAttribute("booking") Booking booking,
+    public String showFindBookingResult(@ModelAttribute("booking") Booking booking,
                                           @RequestParam("id") String id,
                                           Model model) {
         try {

@@ -20,23 +20,12 @@ public class Booking {
     @DBRef
     private Apartment apartment;
 
-    @Field(value = "startDate")
-    private Date startDate;
 
-    @Field(value = "endDate")
-    private Date endDate;
-
-
-
-    public Booking(User user, Apartment apartment,
-    @JsonProperty("start_date") Date startDate,
-                   @JsonProperty("end_date") Date endDate) {
+    public Booking(User user, Apartment apartment) {
         this.user = user;
         this.apartment = apartment;
-        this.startDate = startDate;
-        this.endDate = endDate;
-
     }
+
 
     public Booking() {
     }
@@ -65,21 +54,6 @@ public class Booking {
         this.id = id;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
 }
 
 

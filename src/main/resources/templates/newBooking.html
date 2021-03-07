@@ -44,8 +44,6 @@
             <th>Apartment Guest Capacity</th>
             <th>Apartment Rooms</th>
             <th>Apartment Rating</th>
-            <th>Check In Date</th>
-            <th>Check Out Date</th>
         </tr>
         <tr>
             <td th:text="${booking.getApartment().getId()}"></td>
@@ -54,11 +52,9 @@
             <td th:text="${booking.getApartment().getGuestCapacity()}"></td>
             <td th:text="${booking.getApartment().getRooms()}"></td>
             <td th:text="${booking.getApartment().getRating()}"></td>
-            <td th:text="${booking.getStartDate()}"></td>
-            <td th:text="${booking.getEndDate()}"></td>
         </tr>
     </table>
-
+        <input class="btn btn-lg btn-block display-3"type="button" value="Go Back!" onclick="history.back(-1)" />
 </div>
 
 <div th:replace="fragments/footer :: footer"></div>
