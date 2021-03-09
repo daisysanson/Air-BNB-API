@@ -40,13 +40,6 @@ public class AirBnbApplication {
 
         return args -> {
 
-            Role adminRole = roleRepository.findByRole("ADMIN");
-            if (adminRole == null) {
-                Role newAdminRole = new Role();
-                newAdminRole.setRole("ADMIN");
-                roleRepository.save(newAdminRole);
-            }
-
             Role userCustomer = roleRepository.findByRole("USER_CUSTOMER");
             if (userCustomer == null) {
                 Role newUserRole = new Role();

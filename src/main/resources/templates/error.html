@@ -10,11 +10,14 @@
 
 <h1 th:text="${status}|"></h1>
 <h2 th:text="${message}"></h2>
+<h2> Please make sure you have the correct rights to access this page!</h2>
 
 
-<button class="btn btn-lg btn-block display-3" onclick="goBack">Go Back</button>
-<a href="index.html">Home</a>
+<input class="btn btn-lg btn-block display-3"type="button" value="Go Back!" onclick="history.back(-1)" />
 
+<a href="index">Home</a>
+
+<div th:replace="fragments/scripts :: scripts"></div>
 <div th:replace="fragments/footer :: footer"></div>
 
 </body>

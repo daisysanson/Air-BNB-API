@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="Fragments/head :: head"></head>
 <body><nav th:replace="Fragments/nav :: nav"></nav>
@@ -46,7 +46,13 @@
                                             <label class="form-control-label" for="input-address">Address</label>
                                             <input id="input-address" class="form-control form-control-alternative" placeholder="Address" value="" type="text">
                                         </div>
-                                        <h6 class="heading-small text-muted mb-4">Your Bookings</h6>
+                                        <div sec:authorize="hasAuthority('USER_HOST')">
+                                                <h6 class="heading-small">Your Apartments</h6>
+                                        </div>
+                                        <div sec:authorize="hasAuthority('USER_CUSTOMER')">
+                                                <h6 class="heading-small">Your Bookings: </h6>
+                                        </div>
+<!--                                     <h6 class="heading-small text-muted mb-4">Your Bookings</h6>-->
                                         <table class="table table-striped">
                                             <tr>
                                                 <th>ID</th>
@@ -63,7 +69,13 @@
                                             <td th:text="${booking.apartment.guestCapacity}"></td>
                                             <td th:text="${booking.apartment.rating}"></td>
                                             <td th:text="${booking.apartment.rooms}"></td>
+<!--                                            <div sec:authorize="hasAuthority('USER_HOST')">-->
+<!--                                            <td> -->
                                         </tr>
+                                        </table>
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

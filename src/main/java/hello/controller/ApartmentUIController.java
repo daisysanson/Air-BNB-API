@@ -1,27 +1,37 @@
 package hello.controller;
 
 import hello.exceptions.BadRequestException;
+import hello.exceptions.ForbiddenException;
 import hello.exceptions.NotFoundException;
 import hello.model.Apartment;
+import hello.model.HostBooking;
+import hello.model.User;
+import hello.model.UserUtil;
 import hello.service.ApartmentService;
+import hello.service.HostBookingService;
+import hello.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException.Forbidden;
 
 
 @Controller
 public class ApartmentUIController {
     private ApartmentService apartmentService;
+    private UserService userService;
+    private HostBookingService hostBookingService;
 
 
     @Autowired
-    public ApartmentUIController(ApartmentService apartmentService) {
+    public ApartmentUIController(ApartmentService apartmentService, UserService userService, HostBookingService hostBookingService) {
         this.apartmentService = apartmentService;
+        this.userService = userService;
+        this.hostBookingService = hostBookingService;
     }
 
 
@@ -69,8 +79,11 @@ public class ApartmentUIController {
 
     @GetMapping("/addApartment")
     public String showAddForm(Model model) {
+
         Apartment apartment = new Apartment();
+        HostBooking hostBooking = new HostBooking();
         model.addAttribute("apartment", apartment);
+        model.addAttribute("host", hostBooking);
         model.addAttribute("title", "Add a New Apartment");
         return "addApartment";
     }
@@ -78,6 +91,7 @@ public class ApartmentUIController {
 
     @PostMapping("/apartmentResult")
     public String showAddCustomerForm(@ModelAttribute("apartment") Apartment apartment,
+                                      @ModelAttribute("host") HostBooking hostBooking,
                                       @RequestParam("title") String title,
                                       @RequestParam("address") String address,
                                       @RequestParam("guestCapacity") int guestCapacity,
@@ -85,6 +99,10 @@ public class ApartmentUIController {
                                       @RequestParam("rooms") int rooms, Model model) {
         try {
             model.addAttribute("apartment", apartmentService.addApartment(apartment));
+            User user = userService.findUserByEmail(UserUtil.userName());
+            hostBooking.setUser(user);
+            hostBooking.setApartment(apartment);
+            model.addAttribute("host", hostBookingService.addHostBooking(hostBooking));
             model.addAttribute("title", "Success");
             return "apartmentResult";
         } catch (BadRequestException e) {
@@ -133,6 +151,8 @@ public class ApartmentUIController {
             model.addAttribute("activeLink", "Apartment");
             model.addAttribute("title", "Success!");
             return "updateApartmentResult";
+        } catch (ForbiddenException e){
+            return "forbidden";
         } catch (BadRequestException e) {
             return "badRequest";
         } catch (NotFoundException e) {

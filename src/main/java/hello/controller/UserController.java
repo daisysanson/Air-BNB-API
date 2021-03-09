@@ -35,12 +35,6 @@ public class UserController {
         return ResponseEntity.ok(userRepository.findById(id));
     }
 
-//    @GetMapping(path = "/{email}")
-//    public ResponseEntity<Object> getUserByEmail(@PathVariable("email") String email) {
-//        User users = userService.findUserByEmail(email);
-//        return ResponseEntity.status(HttpStatus.OK).body(users);
-//
-//    }
 
     @PostMapping(value = "/")
     public ResponseEntity<Object> addUser(@RequestBody User user) {

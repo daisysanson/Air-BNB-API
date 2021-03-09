@@ -4,6 +4,9 @@ import hello.dao.ApartmentRepository;
 import hello.exceptions.BadRequestException;
 import hello.exceptions.NotFoundException;
 import hello.model.Apartment;
+import hello.model.HostBooking;
+import hello.model.User;
+import hello.model.UserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,14 +24,19 @@ import static org.springframework.http.ResponseEntity.status;
 public class ApartmentService {
 
     private ApartmentRepository apartmentRepository;
+    private UserService userService;
+    private HostBookingService hostBookingService;
 
 
     @Autowired
-    public ApartmentService(ApartmentRepository apartmentRepository) {
+    public ApartmentService(ApartmentRepository apartmentRepository, UserService userService, HostBookingService hostBookingService) {
         this.apartmentRepository = apartmentRepository;
+        this.userService = userService;
+        this.hostBookingService = hostBookingService;
     }
 
     static Logger log = Logger.getLogger(ApartmentService.class);
+
 
     public ApartmentService() {
 
@@ -110,7 +119,25 @@ public class ApartmentService {
     }
 
 
+    public boolean isUserHostOfApartment(String apartmentId) {
+        User user = userService.findUserByEmail(UserUtil.userName());
+//        List<HostBooking> userBookings = new ArrayList<>();
+        List<HostBooking> bookings = hostBookingService.getAllHostBookingsForUser(user);
+        for (HostBooking booking : bookings) {
+            if (apartmentId.equals(booking.getApartment().getId()) && (user.getId().equals(booking.getUser().getId()))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
     public Apartment updateApartmentById(@PathVariable String id, Apartment apartmentToUpdate) {
+
+        if(!isUserHostOfApartment(id)){
+            throw new BadRequestException("You do not own this apartment!");
+        }
 
         if (StringUtils.isBlank(apartmentToUpdate.getTitle()) || ((StringUtils.isBlank(apartmentToUpdate.getAddress())))) {
             log.info("title or address not entered");

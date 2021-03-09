@@ -2,9 +2,13 @@ package hello.controller;
 
 
 import hello.model.Booking;
+import hello.model.HostBooking;
+import hello.model.Role;
 import hello.model.User;
 import hello.model.UserUtil;
 import hello.service.BookingService;
+import hello.service.HostBookingService;
+import hello.service.RoleService;
 import hello.service.SiteUserDetails;
 import hello.service.UserService;
 import org.apache.log4j.Logger;
@@ -20,43 +24,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserUIController {
     private UserService userService;
     private BookingService bookingService;
+    private HostBookingService hostBookingService;
 
     @Autowired
-    public UserUIController(UserService userService, BookingService bookingService) {
+    public UserUIController(UserService userService, BookingService bookingService, HostBookingService hostBookingService) {
         this.userService = userService;
         this.bookingService = bookingService;
+        this.hostBookingService = hostBookingService;
     }
 
 
     static Logger log = Logger.getLogger(UserUIController.class);
 
     @GetMapping(value = "/account")
-    public String getUserAccount(Model model){
+    public String getUserAccount(Model model) {
         model.addAttribute("activeLink", "Your Profile");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        User user1 = userService.findUserByEmail(UserUtil.userName());
-        model.addAttribute("user", user1);
-       model.addAttribute("bookings", bookingService.getAllBookingsForUser(user1));
+        User user = userService.findUserByEmail(UserUtil.userName());
+        model.addAttribute("user", user);
+        if (userService.hasRole("USER_HOST")){
+            model.addAttribute("bookings", hostBookingService.getAllHostBookingsForUser(user));
+        } else{
+        model.addAttribute("bookings", bookingService.getAllBookingsForUser(user));
+    }
         return "account";
     }
 
-//    @GetMapping("/account")
-//    public String viewUserAccountForm(
-//            @AuthenticationPrincipal SiteUserDetails userDetails,
-//            Model model) {
-//        String userEmail = userDetails.getUsername();
-//        User user = userService.findUserByEmail(userEmail);
-//
-//        model.addAttribute("user", user);
-//        model.addAttribute("pageTitle", "Account Details");
-//
-//        return "users/account_form";
-//    }
 
 }
