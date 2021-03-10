@@ -47,11 +47,12 @@ public class UserUIController {
         model.addAttribute("activeLink", "Your Profile");
         User user = userService.findUserByEmail(UserUtil.userName());
         model.addAttribute("user", user);
-        if (userService.hasRole("USER_HOST")){
+        if (userService.hasRole("USER_HOST")) {
             model.addAttribute("bookings", hostBookingService.getAllHostBookingsForUser(user));
-        } else{
-        model.addAttribute("bookings", bookingService.getAllBookingsForUser(user));
-    }
+        }
+        if (userService.hasRole("USER_CUSTOMER")) {
+            model.addAttribute("bookings", bookingService.getAllBookingsForUser(user));
+        }
         return "account";
     }
 

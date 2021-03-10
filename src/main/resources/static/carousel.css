@@ -79,6 +79,20 @@
   background: rgba(0, 0, 0, 0.75);
 }
 
+
+#slogan{
+padding-top:20px;
+color: #FF385C;
+}
+
+.heading{
+ background-style: white;
+ font-size: 30px;
+font-weight: 400;
+tl-letter-spacing: -0.02em;
+tl-line-height
+    }
+
 .is-hidden {
   display: none;
 }

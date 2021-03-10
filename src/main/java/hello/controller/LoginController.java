@@ -95,7 +95,7 @@ public class LoginController {
 
 
 
-
+///d
     @GetMapping("/error")
     public String redirectToError(Model model, Error error) {
         model.addAttribute("error", error);
@@ -108,18 +108,6 @@ public class LoginController {
 
 
 
-
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String dashboard(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        model.addAttribute("currentUser", user);
-        model.addAttribute("userName", "Welcome " + user.getUserName());
-        model.addAttribute("title", "Your Account!");
-        model.addAttribute("adminMessage", "Content Available Only for Users with Admin Role");
-
-        return "dashboard";
-    }
 
 
 }

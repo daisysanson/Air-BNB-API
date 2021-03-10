@@ -2,84 +2,102 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="Fragments/head :: head"></head>
-<body><nav th:replace="Fragments/nav :: nav"></nav>
-                    <div class="card-body">
-                        <form>
-                            <h6 class="heading-small text-muted mb-4">User information</h6>
-                            <div class="pl-lg-4">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="table table-striped">
-                                            <label class="form-control-label">Username</label>
-                                            <td class="form-control form-control-alternative"  th:text="${user.firstName}"></td>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="table">
-                                            <label class="form-control-label" for="input-email">Email address</label>
-                                            <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="Email Address">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group focused">
-                                            <label class="form-control-label" for="input-first-name">First name</label>
-                                            <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group focused">
-                                            <label class="form-control-label" for="input-last-name">Last name</label>
-                                            <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="my-4">
-                            <!-- Address -->
-                            <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                            <div class="pl-lg-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group focused">
-                                            <label class="form-control-label" for="input-address">Address</label>
-                                            <input id="input-address" class="form-control form-control-alternative" placeholder="Address" value="" type="text">
-                                        </div>
-                                        <div sec:authorize="hasAuthority('USER_HOST')">
-                                                <h6 class="heading-small">Your Apartments</h6>
-                                        </div>
-                                        <div sec:authorize="hasAuthority('USER_CUSTOMER')">
-                                                <h6 class="heading-small">Your Bookings: </h6>
-                                        </div>
-<!--                                     <h6 class="heading-small text-muted mb-4">Your Bookings</h6>-->
-                                        <table class="table table-striped">
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Title</th>
-                                                <th>Location</th>
-                                                <th>Guest Capacity</th>
-                                                <th>Rating</th>
-                                                <th>Rooms</th>
-                                            </tr>
-                                        <tr th:each="booking :${bookings}">
-                                            <td th:text="${booking.id}"></td>
-                                            <td th:text="${booking.apartment.title}"></td>
-                                            <td th:text="${booking.apartment.address}"></td>
-                                            <td th:text="${booking.apartment.guestCapacity}"></td>
-                                            <td th:text="${booking.apartment.rating}"></td>
-                                            <td th:text="${booking.apartment.rooms}"></td>
-<!--                                            <div sec:authorize="hasAuthority('USER_HOST')">-->
-<!--                                            <td> -->
-                                        </tr>
-                                        </table>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
 
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+<div class="container">
+    <form>
+        <h2 class="heading text-muted ">User information</h2>
+        <div class="pl-lg-4">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="table table-striped">
+                        <label class="form-control-label">Username</label>
+                        <input readonly class="form-control form-control-alternative" th:value="${user.userName}"/>
                     </div>
+                </div>
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">
+                    <div class="table">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <input readonly type="email" id="input-email" class="form-control form-control-alternative"
+                               th:value="${user.email}"/>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group focused">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        <input readonly type="text" id="input-first-name" class="form-control form-control-alternative"
+                               th:value="${user.firstName}">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group focused">
+                        <label class="form-control-label" for="input-last-name">Last name</label>
+                        <input readonly type="text" id="input-last-name" class="form-control form-control-alternative"
+                               th:value="${user.lastName}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h2 class="heading text-muted ">Contact Information</h2>
+        <div class="pl-lg-4">
+            <div class="row">
+                <span class="col-md-4">
+                    <div class="form-group focused">
+                        <label class="form-control-label" for="input-address">Address</label>
+                        <input readonly id="input-address" class="form-control form-control-alternative" placeholder="Address" th:value="${user.lastName}"/>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="pl-lg-4">
+            <div class="row">
+                <span id="booking-table" class="col-md-12">
+                    <div sec:authorize="hasAuthority('USER_HOST')">
+                        <h6 class="heading text-muted">Your Apartments</h6>
+                    </div>
+                    <div sec:authorize="hasAuthority('USER_CUSTOMER')">
+                        <h6 class="heading text-muted" >Your Bookings: </h6>
+                    </div>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Location</th>
+                            <th>Guest Capacity</th>
+                            <th>Rating</th>
+                            <th>Rooms</th>
+                            <th>Make a change</th>
+                        </tr>
+                        <tr th:each="booking :${bookings}">
+                            <td th:text="${booking.id}"></td>
+                            <td th:text="${booking.apartment.title}"></td>
+                            <td th:text="${booking.apartment.address}"></td>
+                            <td th:text="${booking.apartment.guestCapacity}"></td>
+                            <td th:text="${booking.apartment.rating}"></td>
+                            <td th:text="${booking.apartment.rooms}"></td>
+                            <span sec:authorize="hasAuthority('USER_HOST')">
+                                <td> <a th:href="@{/updateApartmentForm/{id}(id=${booking.apartment.id})}">Change</a></td>
+                            </span>
+                            <span sec:authorize="hasAuthority('USER_CUSTOMER')">
+                                <td> <a th:href="@{/updateApartmentForm/{id}(id=${booking.apartment.id})}">Change</a></td>
+                            </span>
+                        </tr>
+                    </table>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<div th:replace="fragments/scripts :: scripts"></div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
