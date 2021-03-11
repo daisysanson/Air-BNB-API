@@ -1,24 +1,37 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head th:replace="Fragments/head :: head"></head>
-
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+</head>
 <body>
 
-<div th:replace="fragments/scripts :: scripts"></div>
+
 <nav th:replace="Fragments/nav :: nav"></nav>
 
+<h1>Oops!</h1>
 <h1 th:text="${status}|"></h1>
 <h2 th:text="${message}"></h2>
-<h2> Please make sure you have the correct rights to access this page!</h2>
 
 
 <input class="btn btn-lg btn-block display-3"type="button" value="Go Back!" onclick="history.back(-1)" />
 
-<a href="index">Home</a>
 
-<div th:replace="fragments/scripts :: scripts"></div>
-<div th:replace="fragments/footer :: footer"></div>
+
+<footer th:replace="fragments/footer :: footer"></footer>
 
 </body>
+
+<script src="js/error.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/nav.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
 </html>

@@ -55,13 +55,18 @@ public class ApartmentUIController {
     @PostMapping("/findApartmentResult")
     public String showFindApartmentResult(@ModelAttribute("apartment") Apartment apartment, @RequestParam("title") String title, Model model) {
         try {
+
             model.addAttribute("activeLink", "Apartment");
             model.addAttribute("title", "Result!");
-            model.addAttribute("apartment", apartmentService.selectApartmentByTitle(title));
+
+            model.addAttribute("apartment", apartmentService.selectApartmentByTitle(apartment.getTitle()));
+
 
         } catch (BadRequestException e) {
             return "badRequest";
         } catch (NotFoundException e) {
+            return "notFound";
+        }catch (NullPointerException e) {
             return "notFound";
         }
         return "findApartmentResult";

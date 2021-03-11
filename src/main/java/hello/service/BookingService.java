@@ -3,10 +3,13 @@ package hello.service;
 import hello.dao.ApartmentRepository;
 import hello.dao.BookingRepository;
 import hello.exceptions.BadRequestException;
+import hello.exceptions.ForbiddenException;
 import hello.exceptions.NotFoundException;
 import hello.model.Apartment;
 import hello.model.Booking;
+import hello.model.HostBooking;
 import hello.model.User;
+import hello.model.UserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,18 +21,22 @@ import java.util.List;
 @Service
 public class BookingService {
     private BookingRepository repository;
-    private ApartmentService apartmentService;
+    private UserService userService;
 
 
     @Autowired
-    public BookingService(BookingRepository repository, ApartmentService apartmentService) {
+    public BookingService(BookingRepository repository, UserService userService) {
         this.repository = repository;
-        this.apartmentService = apartmentService;
+        this.userService = userService;
     }
 
 
 
     public Booking selectBookingById(String id) {
+        User user = userService.findUserByEmail(UserUtil.userName());
+        if (!checkUsersBooking(id,user)){
+            throw new ForbiddenException("This is not your booking!");
+        }
         return repository.findById(id).get();
     }
 
@@ -54,9 +61,25 @@ public class BookingService {
     }
 
 
+    public boolean checkUsersBooking(String id, User user) {
+        List<Booking> userBookings = getAllBookingsForUser(user);
+        for (Booking booking : userBookings) {
+            if (booking.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public boolean deleteBookingById(String id) {
+        User user = userService.findUserByEmail(UserUtil.userName());
+
         if (!repository.existsById(id)) {
             throw new NotFoundException("id " + id + "  not found");
+        }
+        if (!checkUsersBooking(id,user)){
+            throw new ForbiddenException("This is not your booking!");
         }
         repository.deleteById(id);
         return true;

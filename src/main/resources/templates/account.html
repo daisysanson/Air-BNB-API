@@ -86,9 +86,11 @@
                             <td th:text="${booking.apartment.rooms}"></td>
                             <span sec:authorize="hasAuthority('USER_HOST')">
                                 <td> <a th:href="@{/updateSpecificApartment/{id}(id=${booking.apartment.id})}">Edit</a></td>
+                                <td><a th:href="@{/deleteBookingForm/{id}(id=${booking.id})}">Delete</a></td></td>
                             </span>
                             <span sec:authorize="hasAuthority('USER_CUSTOMER')">
                                 <td> <a th:href="@{/updateBookingForm/{id}(id=${booking.id})}">Edit</a></td>
+                                <td><a th:href="@{/deleteBookingForm/{id}(id=${booking.id})}">Delete</a></td></td>
                             </span>
                         </tr>
                     </table>

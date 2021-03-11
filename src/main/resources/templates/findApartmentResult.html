@@ -20,6 +20,7 @@
             <th>Rooms</th>
             <th>Your choices</th>
         </tr>
+        <tr th:each="apartment :${apartment}">
         <td th:text="${apartment.id}"></td>
         <td th:text="${apartment.title}"></td>
         <td th:text="${apartment.address}"></td>

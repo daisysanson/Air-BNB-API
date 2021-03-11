@@ -51,6 +51,9 @@ public class ApartmentController {
     @GetMapping(path = "/{id}") //id will appear in the path....i.e //someId
     public ResponseEntity<Apartment> selectApartmentById(@PathVariable("id") String id) {
         Apartment apartment = apartmentService.selectApartmentById(id);
+        if(apartment ==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         log.info("apartment found");
         return ResponseEntity.status(HttpStatus.OK).body(apartment);
     }

@@ -50,7 +50,9 @@ public class HostBookingService {
     }
 
 
+
     public boolean deleteHostBookingById(String id) {
+
         if (!repository.existsById(id)) {
             throw new NotFoundException("id " + id + "  not found");
         }

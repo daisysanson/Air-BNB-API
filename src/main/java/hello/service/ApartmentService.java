@@ -10,6 +10,9 @@ import hello.model.UserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,22 +47,33 @@ public class ApartmentService {
 
 
 
-    public Apartment selectApartmentByTitle(String title) {
-        Apartment apartment = apartmentRepository.findByTitle(title);
-        if (StringUtils.isBlank(apartment.getId())) {
-            log.info("No id entered");
-            throw new BadRequestException("Please enter an id");
-        }
-        if (!apartmentRepository.existsById(apartment.getId())) {
-            log.info("id not found");
-            throw new NotFoundException("Cannot find this apartment");
-        } else {
-            Optional<Apartment> searchApartments = apartmentRepository.findById(apartment.getId());
-            status(HttpStatus.OK).body(searchApartments.get());
+    public List<Apartment> selectApartmentByTitle(String title) {
 
-            return apartmentRepository.findById(apartment.getId()).get();
+        List<Apartment> apartments = apartmentRepository.findAll();
+        List<Apartment> matchingApartment = new ArrayList<>();
+        for (Apartment apartment : apartments) {
+            if (apartment.getTitle().equals(title)) {
+                matchingApartment.add(apartment);
+            }
+            if (StringUtils.isBlank(apartment.getId())) {
+                log.info("No id entered");
+                throw new BadRequestException("Please enter an id");
+            }
+            if (!apartmentRepository.existsById(apartment.getId())) {
+                log.info("id not found");
+                throw new NotFoundException("Cannot find this apartment");
+            }
+
+//            Optional<Apartment> searchApartments = apartmentRepository.findById(apartment.getId());
+//            Optional <Apartment> searchApartments = apartmentRepository.findOne(Example.of(apartmentRepository.findByTitle(apartment.getId())));
+//            status(HttpStatus.OK).body(searchApartments.get());
+
+
+//            return searchApartments
         }
+        return matchingApartment;
     }
+
 
 
     public Apartment selectApartmentById(String id) {
