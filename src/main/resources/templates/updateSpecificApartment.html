@@ -1,20 +1,23 @@
-<!DOCTYPE HTML>
+
 <html xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace="Fragments/head :: head"/>
-
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/footer.css">
+</head>
 <body>
-
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1>Update an Apartment's details</h1>
-            <form action="#" th:action="@{/updateApartmentResult}" th:object="${apartment}" method="put">
+            <form action="#" th:action="@{/updateApartmentResult}" th:object="${apartment}" method="PUT">
                 <div class="form-group">
-                    <label> Apartment id </label>
-                    <input type="text" class="form-control col-lg-4" th:field="*{id}"/>
+                    <input type="hidden" th:value="${id}" name="Apartment" th:field="*{id}"/>
                 </div>
                 <div class="form-group">
                     <label> Apartment title </label>
@@ -45,9 +48,14 @@
     </div>
 </div>
 
-
-<footer th:replace="fragments/scripts :: scripts"></footer>
-</body>
 <div th:replace="fragments/footer :: footer"></div>
+
+<script src="js/error.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/nav.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+</body>
 </html>
 

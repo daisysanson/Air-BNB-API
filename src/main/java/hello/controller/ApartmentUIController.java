@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException.Forbidden;
@@ -74,7 +75,6 @@ public class ApartmentUIController {
         model.addAttribute("title", "All Apartments");
         return "showAllApartments";
     }
-
 
 
     @GetMapping("/addApartment")
@@ -142,6 +142,20 @@ public class ApartmentUIController {
         return "updateApartmentForm";
     }
 
+
+
+    @GetMapping(value= "/updateSpecificApartment/{id}")
+    public String showSpecUpdateForm(Model model, @PathVariable("id") String apartmentId) {
+        Apartment apartment = new Apartment();
+        model.addAttribute("apartment", apartmentService.selectApartmentById(apartmentId));
+        model.addAttribute("activeLink", "Apartment");
+        model.addAttribute("title", "Update an Apartment");
+        return "updateSpecificApartment";
+    }
+
+
+
+
     @GetMapping("/updateApartmentResult")
     public String showUpdateCustomerForm(@ModelAttribute("apartment") Apartment apartmentToUpdate,
                                          @RequestParam("id") String id, Model model) {
@@ -151,7 +165,7 @@ public class ApartmentUIController {
             model.addAttribute("activeLink", "Apartment");
             model.addAttribute("title", "Success!");
             return "updateApartmentResult";
-        } catch (ForbiddenException e){
+        } catch (ForbiddenException e) {
             return "forbidden";
         } catch (BadRequestException e) {
             return "badRequest";
@@ -159,6 +173,11 @@ public class ApartmentUIController {
             return "notFound";
         }
     }
+
+
+
+
+
 
 }
 

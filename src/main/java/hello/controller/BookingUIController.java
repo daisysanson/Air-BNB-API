@@ -1,6 +1,7 @@
 package hello.controller;
 
 import hello.exceptions.BadRequestException;
+import hello.exceptions.ForbiddenException;
 import hello.exceptions.NotFoundException;
 import hello.model.Apartment;
 import hello.model.Booking;
@@ -141,6 +142,42 @@ public class BookingUIController {
             return "notFound";
         }
     }
+
+
+
+    @GetMapping(value= "/updateBookingForm/{id}")
+    public String showBookingUpdateForm(Model model, @PathVariable("id") String bookingId) {
+        User user = userService.findUserByEmail(UserUtil.userName());
+        model.addAttribute("booking", bookingService.selectBookingById(bookingId));
+        model.addAttribute("apartments", apartmentService.getAllApartments());
+        model.addAttribute("user", user.getId());
+        model.addAttribute("activeLink", "Booking");
+        model.addAttribute("title", "Update a Booking");
+        return "updateBookingForm";
+    }
+
+    @GetMapping("/updateBookingResult")
+    public String showUpdateBookingForm(@ModelAttribute("booking") Booking bookingToUpdate,
+                                         @RequestParam("id") String id, Model model) {
+
+        try {
+            Booking booking = bookingService.selectBookingById(id);
+            bookingToUpdate.setApartment(apartmentService.selectApartmentById(booking.getApartment().getId()));
+            model.addAttribute("booking", bookingService.updateBookingById(id, bookingToUpdate));
+
+            model.addAttribute("activeLink", "Booking");
+            model.addAttribute("title", "Success!");
+            return "updateBookingResult";
+        } catch (ForbiddenException e) {
+            return "forbidden";
+        } catch (BadRequestException e) {
+            return "badRequest";
+        } catch (NotFoundException e) {
+            return "notFound";
+        }
+    }
+
+
 
 
 }

@@ -12,12 +12,28 @@ a:hover {
   text-shadow: none;
 }
 
+
+
 footer {
   padding-top: 20px;
   background-color: #F7F7F7;
   width:100%;
-  position: relative;
   bottom:0;
+  overflow:hidden;
+   position: relative;
+    /* negative value of footer height */
+    clear:both;
+
+
+}
+
+@media only screen and (max-width: 600px)
+footer {
+   position: absolute;
+    /* negative value of footer height */
+bottom:0;
+
+
 }
 
 .footer-title{
@@ -47,7 +63,5 @@ color: #FF385C;
 
 .copyright quick-links{
 font-family: 'Questrial', sans-serif;
-
-}
 
 }

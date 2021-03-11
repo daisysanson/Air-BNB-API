@@ -1,19 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="Fragments/head :: head"></head>
+<head th:replace="Fragments/head :: head"/>
 
 <body>
 
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 <div class="container">
-    <h2>Booking added successfully! </h2>
-<h3> Thank you for booking!
-     We will see you soon!
-     Please don't forget to bring some ID to present to your host </h3>
-
-
+    <h2>Booking updated successfully!: </h2>
     <table class="table table-striped">
         <tr>
             <th>Booking ID</th>
@@ -50,11 +45,10 @@
             <td th:text="${booking.getApartment().getRating()}"></td>
         </tr>
     </table>
-
-    <input class="btn btn-lg btn-block display-3" type="button" value="Go Back!" onclick="history.back(-1)" />
 </div>
-<footer th:replace="fragments/footer :: footer"></footer>
 
-</body>
+<div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
+</body>
+
 </html>

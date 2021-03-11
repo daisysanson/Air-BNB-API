@@ -1,12 +1,14 @@
-
-
 body {
     background-color: #fffdfa;
     display: flex;
-      flex-direction: column;
+     flex-direction: column;
+     }
 
+
+html {
+  position: relative;
+  min-height: 100%;
 }
-
 #top-header{
 background-color:black;
 }
