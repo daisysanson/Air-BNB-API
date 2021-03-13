@@ -14,11 +14,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ApartmentControllerTest {
     private static final String APARTMENT_ID = "012345";
+    private static final String TITLE = "";
+    private static final String ADDRESS = "012345";
+    private static final int GUEST_CAPACITY = 2;
+    private static final int ROOMS = -2;
+    private static final int RATING = -3;
 
     @Mock
     private ApartmentService apartmentService;
@@ -29,18 +35,18 @@ public class ApartmentControllerTest {
 
     @Test
     @DisplayName("Apartment found by id")
-     public void testFindApartment(){
+    public void testFindApartment() {
         Apartment apartment = new Apartment();
 
         when(apartmentService.selectApartmentById(APARTMENT_ID)).thenReturn(apartment);
         ResponseEntity<Apartment> response = controller.selectApartmentById(APARTMENT_ID);
 
-        assertEquals(apartment,response.getBody());
+        assertEquals(apartment, response.getBody());
     }
 
     @Test
     @DisplayName("No Apartment found by id")
-    void testNoApartmentFoundById(){
+    void testNoApartmentFoundById() {
         Apartment apartment = new Apartment();
 
 
@@ -50,4 +56,46 @@ public class ApartmentControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
     }
+
+    @Test
+    @DisplayName("Adding apartment ")
+    void testApartmentAdd(){
+        Apartment apartment = new Apartment();
+        apartment.setTitle(TITLE);
+        apartment.setAddress(ADDRESS);
+        apartment.setGuestCapacity(GUEST_CAPACITY);
+        apartment.setRooms(ROOMS);
+        apartment.setRating(RATING);
+
+        ResponseEntity<Apartment> response = controller.addApartment(apartment);
+        assertNotNull(apartment);
+
+
+        assertEquals(apartment,response.getBody());
+
+    }
+
+    @Test
+    @DisplayName("Delete apartment ")
+    void testApartmentDelete(){
+        Apartment apartment = new Apartment();
+        apartment.setId(APARTMENT_ID);
+        apartment.setTitle(TITLE);
+        apartment.setAddress(ADDRESS);
+        apartment.setGuestCapacity(GUEST_CAPACITY);
+        apartment.setRooms(ROOMS);
+        apartment.setRating(RATING);
+
+        ResponseEntity response = controller.deleteApartmentById(apartment.getId());
+
+
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    }
+
+
 }
+
+
+

@@ -49,6 +49,13 @@ h1, h2, h3, h4, h5, h6, a, p{
    }
 
 
+@media all and (max-width: 500px)
+h1, h2, h3, h4, h5, h6, a, p{{
+font-size: 0.8em;
+font-weight: bold;
+
+}
+
 
 label{
 font-family: 'Questrial', sans-serif;
@@ -63,7 +70,7 @@ font-weight: bold;
 }
 
 
-
+}
 td, th{
 font-family: 'Questrial', sans-serif;
 }
@@ -142,6 +149,8 @@ margin-right:20px;}
 
 
    .btn:hover{
+   -moz-border-radius: 50px;
+   -webkit-border-radius: 50px;
    font-family: 'Questrial', sans-serif;
    color:#ff0066;
    background:white;
@@ -168,10 +177,13 @@ text-shadow: 1px 0.5px;
     color: white;
     cursor: pointer;
     transition: 0.5s;
-    padding:20px;
+
 }
 
 .event-box:hover {
+-moz-transition: 0.3s ease;
+-webkit-transition: 0.3s ease;
+transition: 0.3s ease;
     box-shadow: 1px 4px 13px -1px #262626;
     transition: 0.5s;
 }

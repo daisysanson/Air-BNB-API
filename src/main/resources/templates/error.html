@@ -13,11 +13,11 @@
 
 
 <nav th:replace="Fragments/nav :: nav"></nav>
-
+<div class="container-fluid">
 <h1>Oops!</h1>
 <h1 th:text="${status}|"></h1>
 <h2 th:text="${message}"></h2>
-
+</div>
 
 <input class="btn btn-lg btn-block display-3"type="button" value="Go Back!" onclick="history.back(-1)" />
 
