@@ -116,26 +116,29 @@ public class ApartmentUIController {
     }
 
 
-    @GetMapping("/deleteApartmentForm")
-    public String showDeleteApartmentForm(Model model) {
-        Apartment apartment = new Apartment();
-        model.addAttribute("apartment", apartment);
+    @GetMapping("/deleteApartmentForm/{id}")
+    public String showDeleteApartmentForm(Model model, @PathVariable("id") String id) {
+        model.addAttribute("booking", hostBookingService.selectHostBookingById(id));
         model.addAttribute("activeLink", "Apartment");
         model.addAttribute("title", "Delete an Apartment");
         return "deleteApartmentForm";
     }
 
     @GetMapping("/deleteApartmentResult")
-    public String showDeleteApartmentForm(@ModelAttribute("apartment") Apartment apartment,
+    public String showDeleteApartmentForm(@ModelAttribute("booking") HostBooking booking,
                                           @RequestParam("id") String id, Model model) {
-        try {
-            apartmentService.deleteApartmentById(id);
+      try {
+          HostBooking booking1 = hostBookingService.selectHostBookingById(id);
+            apartmentService.deleteApartmentById(booking1.getApartment().getId());
+            hostBookingService.deleteHostBookingById(id);
             model.addAttribute("activeLink", "Apartment");
             model.addAttribute("title", "Success!");
             return "deleteApartmentResult";
         } catch (NotFoundException e) {
             return "notFound";
-        }
+            }
+
+
     }
 
     @GetMapping("/updateApartmentForm")
@@ -151,7 +154,6 @@ public class ApartmentUIController {
 
     @GetMapping(value= "/updateSpecificApartment/{id}")
     public String showSpecUpdateForm(Model model, @PathVariable("id") String apartmentId) {
-        Apartment apartment = new Apartment();
         model.addAttribute("apartment", apartmentService.selectApartmentById(apartmentId));
         model.addAttribute("activeLink", "Apartment");
         model.addAttribute("title", "Update an Apartment");

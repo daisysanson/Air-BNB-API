@@ -11,6 +11,7 @@ import hello.service.HostBookingService;
 import hello.service.RoleService;
 import hello.service.SiteUserDetails;
 import hello.service.UserService;
+import org.apache.catalina.Host;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -51,6 +52,7 @@ public class UserUIController {
             model.addAttribute("bookings", hostBookingService.getAllHostBookingsForUser(user));
         }
         if (userService.hasRole("USER_CUSTOMER")) {
+
             model.addAttribute("bookings", bookingService.getAllBookingsForUser(user));
         }
         return "account";
