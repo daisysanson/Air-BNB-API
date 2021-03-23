@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Date;
+
 @Document(collection = "apartments2")
 public class Apartment {
     @Id
@@ -28,7 +30,8 @@ public class Apartment {
                      @JsonProperty("address") String address,
                      @JsonProperty("guest_capacity") int guestCapacity,
                      @JsonProperty("rooms") int rooms,
-                     @JsonProperty("rating") int rating) {
+                     @JsonProperty("rating") int rating)
+    {
         this.id = id;
         this.title = title;
         this.address = address;
@@ -80,6 +83,8 @@ public class Apartment {
     public int getRating() {
         return rating;
     }
+
+
 
     public void setRating(int rating) {
         this.rating = rating;

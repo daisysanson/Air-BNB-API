@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,9 +32,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private CustomerService customerService;
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     static Logger log = Logger.getLogger(UserService.class);
 
@@ -43,27 +43,37 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public User findUserByDetails(String firstName, String lastName, String email, String id) {
-        return userRepository.findByName(firstName,lastName, email, id);
+    public boolean hasRole (String roleName) {
+        return SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(roleName));
 
     }
 
+
+    public User findUserByDetails(String firstName, String lastName, String email, String id) {
+        return userRepository.findByName(firstName, lastName, email, id);
+
+    }
+
+
     public User saveNewUser(User user) {
         List<User> users = userRepository.findByEmailList(user.getEmail());
+
         if (users.size() >= 1) {
             log.info("email already exists");
             throw new BadRequestException("email already exists");
 
         } else {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            user.setEnabled(true);
-            Role userRole = roleRepository.findByRole("USER"); //new user's role is set as admin
-            user.setRoles(new HashSet(Arrays.asList(userRole)));
-            userRepository.save(user);
-
-            return user;
+            try {
+                user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+                user.setConfirmPassword(bCryptPasswordEncoder.encode(user.getConfirmPassword()));
+                user.setEnabled(true);
+                userRepository.save(user);
+                return user;
+            } catch (BadRequestException e) {
+                throw new BadRequestException("email already exists");
+            }
         }
-
     }
 
 
@@ -104,19 +114,6 @@ public class UserService implements UserDetailsService {
 }
 
 
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        /*Here add user data layer fetching from the MongoDB.
-//          I have used userRepository*/
-//        User user = userRepository.findByEmail(email);
-//        if(user == null){
-//            throw new UsernameNotFoundException(email);
-//        }else{
-//            UserDetails details = new LoggedUser(user);
-//            return details;
-//        }
-//    }
 
     private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="Fragments/head :: head"/>
+
+<body>
+
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+<div class="container-fluid">
+<section id="header">
+    <div id="header-inner">
+        <h1>Forbidden</h1>
+        <h3>Sorry, you don't have access to this page!</h3>
+        </div>
+</section>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>

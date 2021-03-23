@@ -1,22 +1,22 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<head th:replace="Fragments/head :: head"/>
+<head th:replace="Fragments/head :: head"></head>
 
 <body>
-
+<main>
+<div id="top-header">
 <nav th:replace="Fragments/nav :: nav"></nav>
-<header th:replace="Fragments/carousel :: carousel"></header>
 
+<header th:replace="Fragments/carousel :: carousel"></header>
+</div>
 
 <section id="header">
     <div id="header-inner">
-        <h1>Booking stuff</h1>
+        <h1>BNB Bookings</h1>
     </div>
 </section>
-
-
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div sec:authorize="isAuthenticated()">
@@ -27,16 +27,16 @@
         </div>
     </div>
 <section id="content">
-<div class="container">
+    <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
             <div class="event-box">
-                <a href="customer" target="_blank">
-                    <div class="event-inner" id="customers">
+                <a href="account">
+                    <div class="event-inner" id="account">
                         <div class="event-info">
                             <hr>
                             <h1>
-                                <strong>Customers</strong>
+                                <strong>Your profile</strong>
                             </h1>
                             <hr>
                         </div>
@@ -47,12 +47,12 @@
         <div class="col-md-4">
             <div class="row">
             <div class="event-box">
-                <a href="booking" target="_blank">
+                <a href="booking">
                     <div class="event-inner" id="bookings">
                         <div class="event-info">
                             <hr>
                             <h1>
-                                <strong>Bookings</strong>
+                                <strong>Make a booking</strong>
                             </h1>
                             <hr>
                         </div>
@@ -63,12 +63,12 @@
     </div>
     <div class="col-md-4">
         <div class="event-box">
-            <a href="apartment" target="_blank">
+            <a href="apartment">
                 <div class="event-inner" id="apartments">
                     <div class="event-info">
                         <hr>
                         <h1>
-                            <strong>Apartments</strong>
+                            <strong>Browse Apartments</strong>
                         </h1>
                         <hr>
                     </div>
@@ -77,10 +77,12 @@
         </div>
     </div>
 </div>
+</div>
 </section>
-<div th:replace="fragments/scripts :: scripts"></div>
 <div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
 
 
+</main>
 </body>
 </html>

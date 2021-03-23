@@ -32,16 +32,19 @@
                     <label> Rooms: </label>
                     <input type="number" class="form-control col-lg-4" th:field="*{rooms}" required/>
                 </div>
-        <div class="form-group">
-            <input class="btn btn-md col-lg-2" type="submit" value="Submit"/>
-            <input class="btn btn-md col-lg-2" type="reset" value="Reset"/>
-        </div>
-            </form>
-        </div>
-    </div>
+                <div class="form-group">
+                    <input type="hidden" th:value="${user}" name="User"/>
+                </div>
+            <div class="form-group">
+                <input class="btn btn-md col-lg-2" type="submit" value="Submit"/>
+                <input class="btn btn-md col-lg-2" type="reset" value="Reset"/>
+            </div>
+        </form>
 </div>
-<div th:replace="fragments/footer :: footer"></div>
+</div>
+</div>
 <div th:replace="fragments/scripts :: scripts"></div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>

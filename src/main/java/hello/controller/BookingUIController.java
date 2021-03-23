@@ -1,50 +1,41 @@
 package hello.controller;
 
 import hello.exceptions.BadRequestException;
+import hello.exceptions.ForbiddenException;
 import hello.exceptions.NotFoundException;
+import hello.model.Apartment;
 import hello.model.Booking;
-import hello.model.BookingRequest;
 import hello.model.User;
 import hello.model.UserUtil;
 import hello.service.ApartmentService;
 import hello.service.BookingService;
-import hello.service.CustomerService;
 import hello.service.SiteUserDetails;
 import hello.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.util.NoSuchElementException;
+
 
 @Controller
 public class BookingUIController {
 
     private BookingService bookingService;
     private ApartmentService apartmentService;
-    private CustomerService customerService;
     private UserService userService;
 
     @Autowired
-    public BookingUIController(BookingService bookingService, ApartmentService apartmentService, CustomerService customerService, UserService userService) {
+    public BookingUIController(BookingService bookingService, ApartmentService apartmentService,  UserService userService) {
         this.bookingService = bookingService;
         this.apartmentService = apartmentService;
-        this.customerService = customerService;
         this.userService = userService;
 
     }
@@ -62,10 +53,11 @@ public class BookingUIController {
 
     @GetMapping("/newBookingCreate")
     public String showAddBookingForm(Model model) {
-        User user1 = userService.findUserByEmail(UserUtil.userName());
+        User user = userService.findUserByEmail(UserUtil.userName());
         model.addAttribute("booking", new Booking());
+        model.addAttribute("bookings" , bookingService.getAllBookings());
         model.addAttribute("apartments", apartmentService.getAllApartments());
-        model.addAttribute("user", user1.getId());
+        model.addAttribute("user", user.getId());
         model.addAttribute("activeLink", "Booking");
         model.addAttribute("title", "Create a New Booking");
 
@@ -76,6 +68,7 @@ public class BookingUIController {
 
     @PostMapping(value = "/newBooking")
     public String showBooking(@ModelAttribute("booking") Booking booking,Model model){
+
         log.info(UserUtil.userName());
 
         model.addAttribute("booking", bookingService.addBooking(booking));
@@ -83,12 +76,21 @@ public class BookingUIController {
         model.addAttribute("title", "Success!");
 
         return "newBooking";
-//        } catch (NotFoundException e) {
-//            log.info("Customer name not found");
-//        }
-//        return "notFound";
-//    }
     }
+
+
+    @GetMapping(value = "/bookASpecificApartment/{id}")
+    public String bookASpecificApartment(Model model, @PathVariable("id") String apartmentId){
+        User user = userService.findUserByEmail(UserUtil.userName());
+        model.addAttribute("booking", new Booking());
+        model.addAttribute("apartment", apartmentService.selectApartmentById(apartmentId));
+        model.addAttribute("user", user.getId());
+        model.addAttribute("activeLink", "Booking");
+        model.addAttribute("title", "Create a New Booking");
+
+        return "bookASpecificApartment";
+    }
+
 
 
     @GetMapping("/getBooking")
@@ -101,7 +103,7 @@ public class BookingUIController {
     }
 
     @PostMapping("/getBookingResult")
-    public String showFindApartmentResult(@ModelAttribute("booking") Booking booking,
+    public String showFindBookingResult(@ModelAttribute("booking") Booking booking,
                                           @RequestParam("id") String id,
                                           Model model) {
         try {
@@ -115,15 +117,17 @@ public class BookingUIController {
         } catch (NoSuchElementException e) {
             log.info("no booking id entered or does not exist");
             return "badRequest";
+        }catch(ForbiddenException e) {
+            log.info("Not logged in users booking");
+            return "forbidden";
         }
         return "getBookingResult";
     }
 
 
-    @GetMapping("/deleteBookingForm")
-    public String showDeleteBookingForm(Model model) {
-        Booking booking = new Booking();
-        model.addAttribute("booking", booking);
+    @GetMapping("/deleteBookingForm/{id}")
+    public String showDeleteBookingForm(Model model, @PathVariable("id") String id) {
+        model.addAttribute("booking", bookingService.selectBookingById(id));
         model.addAttribute("title", "Delete a Booking");
         model.addAttribute("activeLink", "Booking");
         return "deleteBookingForm";
@@ -133,14 +137,51 @@ public class BookingUIController {
     public String showDeleteBookingForm(@ModelAttribute("booking") Booking booking,
                                         @RequestParam("id") String id, Model model) {
         try {
-            model.addAttribute("booking", bookingService.deleteBookingById(id));
+            model.addAttribute("booking", bookingService.deleteBookingById(booking.getId()));
             model.addAttribute("activeLink", "Booking");
             model.addAttribute("title", "Success!");
             return "deleteBookingResult";
         } catch (NotFoundException e) {
             return "notFound";
+        } catch(ForbiddenException e){
+            return "forbidden";
         }
     }
+
+
+        @GetMapping(value = "/updateBookingForm/{id}")
+        public String showBookingUpdateForm (Model model, @PathVariable("id") String bookingId){
+            User user = userService.findUserByEmail(UserUtil.userName());
+            model.addAttribute("booking", bookingService.selectBookingById(bookingId));
+            model.addAttribute("apartments", apartmentService.getAllApartments());
+            model.addAttribute("user", user.getId());
+            model.addAttribute("activeLink", "Booking");
+            model.addAttribute("title", "Update a Booking");
+            return "updateBookingForm";
+        }
+
+    @GetMapping("/updateBookingResult")
+    public String showUpdateBookingForm(@ModelAttribute("booking") Booking bookingToUpdate,
+                                         @RequestParam("id") String id, Model model) {
+
+        try {
+            Booking booking = bookingService.selectBookingById(id);
+            bookingToUpdate.setApartment(apartmentService.selectApartmentById(booking.getApartment().getId()));
+            model.addAttribute("booking", bookingService.updateBookingById(id, bookingToUpdate));
+
+            model.addAttribute("activeLink", "Booking");
+            model.addAttribute("title", "Success!");
+            return "updateBookingResult";
+        } catch (ForbiddenException e) {
+            return "forbidden";
+        } catch (BadRequestException e) {
+            return "badRequest";
+        } catch (NotFoundException e) {
+            return "notFound";
+        }
+    }
+
+
 
 
 }

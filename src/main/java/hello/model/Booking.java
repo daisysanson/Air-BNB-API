@@ -1,10 +1,13 @@
 package hello.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Document(collection = "bookings")
 public class Booking {
@@ -17,10 +20,12 @@ public class Booking {
     @DBRef
     private Apartment apartment;
 
+
     public Booking(User user, Apartment apartment) {
         this.user = user;
         this.apartment = apartment;
     }
+
 
     public Booking() {
     }
@@ -48,6 +53,7 @@ public class Booking {
     public void setId(String id) {
         this.id = id;
     }
+
 }
 
 

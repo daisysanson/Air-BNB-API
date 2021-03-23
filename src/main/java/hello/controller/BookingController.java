@@ -2,7 +2,6 @@ package hello.controller;
 
 import hello.dao.BookingRepository;
 import hello.model.Booking;
-import hello.model.Customer;
 import hello.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

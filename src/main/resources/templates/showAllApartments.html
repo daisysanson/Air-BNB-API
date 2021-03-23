@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="Fragments/head :: head"/>
 
@@ -17,6 +17,7 @@
             <th>Guest Capacity</th>
             <th>Rooms</th>
             <th>Rating</th>
+            <th></th>
         </tr>
         <tr th:each="apartment :${apartment}">
             <td th:text="${apartment.id}"></td>
@@ -25,9 +26,12 @@
             <td th:text="${apartment.guestCapacity}"></td>
             <td th:text="${apartment.rating}"></td>
             <td th:text="${apartment.rooms}"></td>
+            <span sec:authorize="hasAuthority('USER_CUSTOMER')">
+                <td> <a th:href="@{/bookASpecificApartment/{id}(id=${apartment.id})}">Book</a></td>
+            </span>
         </tr>
-
     </table>
+    <input class="btn btn-lg btn-block display-3"type="button" value="Go Back!" onclick="history.back(-1)" />
 
 </div>
 

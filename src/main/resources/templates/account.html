@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="Fragments/head :: head"></head>
+<body>
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+<div class="container">
+    <form>
+        <h2 class="heading text-muted ">User information</h2>
+        <div class="pl-lg-4">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="table table-striped">
+                        <label class="form-control-label">Username</label>
+                        <input readonly class="form-control form-control-alternative" th:value="${user.userName}"/>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">
+                    <div class="table">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <input readonly type="email" id="input-email" class="form-control form-control-alternative"
+                               th:value="${user.email}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group focused">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        <input readonly type="text" id="input-first-name" class="form-control form-control-alternative"
+                               th:value="${user.firstName}">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group focused">
+                        <label class="form-control-label" for="input-last-name">Last name</label>
+                        <input readonly type="text" id="input-last-name" class="form-control form-control-alternative"
+                               th:value="${user.lastName}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h2 class="heading text-muted ">Contact Information</h2>
+        <div class="pl-lg-4">
+            <div class="row">
+                <span class="col-md-4">
+                    <div class="form-group focused">
+                        <label class="form-control-label" for="input-address">Address</label>
+                        <input readonly id="input-address" class="form-control form-control-alternative" placeholder="Address" th:value="${user.lastName}"/>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="pl-lg-4">
+            <div class="row">
+                <span id="booking-table" class="col-md-12">
+                    <div sec:authorize="hasAuthority('USER_HOST')">
+                        <h6 class="heading text-muted">Your Apartments</h6>
+                    </div>
+                    <div sec:authorize="hasAuthority('USER_CUSTOMER')">
+                        <h6 class="heading text-muted" >Your Bookings: </h6>
+                    </div>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Location</th>
+                            <th>Guest Capacity</th>
+                            <th>Rating</th>
+                            <th>Rooms</th>
+                            <th>Make a change</th>
+                        </tr>
+                        <tr th:each="booking :${bookings}">
+                            <td th:text="${booking.id}"></td>
+                            <td th:text="${booking.apartment.title}"></td>
+                            <td th:text="${booking.apartment.address}"></td>
+                            <td th:text="${booking.apartment.guestCapacity}"></td>
+                            <td th:text="${booking.apartment.rating}"></td>
+                            <td th:text="${booking.apartment.rooms}"></td>
+                            <span sec:authorize="hasAuthority('USER_HOST')">
+                                <td> <a th:href="@{/updateSpecificApartment/{id}(id=${booking.apartment.id})}">Edit</a></td>
+                                <td><a th:href="@{/deleteApartmentForm/{id}(id=${booking.id})}">Delete</a></td></td>
+                            </span>
+                            <span sec:authorize="hasAuthority('USER_CUSTOMER')">
+                                <td> <a th:href="@{/updateBookingForm/{id}(id=${booking.id})}">Edit</a></td>
+                                <td><a th:href="@{/deleteBookingForm/{id}(id=${booking.id})}">Delete</a></td></td>
+                            </span>
+                        </tr>
+                    </table>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<div th:replace="fragments/scripts :: scripts"></div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>

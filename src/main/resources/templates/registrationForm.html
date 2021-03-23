@@ -14,7 +14,9 @@
                 <div class="col-sm-10 offset-sm-1 text-center">
                     <h1 class="display-3">Register</h1>
                     <div class="info-form">
-                        <h2 class="invalid" th:text="${rejectMessage}"></h2>
+                        <div class="invalid">
+                        <h2  style="white-space: pre;" class="invalid" th:text="${rejectMessage}"></h2>
+                    </div>
                         <form class="form-inline justify-content-center" th:action="@{/registrationResult}"
                               method="POST">
                             <div class="col-md-6 text-center">
@@ -37,6 +39,12 @@
                                            required=""/>
                                 </div>
                                 <div class="form-group">
+                                    <label> Confirm Password</label>
+                                    <input type="password" name="confirmPassword" id="inputConfirmPassword" class="form-control"
+                                           placeholder="Confirm Password"
+                                           required=""/>
+                                </div>
+                                <div class="form-group">
                                 <label>First Name</label>
                                 <input type="firstName" name="firstName" id="inputFirstName" class="form-control"
                                        placeholder="First Name"
@@ -54,8 +62,19 @@
                                            placeholder="Address"
                                            required=""/>
                                 </div>
+                                <div class="form-group">
+                                    <label>Select your account type: </label>
+                                    <select id="roleSelect"
+                                            th:object="${user}"
+                                            name="roles"
+                                            th:fields="*{roles}" >
+                                        <option th:each="r : ${bob}"
+                                                th:value="${r.id}"
+                                                th:text="${r.role}"></option>
+                                    </select>
                                 <div class="col-sm-10 offset-sm-1 text-center">
                                 <button class="btn btn-lg btn-block display-3" type="submit">Register</button>
+                            </div>
                                 </div>
                             </div>
                         </form>

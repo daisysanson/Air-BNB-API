@@ -1,6 +1,7 @@
 package hello.controller;
 
 
+import hello.exceptions.BadRequestException;
 import hello.model.Apartment;
 import hello.service.ApartmentService;
 import org.apache.log4j.Logger;
@@ -35,9 +36,14 @@ public class ApartmentController {
 
     @PostMapping
     public ResponseEntity<Apartment> addApartment(@RequestBody Apartment apartment) {
+        try{
         Apartment apartment1 = apartmentService.addApartment(apartment);
         log.info("apartment added");
-        return ResponseEntity.status(HttpStatus.OK).body(apartment);
+        return ResponseEntity.status(HttpStatus.OK).body(apartment);}
+        catch (BadRequestException e) {
+            throw new BadRequestException("Invalid data");
+
+        }
 
     }
 
@@ -51,6 +57,9 @@ public class ApartmentController {
     @GetMapping(path = "/{id}") //id will appear in the path....i.e //someId
     public ResponseEntity<Apartment> selectApartmentById(@PathVariable("id") String id) {
         Apartment apartment = apartmentService.selectApartmentById(id);
+        if(apartment ==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         log.info("apartment found");
         return ResponseEntity.status(HttpStatus.OK).body(apartment);
     }
@@ -60,7 +69,7 @@ public class ApartmentController {
     public ResponseEntity<String> deleteApartmentById(@PathVariable("id") String id) {
         apartmentService.deleteApartmentById(id);
         log.info("apartment deleted");
-        return ResponseEntity.status(HttpStatus.OK).body("customer at id " + id + " has been deleted");
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 

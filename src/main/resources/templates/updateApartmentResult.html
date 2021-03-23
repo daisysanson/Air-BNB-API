@@ -18,18 +18,20 @@
             <th>Rating</th>
             <th>Rooms</th>
         </tr>
+        <tr>
         <td th:text="${apartment.id}"></td>
         <td th:text="${apartment.title}"></td>
         <td th:text="${apartment.address}"></td>
         <td th:text="${apartment.guestCapacity}"></td>
         <td th:text="${apartment.rating}"></td>
         <td th:text="${apartment.rooms}"></td>
-        </tr>
+        </tr>r
     </table>
 
 </div>
 
-<div th:replace="fragments/footer :: footer"></div>
-<div th:replace="fragments/scripts :: scripts"></div>
+<footer th:replace="fragments/footer :: footer"></footer>
+
 </body>
+<div th:replace="fragments/scripts :: scripts"></div>
 </html>

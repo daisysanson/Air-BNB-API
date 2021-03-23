@@ -8,9 +8,15 @@
 <nav th:replace="Fragments/nav :: nav"></nav>
 
 <div class="container">
-<h2>Apartment deleted successfully! </h2>
+    <section id="header">
+        <div id="header-inner">
+            <h2>Booking deleted successfully! </h2>
+        </div>
+    </section>
 </div>
-
+<div class="container">
+    <a class="btn btn-md col-lg-2" type="submit" href="/account">Back to your account</a>
+</div>
 <div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
 </body>

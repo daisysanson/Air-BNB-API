@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="Fragments/head :: head"/>
+
+<body>
+
+<nav th:replace="Fragments/nav :: nav"></nav>
+
+<div class="container">
+    <h2>Booking updated successfully!: </h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Booking ID</th>
+        </tr>
+        <tr>
+            <td th:text="${booking.getId()}"></td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <th>Surname</th>
+            <th>Address</th>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <td th:text="${booking.getUser().getFirstName()}"></td>
+            <td th:text="${booking.getUser().getLastName()}"></td>
+            <td th:text="${booking.getUser().getAddress()}"></td>
+            <td th:text="${booking.getUser().getEmail()}"></td>
+        </tr>
+        <tr>
+            <th>Apartment ID</th>
+            <th>Apartment Title</th>
+            <th>Apartment Address</th>
+            <th>Apartment Guest Capacity</th>
+            <th>Apartment Rooms</th>
+            <th>Apartment Rating</th>
+        </tr>
+        <tr>
+            <td th:text="${booking.getApartment().getId()}"></td>
+            <td th:text="${booking.getApartment().getTitle()}"></td>
+            <td th:text="${booking.getApartment().getAddress()}"></td>
+            <td th:text="${booking.getApartment().getGuestCapacity()}"></td>
+            <td th:text="${booking.getApartment().getRooms()}"></td>
+            <td th:text="${booking.getApartment().getRating()}"></td>
+        </tr>
+    </table>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+
+</html>

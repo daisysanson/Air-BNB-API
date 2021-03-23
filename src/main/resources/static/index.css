@@ -1,16 +1,25 @@
 body {
     background-color: #fffdfa;
+    display: flex;
+     flex-direction: column;
+     }
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+#top-header{
+background-color:black;
 }
 
-
 #header {
-    font-family: 'Scope One', serif;
+    font-family: 'Questrial', sans-serif;
     width: 100%;
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     color: #ff0066;
-    text-shadow: 0px -1px #330000;
 }
 
 #header #header-inner {
@@ -20,28 +29,37 @@ body {
 }
 
 #header #header-inner h1 {
-    font-size: 8em;
+    font-size: 6em;
+    padding-top:30px;
+    color:#222222;
 }
 
-#header #header-inner h5 {
+#header #header-inner h2 {
     margin-top: 50px;
     font-size: 2.5em;
 }
 
 
 h1, h2, h3, h4, h5, h6, a, p{
-   font-family: 'Scope One', serif;
+   font-family: 'Questrial', sans-serif;
     margin-top: 20px;
     margin-bottom:20px
-    color: #ff0066;
+    color: #FF385C;
 
    }
 
 
+@media all and (max-width: 500px)
+h1, h2, h3, h4, h5, h6, a, p{{
+font-size: 0.8em;
+font-weight: bold;
+
+}
+
 
 label{
-font-family: 'Scope One', serif;
-color: #ff0066;
+font-family: 'Questrial', sans-serif;
+color: #FF385C;
 font-size:18px;
 font-weight: bold;
   margin-top: 20px;
@@ -52,9 +70,9 @@ font-weight: bold;
 }
 
 
-
+}
 td, th{
-font-family: 'Scope One', serif;
+font-family: 'Questrial', sans-serif;
 }
 
 
@@ -70,7 +88,7 @@ weight:bold;
 font-size: 20px; }
 
 .greeting{
-color: #ff0066;;
+color: #FF385C;
 weight:bold;
 font-size: 20px;
 position:relative;
@@ -78,20 +96,28 @@ position:relative;
 
 
    .form-group,{
-   font-family: 'Scope One', serif;
+   font-family: 'Questrial', sans-serif;
    font-weight: bold;
-   color: #ff0066;
+   color: #FF385C;
 
 
    }
 
 input {
- font-family: 'Scope One', serif;
+ font-family: 'Questrial', sans-serif;
     margin-top: 10px;
     width: 100%;
 
 }
 
+.heading{
+color: white;
+ background-style: white;
+ font-size: 30px;
+font-weight: 400;
+tl-letter-spacing: -0.02em;
+tl-line-height
+    }
 
 .form-inline .form-control{
 width:100%;
@@ -102,7 +128,7 @@ margin-right:20px;}
 
 
   .btn{
-   font-family: 'Scope One', serif;
+   font-family: 'Questrial', sans-serif;
    color:white;
    border: 2px transparent rgba(217, 83, 78, 0.75);
    border-radius: 20px;
@@ -123,7 +149,9 @@ margin-right:20px;}
 
 
    .btn:hover{
-   font-family: 'Scope One', serif;
+   -moz-border-radius: 50px;
+   -webkit-border-radius: 50px;
+   font-family: 'Questrial', sans-serif;
    color:#ff0066;
    background:white;
    border: 2px transparent rgba(217, 83, 78, 0.75);
@@ -141,17 +169,21 @@ margin-right:20px;}
 }
 
 .event-box {
+text-shadow: 1px 0.5px;
     width: 100%;
     height: 400px;
     background-color: #transparent;
     margin-bottom: 35px;
-    color: #ff0066;
-    text-shadow: 0px -1px #330000;
+    color: white;
     cursor: pointer;
     transition: 0.5s;
+
 }
 
 .event-box:hover {
+-moz-transition: 0.3s ease;
+-webkit-transition: 0.3s ease;
+transition: 0.3s ease;
     box-shadow: 1px 4px 13px -1px #262626;
     transition: 0.5s;
 }
@@ -174,21 +206,38 @@ margin-right:20px;}
 
 .event-info h1 {
     font-size: 3em;
+    font-weight:700
+    line-height:36px
 }
-/* horizontal rows */
+/* horizontal rows*/
 .event-info hr {
+color: white;
     width: 60%;
     border: 2px solid #ff0066;
 }
 
-#customers {
-    background-size: cover;
-}
+
+#roleSelect {
+margin:10px;
+margin-top:26px;
+ position: align; }
 
 #apartments {
     background-size: cover;
+    background-image: url(./img/rainier.jpg);
+
 }
 
 #bookings {
     background-size: cover;
+    background-image: url(./img/wigwam.jpeg);
 }
+#account {
+    background-size: cover;
+    background-image: url(./img/onsen.jpeg);
+    }
+
+#booking-table{
+padding-bottom:60px;}
+
+

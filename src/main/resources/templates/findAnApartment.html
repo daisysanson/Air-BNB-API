@@ -13,8 +13,8 @@
             <h1>Find an apartment</h1>
             <form action="#" th:action="@{/findApartmentResult}" th:object="${apartment}" method="post">
                 <div class="form-group">
-                    <label> Apartment ID </label>
-                    <input type="text" class="form-control col-lg-4" th:field="*{id}"/>
+                    <label> Apartment Title </label>
+                    <input type="text" class="form-control col-lg-4" th:value="*{title}" th:field="*{title}"/>
                     <small id="advice" class="form-text text-muted">Enter the apartment's ID</small>
                 </div>
                 <div class="form-group">
@@ -25,8 +25,7 @@
         </div>
     </div>
 </div>
-
-<div th:replace="fragments/footer :: footer"></div>
 <div th:replace="fragments/scripts :: scripts"></div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
